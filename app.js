@@ -76,22 +76,34 @@ function showResult() {
 function restartQuiz() {
     currentStep = 0; answers = {};
     document.getElementById('result-container').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'block';
     renderStep();
 }
-function sendToTelegram(e) {
-    e.preventDefault();
+function buildTZText() {
     var total = 0;
     Object.keys(answers).forEach(function(k) { total += answers[k].price; });
     var note = document.getElementById('client-contact').value.trim();
-    var text = 'Заявка с сайта DevStudio:\n' +
+    return 'Заявка с сайта DevStudio:\n' +
         '• Цель: ' + answers.goal.title + '\n' +
         '• Формат: ' + answers.format.title + '\n' +
         '• Материалы: ' + answers.assets.title + '\n' +
         '• Функции: ' + answers.features.title + '\n' +
         '• Сроки: ' + answers.deadline.title + '\n' +
         '• Бюджет: от ' + total + ' BYN' + (note ? '\n• Комментарий: ' + note : '');
-        var url = 'tg://resolve?domain=my_devstudio_leads_bot&text=' + encodeURIComponent(text);
+}
+function copyTZ() {
+    var text = buildTZText();
+    navigator.clipboard.writeText(text).then(function() {
+        var btn = document.getElementById('copy-btn');
+        btn.textContent = '✓ Скопировано';
+        setTimeout(function() { btn.textContent = 'Скопировать ТЗ'; }, 2000);
+    });
+}
+function sendToTelegram(e) {
+    e.preventDefault();
+    var text = buildTZText();
+    var url = 'tg://resolve?domain=travellereagle&text=' + encodeURIComponent(text);
     window.open(url, '_blank');
     var msg = document.getElementById('success-msg');
     msg.style.display = 'block';

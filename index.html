@@ -12,7 +12,9 @@
             <div class="logo">Dev<span>Studio</span></div>
             <div class="nav-links">
                 <a href="#showroom">Шоурум</a>
-                <a href="#quiz">Подобрать сайт</a>
+                <a href="#steps">Этапы</a>
+                <a href="#quiz">Калькулятор</a>
+                <a href="#faq">Вопросы</a>
             </div>
         </div>
     </header>
@@ -26,6 +28,7 @@
                 <a href="#showroom" class="btn btn-secondary">Открыть шоурум</a>
             </div>
         </section>
+
         <section id="showroom" class="section">
             <div class="section-header">
                 <h2>Интерактивный шоурум</h2>
@@ -61,6 +64,36 @@
                 </div>
             </div>
         </section>
+
+        <section id="steps" class="section">
+            <div class="section-header">
+                <h2>Как мы будем работать</h2>
+                <p>Прозрачный процесс без затягивания сроков и лишней бюрократии</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01. Бриф</div>
+                    <h3>Обсуждаем задачу</h3>
+                    <p>Изучаем вашу нишу, целевую аудиторию и фиксируем точную смету до старта работ.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02. Прототип</div>
+                    <h3>Собираем структуру</h3>
+                    <p>Продумываем логику блоков и тексты так, чтобы посетитель захотел оставить заявку.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03. Разработка</div>
+                    <h3>Верстаем и подключаем</h3>
+                    <p>Создаем адаптивный дизайн под смартфоны и настраиваем отправку заявок в Telegram.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">04. Запуск</div>
+                    <h3>Публикуем в сети</h3>
+                    <p>Привязываем ваш домен, проверяем скорость загрузки и передаем все доступы вам.</p>
+                </div>
+            </div>
+        </section>
+
         <section id="quiz" class="section">
             <div class="section-header">
                 <h2>Экспресс-бриф</h2>
@@ -86,13 +119,41 @@
                     <form class="form-group" onsubmit="sendToTelegram(event)">
                         <input type="text" class="input-field" id="client-contact" placeholder="Ваш телефон или комментарий (необязательно)">
                         <button type="submit" class="btn btn-primary">Отправить ТЗ в Telegram</button>
+                        <button type="button" class="btn btn-secondary" id="copy-btn" onclick="copyTZ()">Скопировать ТЗ</button>
                     </form>
                     <div class="success-msg" id="success-msg"></div>
                     <div style="margin-top: 16px;"><button class="tab-btn" onclick="restartQuiz()">← Пройти бриф заново</button></div>
                 </div>
             </div>
         </section>
+
+        <section id="faq" class="section">
+            <div class="section-header">
+                <h2>Частые вопросы</h2>
+                <p>Ответы на популярные вопросы перед началом разработки</p>
+            </div>
+            <div class="faq-list">
+                <details>
+                    <summary>Как происходит оплата за разработку?</summary>
+                    <p>Работаем по комфортной схеме 50/50: первая половина вносится перед началом разработки после утверждения задачи, вторая — после демонстрации готового сайта перед переносом на ваш домен.</p>
+                </details>
+                <details>
+                    <summary>Что делать, если у меня нет текстов и фотографий?</summary>
+                    <p>Это не проблема. Я помогу составить продающую структуру, напишу понятные заголовки для вашей ниши и подберу качественные тематические изображения.</p>
+                </details>
+                <details>
+                    <summary>Поможете ли вы купить домен и разместить сайт?</summary>
+                    <p>Да, я полностью беру техническую часть на себя: помогу зарегистрировать красивое имя (например, .by или .ru) и бесплатно размещу сайт на быстром хостинге.</p>
+                </details>
+                <details>
+                    <summary>Смогу ли я вносить правки в процессе работы?</summary>
+                    <p>Конечно. На каждом этапе вы видите промежуточный результат и можете скорректировать тексты, цвета или расположение блоков.</p>
+                </details>
+            </div>
+        </section>
     </main>
+
+    <a href="https://t.me" target="_blank" class="float-tg">Написать в Telegram</a>
     <footer><div class="container">© 2026 DevStudio. Создание сайтов под ключ.</div></footer>
     <script src="app.js"></script>
 </body>
