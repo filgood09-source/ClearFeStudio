@@ -38,31 +38,44 @@
         <section id="showroom" class="section reveal">
             <div class="section-header">
                 <h2>Интерактивный шоурум</h2>
-                <p>Выберите нишу и примерьте цветовую схему будущего сайта</p>
+                <p>Проверьте адаптивность под смартфон, переключите нишу и сравните «До / После»</p>
             </div>
             <div class="showroom-controls">
                 <div class="tabs">
                     <button class="tab-btn active" onclick="setNiche('auto', this)">Автосервис</button>
-                    <button class="tab-btn" onclick="setNiche('coffee', this)">Кофейня / Доставка</button>
+                    <button class="tab-btn" onclick="setNiche('coffee', this)">Кофейня</button>
                     <button class="tab-btn" onclick="setNiche('school', this)">Онлайн-школа</button>
                 </div>
+                <div class="device-toggle">
+                    <button class="dev-btn active" id="btn-after" onclick="setMode('after')">Как сделаю я</button>
+                    <button class="dev-btn warn" id="btn-before" onclick="setMode('before')">Как обычно (До)</button>
+                </div>
+                <div class="device-toggle">
+                    <button class="dev-btn active" id="btn-desk" onclick="setDevice('desktop')">Компьютер</button>
+                    <button class="dev-btn" id="btn-mob" onclick="setDevice('mobile')">Телефон</button>
+                </div>
                 <div class="theme-picker">
-                    <span>Стиль:</span>
-                    <div class="color-dot active" style="background: #1e293b;" onclick="setTheme('dark', this)"></div>
-                    <div class="color-dot" style="background: #f8fafc;" onclick="setTheme('light', this)"></div>
-                    <div class="color-dot" style="background: #4f46e5;" onclick="setTheme('brand', this)"></div>
+                    <div class="color-dot active" style="background: #1e293b;" onclick="setTheme('dark', this)" title="Темная"></div>
+                    <div class="color-dot" style="background: #f8fafc;" onclick="setTheme('light', this)" title="Светлая"></div>
+                    <div class="color-dot" style="background: #4f46e5;" onclick="setTheme('brand', this)" title="Акцент"></div>
                 </div>
             </div>
-            <div class="mockup-window">
+            <div class="mockup-window" id="mockup-window">
                 <div class="mockup-bar">
                     <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
                     <div class="mockup-url" id="mockup-url">https://auto-pro-service.by</div>
                 </div>
                 <div class="mockup-body" id="mockup-body">
+                    <div class="demo-nav">
+                        <span class="demo-logo" id="demo-logo">AutoPro Минск</span>
+                        <span class="demo-phone" id="demo-phone">+375 (29) 555-12-34</span>
+                    </div>
                     <div class="mockup-tag" id="mockup-tag">Ремонт и диагностика</div>
                     <div class="mockup-title" id="mockup-title">Честный автосервис с гарантией на работы 1 год</div>
                     <div class="mockup-desc" id="mockup-desc">Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.</div>
-                    <button class="mockup-cta" id="mockup-cta">Записаться на диагностику</button>
+                    <button class="mockup-cta" id="mockup-cta" onclick="triggerDemoAction()">Записаться на диагностику</button>
+                    <div class="demo-toast" id="demo-toast">✓ Клиент нажал на кнопку — всплывает форма записи в 1 клик!</div>
+                    <div class="demo-services" id="demo-services"></div>
                     <div class="mockup-stats" id="mockup-stats">
                         <div><strong>Было:</strong> 2 заявки в неделю из соцсетей</div>
                         <div><strong>Стало:</strong> 18 заявок в неделю с сайта (конверсия 6.4%)</div>
@@ -218,7 +231,7 @@
         </section>
     </main>
 
-    <a href="tg://resolve?domain=travellereagle" class="float-tg"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg> Написать в Telegram</a>
+    <a href="tg://resolve?domain=my_devstudio_leads_bot" class="float-tg"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg> Написать в Telegram</a>
     <footer><div class="container">© 2026 DevStudio. Создание сайтов под ключ.</div></footer>
     <script src="app.js"></script>
 </body>

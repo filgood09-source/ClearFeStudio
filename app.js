@@ -1,23 +1,77 @@
 var niches = {
-    auto: { url: 'https://auto-pro-service.by', tag: 'Ремонт и диагностика', title: 'Честный автосервис с гарантией на работы 1 год', desc: 'Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.', cta: 'Записаться на диагностику', stats: '<div><strong>Было:</strong> 2 заявки в неделю из соцсетей</div><div><strong>Стало:</strong> 18 заявок в неделю с сайта (конверсия 6.4%)</div>' },
-    coffee: { url: 'https://roast-coffee-bar.by', tag: 'Кофейня и пекарня', title: 'Свежая обжарка и ремесленная выпечка каждое утро', desc: 'Закажите любимый кофе и круассаны заранее к вашему приходу без очереди.', cta: 'Открыть меню и заказать', stats: '<div><strong>Было:</strong> Очереди в утренние часы</div><div><strong>Стало:</strong> +35% предзаказов через мобильное веб-приложение</div>' },
-    school: { url: 'https://design-start-academy.by', tag: 'Онлайн-образование', title: 'Освойте новую профессию с нуля за 2 месяца', desc: 'Практические задания, проверка кураторов и помощь с первым портфолио.', cta: 'Записаться на бесплатный урок', stats: '<div><strong>Было:</strong> Сбор заявок через длинную Google-форму</div><div><strong>Стало:</strong> Рост конверсии в регистрацию в 2.3 раза</div>' }
+    auto: {
+        url: 'https://auto-pro-service.by',
+        logo: 'AutoPro Минск',
+        phone: '+375 (29) 555-12-34',
+        tag: 'Ремонт и диагностика',
+        title: 'Честный автосервис с гарантией на работы 1 год',
+        desc: 'Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.',
+        cta: 'Записаться на диагностику',
+        services: [
+            { name: 'Замена масла и фильтров', price: 'от 45 BYN' },
+            { name: 'Диагностика подвески', price: '30 BYN' },
+            { name: 'Компьютерная диагностика', price: 'Бесплатно' }
+        ],
+        stats: '<div><strong>Было:</strong> 2 заявки в неделю из соцсетей</div><div><strong>Стало:</strong> 18 заявок в неделю с сайта (конверсия 6.4%)</div>'
+    },
+    coffee: {
+        url: 'https://roast-coffee-bar.by',
+        logo: 'Roast & Bake',
+        phone: 'Минск, пр. Независимости',
+        tag: 'Кофейня и пекарня',
+        title: 'Свежая обжарка и ремесленная выпечка каждое утро',
+        desc: 'Закажите любимый кофе и круассаны заранее к вашему приходу без очереди.',
+        cta: 'Открыть меню и заказать',
+        services: [
+            { name: 'Капучино 300 мл', price: '6.50 BYN' },
+            { name: 'Миндальный круассан', price: '7.00 BYN' },
+            { name: 'Комбо: кофе + сэндвич', price: '12.90 BYN' }
+        ],
+        stats: '<div><strong>Было:</strong> Очереди в утренние часы</div><div><strong>Стало:</strong> +35% предзаказов через мобильное веб-приложение</div>'
+    },
+    school: {
+        url: 'https://design-start-academy.by',
+        logo: 'DesignStart',
+        phone: 'Старт потока: 1 числа',
+        tag: 'Онлайн-образование',
+        title: 'Освойте новую профессию с нуля за 2 месяца',
+        desc: 'Практические задания, проверка кураторов и помощь с первым портфолио.',
+        cta: 'Записаться на пробный урок',
+        services: [
+            { name: 'Тариф «Базовый»', price: '490 BYN' },
+            { name: 'Тариф «С куратором»', price: '790 BYN' },
+            { name: 'Пробное занятие', price: '0 BYN' }
+        ],
+        stats: '<div><strong>Было:</strong> Сбор заявок через длинную Google-форму</div><div><strong>Стало:</strong> Рост конверсии в регистрацию в 2.3 раза</div>'
+    }
 };
 var themes = {
     dark: { bg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
     light: { bg: '#f8fafc', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
     brand: { bg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#0f172a' }
 };
+var currentNiche = 'auto';
+function renderServices(list) {
+    var html = '';
+    list.forEach(function(s) {
+        html += '<div class="demo-srv-card"><div class="demo-srv-name">' + s.name + '</div><div class="demo-srv-price">' + s.price + '</div></div>';
+    });
+    document.getElementById('demo-services').innerHTML = html;
+}
 function setNiche(key, btn) {
+    currentNiche = key;
     document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     var d = niches[key];
     document.getElementById('mockup-url').textContent = d.url;
+    document.getElementById('demo-logo').textContent = d.logo;
+    document.getElementById('demo-phone').textContent = d.phone;
     document.getElementById('mockup-tag').textContent = d.tag;
     document.getElementById('mockup-title').textContent = d.title;
     document.getElementById('mockup-desc').textContent = d.desc;
     document.getElementById('mockup-cta').textContent = d.cta;
     document.getElementById('mockup-stats').innerHTML = d.stats;
+    renderServices(d.services);
 }
 function setTheme(key, dot) {
     document.querySelectorAll('.color-dot').forEach(function(d) { d.classList.remove('active'); });
@@ -28,8 +82,28 @@ function setTheme(key, dot) {
     document.getElementById('mockup-cta').style.background = t.btnBg;
     document.getElementById('mockup-cta').style.color = t.btnColor;
 }
+function setDevice(type) {
+    var win = document.getElementById('mockup-window');
+    document.getElementById('btn-desk').classList.toggle('active', type === 'desktop');
+    document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
+    win.classList.toggle('mobile-mode', type === 'mobile');
+}
+function setMode(mode) {
+    var body = document.getElementById('mockup-body');
+    document.getElementById('btn-after').classList.toggle('active', mode === 'after');
+    document.getElementById('btn-before').classList.toggle('active', mode === 'before');
+    body.classList.toggle('old-style', mode === 'before');
+    var d = niches[currentNiche];
+    document.getElementById('mockup-title').textContent = mode === 'before' ? 'Добро пожаловать на наш сайт. Оказываем услуги.' : d.title;
+    document.getElementById('mockup-desc').textContent = mode === 'before' ? 'Звоните по телефону в рабочее время с 9 до 18. Прайс-лист уточняйте у менеджера.' : d.desc;
+}
+function triggerDemoAction() {
+    var toast = document.getElementById('demo-toast');
+    toast.style.display = 'block';
+    setTimeout(function() { toast.style.display = 'none'; }, 3000);
+}
 setTheme('dark', document.querySelector('.color-dot'));
-
+renderServices(niches.auto.services);
 var quizSteps = [
     { question: "1. Какая главная цель вашего сайта?", key: "goal", options: [{ title: "Получать заявки на услуги", sub: "Клиенты оставляют контакты", price: 0 }, { title: "Продавать товары онлайн", sub: "Каталог с корзиной", price: 0 }, { title: "Имидж и презентация", sub: "Рассказать о компании", price: 0 }] },
     { question: "2. Какой формат сайта вам ближе?", key: "format", options: [{ title: "Лендинг (одностраничник)", sub: "Быстрый запуск под рекламу", price: 450 }, { title: "Многостраничный сайт", sub: "Отдельные разделы услуг", price: 800 }, { title: "Интернет-магазин / Mini App", sub: "Сложная логика и каталог", price: 1150 }] },
@@ -93,14 +167,18 @@ function buildTZText() {
     var note = document.getElementById('client-contact').value.trim();
     var addons = [];
     document.querySelectorAll('.addon-item input:checked').forEach(function(cb) { addons.push(cb.getAttribute('data-name')); });
-    return 'Заявка с сайта DevStudio:\n' +
-        '• Цель: ' + answers.goal.title + '\n' +
-        '• Формат: ' + answers.format.title + '\n' +
-        '• Материалы: ' + answers.assets.title + '\n' +
-        '• Функции: ' + answers.features.title + '\n' +
-        '• Сроки: ' + answers.deadline.title +
-        (addons.length ? '\n• Доп. опции: ' + addons.join(', ') : '') +
-        '\n• Бюджет: от ' + total + ' BYN' + (note ? '\n• Комментарий: ' + note : '');
+    var lines = [
+        'Заявка с сайта DevStudio:',
+        '• Цель: ' + answers.goal.title,
+        '• Формат: ' + answers.format.title,
+        '• Материалы: ' + answers.assets.title,
+        '• Функции: ' + answers.features.title,
+        '• Сроки: ' + answers.deadline.title
+    ];
+    if (addons.length) { lines.push('• Доп. опции: ' + addons.join(', ')); }
+    lines.push('• Бюджет: от ' + total + ' BYN');
+    if (note) { lines.push('• Комментарий: ' + note); }
+    return lines.join('\n');
 }
 function copyTZ() {
     navigator.clipboard.writeText(buildTZText()).then(function() {
@@ -118,6 +196,7 @@ function sendToTelegram(e) {
     msg.innerHTML = '✅ ТЗ сформировано! Если Telegram не открылся сам, <a href="' + url + '" style="text-decoration: underline;">нажмите сюда</a>.';
 }
 renderStep();
+
 var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
         if (entry.isIntersecting) { entry.target.classList.add('visible'); }
