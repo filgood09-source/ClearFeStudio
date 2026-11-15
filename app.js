@@ -1,6 +1,13 @@
+function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('open');
+}
+function closeMenu() {
+    document.getElementById('nav-links').classList.remove('open');
+}
+
 var niches = {
     auto: {
-        url: 'https://auto-pro-service.by',
+        url: 'https://demo-auto.by',
         logo: 'AutoPro Минск',
         phone: '+375 (29) 555-12-34',
         tag: 'Ремонт и диагностика',
@@ -15,7 +22,7 @@ var niches = {
         stats: '<div><strong>Было:</strong> 2 заявки в неделю из соцсетей</div><div><strong>Стало:</strong> 18 заявок в неделю с сайта (конверсия 6.4%)</div>'
     },
     coffee: {
-        url: 'https://roast-coffee-bar.by',
+        url: 'https://demo-coffee.by',
         logo: 'Roast & Bake',
         phone: 'Минск, пр. Независимости',
         tag: 'Кофейня и пекарня',
@@ -30,7 +37,7 @@ var niches = {
         stats: '<div><strong>Было:</strong> Очереди в утренние часы</div><div><strong>Стало:</strong> +35% предзаказов через мобильное веб-приложение</div>'
     },
     school: {
-        url: 'https://design-start-academy.by',
+        url: 'https://demo-school.by',
         logo: 'DesignStart',
         phone: 'Старт потока: 1 числа',
         tag: 'Онлайн-образование',
@@ -168,7 +175,7 @@ function buildTZText() {
     var addons = [];
     document.querySelectorAll('.addon-item input:checked').forEach(function(cb) { addons.push(cb.getAttribute('data-name')); });
     var lines = [
-        'Заявка с сайта DevStudio:',
+        'Заявка с сайта ClearFeStudio:',
         '• Цель: ' + answers.goal.title,
         '• Формат: ' + answers.format.title,
         '• Материалы: ' + answers.assets.title,
