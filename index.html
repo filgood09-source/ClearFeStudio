@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <script>
+        <script>
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
@@ -140,35 +140,29 @@
             state[category] = { name, price };
             const sum = state.format.price + state.design.price + state.speed.price;
             document.getElementById('total-display').textContent = `${sum} BYN`;
-            if (tg.MainButton) tg.MainButton.setText(`ОТПРАВИТЬ ЗАЯВКУ (${sum} BYN)`);
             if (tg.HapticFeedback) tg.HapticFeedback.selectionChanged();
         }
 
         function sendDataToBot() {
             const sum = state.format.price + state.design.price + state.speed.price;
             const comment = document.getElementById('comment').value.trim();
-            const payload = JSON.stringify({
-                format: state.format.name,
-                design: state.design.name,
-                speed: state.speed.name,
-                total: `${sum} BYN`,
-                comment: comment || 'Без комментария'
-            });
 
-            if (tg.initData) {
-                tg.sendData(payload);
+            const text = `🔥 Заявка из DevStudio!\n\n` +
+                         `• Формат: ${state.format.name}\n` +
+                         `• Контент: ${state.design.name}\n` +
+                         `• Сроки: ${state.speed.name}\n` +
+                         `• Бюджет: ${sum} BYN\n` +
+                         `• Комментарий: ${comment || 'Без комментария'}`;
+
+            const shareUrl = `https://t.me{encodeURIComponent(text)}`;
+
+            if (tg.openTelegramLink) {
+                tg.openTelegramLink(shareUrl);
             } else {
-                const text = `🔥 Заявка из Mini App!\n\n• Формат: ${state.format.name}\n• Контент: ${state.design.name}\n• Сроки: ${state.speed.name}\n• Бюджет: ${sum} BYN\n• Комментарий: ${comment || '—'}`;
-                window.open(`tg://resolve?domain=travellereagle&text=${encodeURIComponent(text)}`, '_blank');
+                window.open(shareUrl, '_blank');
             }
         }
-
-        if (tg.MainButton) {
-            tg.MainButton.setText('ОТПРАВИТЬ ЗАЯВКУ (350 BYN)');
-            tg.MainButton.show();
-            tg.MainButton.onClick(sendDataToBot);
-            document.getElementById('fallback-btn').style.display = 'none';
-        }
     </script>
+
 </body>
 </html>
