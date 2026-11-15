@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <title>Интерактивный шоурум — ClearFeStudio</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%233b82f6'/><text x='50' y='67' font-family='sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'>C</text></svg>">
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
     <header>
@@ -68,17 +68,14 @@
                     </div>
                 </div>
             </div>
-
             <div style="text-align: center; margin-top: 32px;">
                 <p style="color: var(--muted); margin-bottom: 14px;">Понравился такой формат? Рассчитайте стоимость создания под ваш бизнес за 1 минуту.</p>
                 <a href="index.html#quiz" class="btn btn-primary">Хочу такой же сайт — рассчитать цену</a>
             </div>
         </section>
     </main>
-
-    <a href="tg://resolve?domain=travellereagle" class="float-tg"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg> Написать в Telegram</a>
+    <a href="tg://resolve?domain=travellereagle" class="float-tg">Написать в Telegram</a>
     <footer><div class="container">© 2026 ClearFeStudio. Создание сайтов под ключ.</div></footer>
-
     <script>
         var niches = {
             auto: {
@@ -149,60 +146,70 @@
             brand: { bg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#0f172a' }
         };
 
-var currentNiche = 'auto';
-function renderServices(list) {
-var html = '';
-for (var i = 0; i < list.length; i++) {
-html += '' + list[i].name + '' + list[i].price + '';
-}
-document.getElementById('demo-services').innerHTML = html;
-}
-function setNiche(key, btn) {
-currentNiche = key;
-var tabs = document.querySelectorAll('#niche-tabs .tab-btn');
-for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-btn.classList.add('active');
-var d = niches[key];
-document.getElementById('mockup-url').textContent = d.url;
-document.getElementById('demo-logo').textContent = d.logo;
-document.getElementById('demo-phone').textContent = d.phone;
-document.getElementById('mockup-tag').textContent = d.tag;
-document.getElementById('mockup-title').textContent = d.title;
-document.getElementById('mockup-desc').textContent = d.desc;
-document.getElementById('mockup-cta').textContent = d.cta;
-document.getElementById('mockup-stats').innerHTML = d.stats;
-renderServices(d.services);
-setMode('after');
-}
-function setTheme(key, dot) {
-var dots = document.querySelectorAll('.color-dot');
-for (var i = 0; i < dots.length; i++) { dots[i].classList.remove('active'); }
-dot.classList.add('active');
-var t = themes[key];
-document.getElementById('mockup-body').style.background = t.bg;
-document.getElementById('mockup-body').style.color = t.color;
-document.getElementById('mockup-cta').style.background = t.btnBg;
-document.getElementById('mockup-cta').style.color = t.btnColor;
-}
-function setDevice(type) {
-var win = document.getElementById('mockup-window');
-document.getElementById('btn-desk').classList.toggle('active', type === 'desktop');
-document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
-win.classList.toggle('mobile-mode', type === 'mobile');
-}
-function setMode(mode) {
-var body = document.getElementById('mockup-body');
-document.getElementById('btn-after').classList.toggle('active', mode === 'after');
-document.getElementById('btn-before').classList.toggle('active', mode === 'before');
-body.classList.toggle('old-style', mode === 'before');
-var d = niches[currentNiche];
-document.getElementById('mockup-title').textContent = mode === 'before' ? 'Добро пожаловать на наш сайт. Оказываем услуги.' : d.title;
-document.getElementById('mockup-desc').textContent = mode === 'before' ? 'Звоните по телефону в рабочее время с 9 до 18. Прайс-лист уточняйте у менеджера.' : d.desc;
-}
-function triggerDemoAction() {
-var toast = document.getElementById('demo-toast');
-toast.style.display = 'block';
-setTimeout(function() { toast.style.display = 'none'; }, 3000);
-}
-setTheme('dark', document.querySelector('.color-dot'));
-renderServices(niches.auto.services);
+        var currentNiche = 'auto';
+
+        function renderServices(list) {
+            var html = '';
+            for (var i = 0; i < list.length; i++) {
+                html += '<div class="demo-srv-card"><div class="demo-srv-name">' + list[i].name + '</div><div class="demo-srv-price">' + list[i].price + '</div></div>';
+            }
+            document.getElementById('demo-services').innerHTML = html;
+        }
+
+        function setNiche(key, btn) {
+            currentNiche = key;
+            var tabs = document.querySelectorAll('#niche-tabs .tab-btn');
+            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+            btn.classList.add('active');
+            var d = niches[key];
+            document.getElementById('mockup-url').textContent = d.url;
+            document.getElementById('demo-logo').textContent = d.logo;
+            document.getElementById('demo-phone').textContent = d.phone;
+            document.getElementById('mockup-tag').textContent = d.tag;
+            document.getElementById('mockup-title').textContent = d.title;
+            document.getElementById('mockup-desc').textContent = d.desc;
+            document.getElementById('mockup-cta').textContent = d.cta;
+            document.getElementById('mockup-stats').innerHTML = d.stats;
+            renderServices(d.services);
+            setMode('after');
+        }
+
+        function setTheme(key, dot) {
+            var dots = document.querySelectorAll('.color-dot');
+            for (var i = 0; i < dots.length; i++) { dots[i].classList.remove('active'); }
+            dot.classList.add('active');
+            var t = themes[key];
+            document.getElementById('mockup-body').style.background = t.bg;
+            document.getElementById('mockup-body').style.color = t.color;
+            document.getElementById('mockup-cta').style.background = t.btnBg;
+            document.getElementById('mockup-cta').style.color = t.btnColor;
+        }
+
+        function setDevice(type) {
+            var win = document.getElementById('mockup-window');
+            document.getElementById('btn-desk').classList.toggle('active', type === 'desktop');
+            document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
+            win.classList.toggle('mobile-mode', type === 'mobile');
+        }
+
+        function setMode(mode) {
+            var body = document.getElementById('mockup-body');
+            document.getElementById('btn-after').classList.toggle('active', mode === 'after');
+            document.getElementById('btn-before').classList.toggle('active', mode === 'before');
+            body.classList.toggle('old-style', mode === 'before');
+            var d = niches[currentNiche];
+            document.getElementById('mockup-title').textContent = mode === 'before' ? 'Добро пожаловать на наш сайт. Оказываем услуги.' : d.title;
+            document.getElementById('mockup-desc').textContent = mode === 'before' ? 'Звоните по телефону в рабочее время с 9 до 18. Прайс-лист уточняйте у менеджера.' : d.desc;
+        }
+
+        function triggerDemoAction() {
+            var toast = document.getElementById('demo-toast');
+            toast.style.display = 'block';
+            setTimeout(function() { toast.style.display = 'none'; }, 3000);
+        }
+
+        setTheme('dark', document.querySelector('.color-dot'));
+        renderServices(niches.auto.services);
+    </script>
+</body>
+</html>
