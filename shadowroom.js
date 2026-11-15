@@ -38,8 +38,8 @@ var niches = {
         desc: 'Практические задания, проверка кураторов и помощь с первым портфолио.',
         cta: 'Записаться на пробный урок',
         services: [
-            { name: 'Тариф «Базовый»', price: '490 BYN' },
-            { name: 'Тариф «С куратором»', price: '790 BYN' },
+            { name: 'Тариф Базовый', price: '490 BYN' },
+            { name: 'Тариф С куратором', price: '790 BYN' },
             { name: 'Пробное занятие', price: '0 BYN' }
         ],
         stats: '<div><strong>Было:</strong> Сбор заявок через длинную Google-форму</div><div><strong>Стало:</strong> Рост конверсии в регистрацию в 2.3 раза</div>'
@@ -60,12 +60,15 @@ var niches = {
         stats: '<div><strong>Было:</strong> Долгая переписка в Direct</div><div><strong>Стало:</strong> 80% клиентов записываются сами через сайт</div>'
     }
 };
+
 var themes = {
     dark: { bg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
     light: { bg: '#f8fafc', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
     brand: { bg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#0f172a' }
 };
+
 var currentNiche = 'auto';
+
 function renderServices(list) {
     var html = '';
     list.forEach(function(s) {
@@ -73,9 +76,12 @@ function renderServices(list) {
     });
     document.getElementById('demo-services').innerHTML = html;
 }
+
 function setNiche(key, btn) {
     currentNiche = key;
-    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b) {
+        b.classList.remove('active');
+    });
     btn.classList.add('active');
     var d = niches[key];
     document.getElementById('mockup-url').textContent = d.url;
@@ -89,8 +95,11 @@ function setNiche(key, btn) {
     renderServices(d.services);
     setMode('after');
 }
+
 function setTheme(key, dot) {
-    document.querySelectorAll('.color-dot').forEach(function(d) { d.classList.remove('active'); });
+    document.querySelectorAll('.color-dot').forEach(function(d) {
+        d.classList.remove('active');
+    });
     dot.classList.add('active');
     var t = themes[key];
     document.getElementById('mockup-body').style.background = t.bg;
@@ -98,12 +107,14 @@ function setTheme(key, dot) {
     document.getElementById('mockup-cta').style.background = t.btnBg;
     document.getElementById('mockup-cta').style.color = t.btnColor;
 }
+
 function setDevice(type) {
     var win = document.getElementById('mockup-window');
     document.getElementById('btn-desk').classList.toggle('active', type === 'desktop');
     document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
     win.classList.toggle('mobile-mode', type === 'mobile');
 }
+
 function setMode(mode) {
     var body = document.getElementById('mockup-body');
     document.getElementById('btn-after').classList.toggle('active', mode === 'after');
@@ -113,10 +124,14 @@ function setMode(mode) {
     document.getElementById('mockup-title').textContent = mode === 'before' ? 'Добро пожаловать на наш сайт. Оказываем услуги.' : d.title;
     document.getElementById('mockup-desc').textContent = mode === 'before' ? 'Звоните по телефону в рабочее время с 9 до 18. Прайс-лист уточняйте у менеджера.' : d.desc;
 }
+
 function triggerDemoAction() {
     var toast = document.getElementById('demo-toast');
     toast.style.display = 'block';
-    setTimeout(function() { toast.style.display = 'none'; }, 3000);
+    setTimeout(function() {
+        toast.style.display = 'none';
+    }, 3000);
 }
+
 setTheme('dark', document.querySelector('.color-dot'));
 renderServices(niches.auto.services);
