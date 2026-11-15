@@ -1,8 +1,8 @@
 :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --primary: #3b82f6; --accent: #10b981; }
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-html { scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); line-height: 1.5; position: relative; overflow-x: hidden; }
-body::before { content: ''; position: absolute; top: -180px; left: 50%; transform: translateX(-50%); width: 700px; height: 420px; background: radial-gradient(circle, rgba(59,130,246,0.22) 0%, rgba(15,23,42,0) 70%); pointer-events: none; z-index: -1; }
+html, body { scroll-behavior: smooth; overflow-x: hidden; width: 100%; position: relative; }
+body { background: var(--bg); color: var(--text); line-height: 1.5; }
+body::before { content: ''; position: fixed; top: -150px; left: 50%; transform: translateX(-50%); width: 100vw; max-width: 700px; height: 420px; background: radial-gradient(circle, rgba(59,130,246,0.22) 0%, rgba(15,23,42,0) 70%); pointer-events: none; z-index: -1; }
 .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
 header { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; position: sticky; top: 0; background: rgba(15,23,42,0.94); backdrop-filter: blur(10px); z-index: 30; }
 .nav { display: flex; justify-content: space-between; align-items: center; }
@@ -40,7 +40,7 @@ header { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; posit
 .color-dot { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
 .color-dot.active { border-color: var(--accent); transform: scale(1.1); }
 .mockup-window { border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 20px 45px rgba(0,0,0,0.35); transition: max-width 0.35s ease; margin: 0 auto; width: 100%; }
-.mockup-window.mobile-mode { max-width: 375px; border-radius: 30px; border: 4px solid #334155; }
+.mockup-window.mobile-mode { max-width: 340px; border-radius: 28px; border: 4px solid #334155; }
 .mockup-bar { background: #0b1120; padding: 10px 14px; display: flex; align-items: center; gap: 7px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .r { background: #ef4444; } .y { background: #f59e0b; } .g { background: #10b981; }
@@ -48,7 +48,7 @@ header { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; posit
 .mockup-body { padding: 32px; transition: 0.3s; }
 .demo-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; margin-bottom: 18px; border-bottom: 1px solid rgba(128,128,128,0.2); font-size: 0.85rem; gap: 8px; flex-wrap: wrap; }
 .demo-logo { font-weight: 800; font-size: 1rem; }
-.demo-phone { font-weight: 600; opacity: 0.85; font-size: 0.82rem; }
+.demo-phone, .demo-phone a { font-weight: 600; opacity: 0.85; font-size: 0.82rem; color: inherit !important; text-decoration: none; }
 .mockup-tag { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; opacity: 0.8; margin-bottom: 8px; }
 .mockup-title { font-size: 1.55rem; font-weight: 800; margin-bottom: 12px; line-height: 1.25; }
 .mockup-desc { opacity: 0.85; max-width: 560px; margin-bottom: 20px; font-size: 0.95rem; }
@@ -120,7 +120,6 @@ footer { text-align: center; padding: 28px 0 80px; color: var(--muted); font-siz
 .section { padding: 36px 0; }
 .section-header h2 { font-size: 1.5rem; }
 .tabs { width: 100%; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
-.desktop-only { display: none !important; }
 .mockup-body { padding: 20px 16px; }
 .mockup-title { font-size: 1.3rem; }
 .mockup-cta { width: 100%; text-align: center; }
