@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevStudio — Создание сайтов под ключ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="logo">Dev<span>Studio</span></div>
+            <div class="nav-links">
+                <a href="#showroom">Шоурум</a>
+                <a href="#quiz">Подобрать сайт</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="badge">Веб-приложение для вашего бизнеса</div>
+            <h1>Создаю современные сайты, которые приносят заявки</h1>
+            <p>Посмотрите живые примеры в интерактивном шоуруме или пройдите короткий бриф за 1 минуту, чтобы узнать точную стоимость и сроки.</p>
+            <div class="btn-group">
+                <a href="#quiz" class="btn btn-primary">Подобрать сайт за 1 минуту</a>
+                <a href="#showroom" class="btn btn-secondary">Открыть шоурум</a>
+            </div>
+        </section>
+
+        <section id="showroom" class="section">
+            <div class="section-header">
+                <h2>Интерактивный шоурум</h2>
+                <p>Выберите нишу и примерьте цветовую схему будущего сайта</p>
+            </div>
+
+            <div class="showroom-controls">
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="setNiche('auto', this)">Автосервис</button>
+                    <button class="tab-btn" onclick="setNiche('coffee', this)">Кофейня / Доставка</button>
+                    <button class="tab-btn" onclick="setNiche('school', this)">Онлайн-школа</button>
+                </div>
+
+                <div class="theme-picker">
+                    <span>Стиль:</span>
+                    <div class="color-dot active" style="background: #1e293b;" onclick="setTheme('dark', this)" title="Темный графит"></div>
+                    <div class="color-dot" style="background: #f8fafc;" onclick="setTheme('light', this)" title="Светлый минимализм"></div>
+                    <div class="color-dot" style="background: #4f46e5;" onclick="setTheme('brand', this)" title="Яркий акцент"></div>
+                </div>
+            </div>
+
+            <div class="mockup-window">
+                <div class="mockup-bar">
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
+                    <div class="mockup-url" id="mockup-url">https://auto-pro-service.by</div>
+                </div>
+                <div class="mockup-body" id="mockup-body">
+                    <div class="mockup-tag" id="mockup-tag">Ремонт и диагностика</div>
+                    <div class="mockup-title" id="mockup-title">Честный автосервис с гарантией на работы 1 год</div>
+                    <div class="mockup-desc" id="mockup-desc">Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.</div>
+                    <button class="mockup-cta" id="mockup-cta">Записаться на диагностику</button>
+                    <div class="mockup-stats" id="mockup-stats">
+                        <div><strong>Было:</strong> 2 заявки в неделю из соцсетей</div>
+                        <div><strong>Стало:</strong> 18 заявок в неделю с сайта (конверсия 6.4%)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="section">
+            <div class="section-header">
+                <h2>Экспресс-бриф</h2>
+                <p>Ответьте на 5 вопросов — система соберет ТЗ и рассчитает бюджет</p>
+            </div>
+
+            <div class="quiz-box">
+                <div id="quiz-container">
+                    <div class="progress-wrap">
+                        <div class="progress-info">
+                            <span id="step-text">Шаг 1 из 5</span>
+                            <span id="step-percent">20%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-question" id="question-title">Какая главная цель сайта?</div>
+                    <div class="options-grid" id="options-grid"></div>
+
+                    <div class="quiz-footer">
+                        <button class="btn btn-secondary" id="prev-btn" onclick="prevStep()" style="visibility: hidden;">Назад</button>
+                        <button class="btn btn-primary" id="next-btn" onclick="nextStep()">Далее</button>
+                    </div>
+                </div>
+
+                <div id="result-container" class="result-card">
+                    <h3>Ваше техническое задание готово!</h3>
+                    <p style="color: var(--text-muted); margin-top: 6px;">На основе ваших ответов мы подобрали оптимальный формат запуска.</p>
+
+                    <div class="result-summary" id="result-summary"></div>
+
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Ориентировочный бюджет:</div>
+                            <div class="result-price" id="final-price">от 450 BYN</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">Срок разработки:</div>
+                            <div style="font-weight: 700; font-size: 1.1rem;" id="final-time">7–10 дней</div>
+                        </div>
+                    </div>
+
+                    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+                    <form class="form-group" action="https://google.com" method="POST" target="hidden_iframe" onsubmit="handleFormSuccess()">
+                        <input type="hidden" name="entry.46567672" id="google-tz-input">
+                        <input type="text" class="input-field" name="entry.1668476584" id="client-contact" placeholder="Ваш Telegram (@username) или телефон" required>
+                        <button type="submit" class="btn btn-primary">Отправить ТЗ и обсудить</button>
+                    </form>
+
+                    <div class="success-msg" id="success-msg"></div>
+
+                    <div style="margin-top: 16px;">
+                        <button class="tab-btn" onclick="restartQuiz()">← Пройти бриф заново</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2026 DevStudio. Интерактивное веб-приложение для заказа сайтов.
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
