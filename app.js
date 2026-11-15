@@ -91,7 +91,7 @@ function sendToTelegram(e) {
         '• Функции: ' + answers.features.title + '\n' +
         '• Сроки: ' + answers.deadline.title + '\n' +
         '• Бюджет: от ' + total + ' BYN' + (note ? '\n• Комментарий: ' + note : '');
-    var url = 'tg://resolve?domain=travellereagle&text=' + encodeURIComponent(text);
+        var url = 'tg://resolve?domain=my_devstudio_leads_bot&text=' + encodeURIComponent(text);
     window.open(url, '_blank');
     var msg = document.getElementById('success-msg');
     msg.style.display = 'block';
