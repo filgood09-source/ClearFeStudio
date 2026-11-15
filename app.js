@@ -196,7 +196,7 @@ function copyTZ() {
 }
 function sendToTelegram(e) {
     e.preventDefault();
-    var url = 'tg://resolve?domain=my_devstudio_leads_bot&text=' + encodeURIComponent(buildTZText());
+    var url = 'tg://resolve?domain=clearfe_leads_bot&text=' + encodeURIComponent(buildTZText());
     window.open(url, '_blank');
     var msg = document.getElementById('success-msg');
     msg.style.display = 'block';
