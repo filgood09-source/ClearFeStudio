@@ -83,7 +83,7 @@
                     <tbody>
                         <tr>
                             <td>Стоимость запуска</td>
-                            <td class="highlight">от 350 BYN (фиксировано)</td>
+                            <td class="highlight">от 450 BYN (фиксировано)</td>
                             <td>от 1 500 – 3 000 BYN</td>
                             <td>Бесплатно + оплата тарифов</td>
                         </tr>
@@ -156,8 +156,23 @@
                 <div id="result-container" class="result-card">
                     <h3>Ваше техническое задание готово!</h3>
                     <div class="result-summary" id="result-summary"></div>
+                    <div class="addons-box">
+                        <div class="addons-title">Добавить к заказу (пересчитается сразу):</div>
+                        <label class="addon-item">
+                            <span class="addon-left"><input type="checkbox" value="80" data-name="Покупка домена .by и запуск" onchange="recalcTotal()"> Покупка домена .by и запуск</span>
+                            <span class="addon-price">+80 BYN</span>
+                        </label>
+                        <label class="addon-item">
+                            <span class="addon-left"><input type="checkbox" value="150" data-name="Написание продающих текстов" onchange="recalcTotal()"> Написание продающих текстов</span>
+                            <span class="addon-price">+150 BYN</span>
+                        </label>
+                        <label class="addon-item">
+                            <span class="addon-left"><input type="checkbox" value="200" data-name="Приоритетный запуск за 3–5 дней" onchange="recalcTotal()"> Приоритетный запуск за 3–5 дней</span>
+                            <span class="addon-price">+200 BYN</span>
+                        </label>
+                    </div>
                     <div>
-                        <div style="font-size: 0.85rem; color: var(--muted);">Ориентировочный бюджет:</div>
+                        <div style="font-size: 0.85rem; color: var(--muted);">Итоговый ориентировочный бюджет:</div>
                         <div class="result-price" id="final-price"></div>
                     </div>
                     <form class="form-group" onsubmit="sendToTelegram(event)">

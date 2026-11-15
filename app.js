@@ -31,11 +31,11 @@ function setTheme(key, dot) {
 setTheme('dark', document.querySelector('.color-dot'));
 
 var quizSteps = [
-    { question: "1. Какая главная цель вашего сайта?", key: "goal", options: [{ title: "Получать заявки на услуги", sub: "Клиенты оставляют контакты", price: 0 }, { title: "Продавать товары онлайн", sub: "Каталог с корзиной", price: 300 }, { title: "Имидж и презентация", sub: "Рассказать о компании", price: 100 }] },
-    { question: "2. Какой формат сайта вам ближе?", key: "format", options: [{ title: "Лендинг (одностраничник)", sub: "Быстрый запуск под рекламу", price: 350 }, { title: "Многостраничный сайт", sub: "Отдельные разделы услуг", price: 650 }, { title: "Интернет-магазин / Mini App", sub: "Сложная логика", price: 950 }] },
-    { question: "3. Что уже готово для старта?", key: "assets", options: [{ title: "Есть только идея", sub: "Нужна помощь с текстами", price: 150 }, { title: "Есть тексты и фото", sub: "Осталось упаковать в дизайн", price: 50 }, { title: "Нужен редизайн", sub: "Обновить старый сайт", price: 100 }] },
-    { question: "4. Какие функции добавить?", key: "features", options: [{ title: "Базовый набор", sub: "Формы заявок в Telegram", price: 0 }, { title: "Квиз или калькулятор", sub: "Расчет цены для клиента", price: 150 }, { title: "Онлайн-оплата и CRM", sub: "Прием платежей", price: 250 }] },
-    { question: "5. Какие сроки запуска комфортны?", key: "deadline", options: [{ title: "Срочно (до 7 дней)", sub: "Приоритетная разработка", price: 150 }, { title: "Стандартно (2–3 недели)", sub: "Спокойная проработка", price: 0 }, { title: "Не спешим (от 1 месяца)", sub: "Максимум деталей", price: 0 }] }
+    { question: "1. Какая главная цель вашего сайта?", key: "goal", options: [{ title: "Получать заявки на услуги", sub: "Клиенты оставляют контакты", price: 0 }, { title: "Продавать товары онлайн", sub: "Каталог с корзиной", price: 350 }, { title: "Имидж и презентация", sub: "Рассказать о компании", price: 150 }] },
+    { question: "2. Какой формат сайта вам ближе?", key: "format", options: [{ title: "Лендинг (одностраничник)", sub: "Быстрый запуск под рекламу", price: 450 }, { title: "Многостраничный сайт", sub: "Отдельные разделы услуг", price: 800 }, { title: "Интернет-магазин / Mini App", sub: "Сложная логика и каталог", price: 1150 }] },
+    { question: "3. Что уже готово для старта?", key: "assets", options: [{ title: "Есть только идея", sub: "Нужна помощь со структурой", price: 150 }, { title: "Есть тексты и фото", sub: "Осталось упаковать в дизайн", price: 50 }, { title: "Нужен редизайн", sub: "Обновить старый сайт", price: 120 }] },
+    { question: "4. Какие функции добавить?", key: "features", options: [{ title: "Базовый набор", sub: "Формы заявок в Telegram", price: 0 }, { title: "Квиз или калькулятор", sub: "Расчет цены для клиента", price: 180 }, { title: "Онлайн-оплата и CRM", sub: "Прием платежей и интеграции", price: 300 }] },
+    { question: "5. Какие сроки запуска комфортны?", key: "deadline", options: [{ title: "Срочно (до 7 дней)", sub: "Приоритетная разработка", price: 200 }, { title: "Стандартно (2–3 недели)", sub: "Спокойная проработка", price: 0 }, { title: "Не спешим (от 1 месяца)", sub: "Максимум деталей", price: 0 }] }
 ];
 var currentStep = 0;
 var answers = {};
@@ -60,41 +60,50 @@ function nextStep() {
     if (currentStep < quizSteps.length - 1) { currentStep++; renderStep(); } else { showResult(); }
 }
 function prevStep() { if (currentStep > 0) { currentStep--; renderStep(); } }
+function getTotalSum() {
+    var total = 0;
+    Object.keys(answers).forEach(function(k) { total += answers[k].price; });
+    document.querySelectorAll('.addon-item input:checked').forEach(function(cb) { total += parseInt(cb.value, 10); });
+    return total;
+}
+function recalcTotal() {
+    document.getElementById('final-price').textContent = 'от ' + getTotalSum() + ' BYN';
+}
 function showResult() {
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'block';
-    var total = 0;
-    Object.keys(answers).forEach(function(k) { total += answers[k].price; });
     document.getElementById('result-summary').innerHTML =
         '<div class="result-row"><span>Цель:</span><strong>' + answers.goal.title + '</strong></div>' +
         '<div class="result-row"><span>Формат:</span><strong>' + answers.format.title + '</strong></div>' +
         '<div class="result-row"><span>Материалы:</span><strong>' + answers.assets.title + '</strong></div>' +
         '<div class="result-row"><span>Функции:</span><strong>' + answers.features.title + '</strong></div>' +
         '<div class="result-row"><span>Сроки:</span><strong>' + answers.deadline.title + '</strong></div>';
-    document.getElementById('final-price').textContent = 'от ' + total + ' BYN';
+    recalcTotal();
 }
 function restartQuiz() {
     currentStep = 0; answers = {};
+    document.querySelectorAll('.addon-item input').forEach(function(cb) { cb.checked = false; });
     document.getElementById('result-container').style.display = 'none';
     document.getElementById('success-msg').style.display = 'none';
     document.getElementById('quiz-container').style.display = 'block';
     renderStep();
 }
 function buildTZText() {
-    var total = 0;
-    Object.keys(answers).forEach(function(k) { total += answers[k].price; });
+    var total = getTotalSum();
     var note = document.getElementById('client-contact').value.trim();
+    var addons = [];
+    document.querySelectorAll('.addon-item input:checked').forEach(function(cb) { addons.push(cb.getAttribute('data-name')); });
     return 'Заявка с сайта DevStudio:\n' +
         '• Цель: ' + answers.goal.title + '\n' +
         '• Формат: ' + answers.format.title + '\n' +
         '• Материалы: ' + answers.assets.title + '\n' +
         '• Функции: ' + answers.features.title + '\n' +
-        '• Сроки: ' + answers.deadline.title + '\n' +
-        '• Бюджет: от ' + total + ' BYN' + (note ? '\n• Комментарий: ' + note : '');
+        '• Сроки: ' + answers.deadline.title +
+        (addons.length ? '\n• Доп. опции: ' + addons.join(', ') : '') +
+        '\n• Бюджет: от ' + total + ' BYN' + (note ? '\n• Комментарий: ' + note : '');
 }
 function copyTZ() {
-    var text = buildTZText();
-    navigator.clipboard.writeText(text).then(function() {
+    navigator.clipboard.writeText(buildTZText()).then(function() {
         var btn = document.getElementById('copy-btn');
         btn.textContent = '✓ Скопировано';
         setTimeout(function() { btn.textContent = 'Скопировать ТЗ'; }, 2000);
@@ -102,8 +111,7 @@ function copyTZ() {
 }
 function sendToTelegram(e) {
     e.preventDefault();
-    var text = buildTZText();
-    var url = 'tg://resolve?domain=travellereagle&text=' + encodeURIComponent(text);
+    var url = 'tg://resolve?domain=travellereagle&text=' + encodeURIComponent(buildTZText());
     window.open(url, '_blank');
     var msg = document.getElementById('success-msg');
     msg.style.display = 'block';
