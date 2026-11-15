@@ -118,3 +118,9 @@ function sendToTelegram(e) {
     msg.innerHTML = '✅ ТЗ сформировано! Если Telegram не открылся сам, <a href="' + url + '" style="text-decoration: underline;">нажмите сюда</a>.';
 }
 renderStep();
+var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
