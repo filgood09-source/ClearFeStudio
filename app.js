@@ -201,10 +201,11 @@ function sendToTelegram(e) {
             throw new Error('TG API error');
         }
     })
-    .catch(function() {
+        .catch(function(err) {
         msg.style.display = 'block';
-        msg.innerHTML = 'Не удалось отправить автоматически. <a href="' + fallbackUrl + '" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Нажмите здесь, чтобы отправить ТЗ в Telegram в 1 клик</a>.';
+        msg.innerHTML = 'Ошибка: ' + err.message + ' — <a href="' + fallbackUrl + '" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">отправить вручную</a>.';
     })
+
     .finally(function() {
         if (submitBtn) {
             submitBtn.disabled = false;
