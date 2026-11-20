@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-   <meta property="og:image" content="https://github.io">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <title>Интерактивный шоурум — ClearFeStudio</title>
+    <meta name="description" content="Интерактивный шоурум прототипов ClearFeStudio. Выберите нишу, тему оформления и сравните сайт До и После.">
+    <meta property="og:title" content="Интерактивный шоурум — ClearFeStudio">
+    <meta property="og:description" content="Потестируйте будущий сайт для вашего бизнеса до заказа.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.io">
+    <meta property="og:image" content="https://github.io">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
     <header>
         <div class="container nav">
-            <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">ClearFeStudio</a>
+            <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">ClearFe<span>Studio</span></a>
             <div style="display: flex; gap: 10px; align-items: center;">
                 <a href="index.html" class="btn btn-secondary" style="padding: 8px 14px;">← На главную</a>
                 <a href="index.html#quiz" class="btn btn-primary" style="padding: 8px 14px;">Расчёт цены</a>
@@ -45,7 +49,7 @@
                     <button type="button" class="dev-btn warn" id="btn-before" onclick="setMode('before')">Как обычно (До)</button>
                 </div>
 
-                <div class="device-toggle">
+                <div class="device-toggle device-switcher">
                     <button type="button" class="dev-btn active" id="btn-desk" onclick="setDevice('desk')">Компьютер</button>
                     <button type="button" class="dev-btn" id="btn-mob" onclick="setDevice('mobile')">Телефон</button>
                 </div>

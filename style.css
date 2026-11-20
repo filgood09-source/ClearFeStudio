@@ -124,6 +124,8 @@ footer { text-align: center; padding: 28px 0 80px; color: var(--muted); font-siz
 .section { padding: 36px 0; }
 .section-header h2 { font-size: 1.5rem; }
 .tabs { width: 100%; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.device-switcher { display: none !important; }
+.mockup-window.mobile-mode { max-width: 100%; border-radius: 16px; border: 1px solid rgba(255,255,255,0.12); }
 .mockup-body { padding: 20px 16px; }
 .mockup-title { font-size: 1.3rem; }
 .mockup-cta { width: 100%; text-align: center; }
@@ -131,7 +133,4 @@ footer { text-align: center; padding: 28px 0 80px; color: var(--muted); font-siz
 .form-group { flex-direction: column; }
 .form-group .btn { width: 100%; }
 .float-tg { bottom: 14px; right: 14px; padding: 10px 14px; font-size: 0.85rem; }
-}
-@media (max-width: 440px) {
-.device-switcher { display: none; }
 }
