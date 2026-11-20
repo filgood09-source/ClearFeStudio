@@ -2,22 +2,23 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <title>Интерактивный шоурум — ClearFeStudio</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%233b82f6'/><text x='50' y='67' font-family='sans-serif' font-size='52' font-weight='bold' fill='white' text-anchor='middle'>C</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
     <header>
         <div class="container nav">
-            <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">ClearFe<span>Studio</span></a>
+            <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">ClearFeStudio</a>
             <div style="display: flex; gap: 10px; align-items: center;">
-                <a href="index.html" class="btn btn-secondary" style="padding: 8px 14px; font-size: 0.88rem;">← На главную</a>
-                <a href="index.html#quiz" class="btn btn-primary" style="padding: 8px 14px; font-size: 0.88rem;">Расчёт цены</a>
+                <a href="index.html" class="btn btn-secondary" style="padding: 8px 14px;">← На главную</a>
+                <a href="index.html#quiz" class="btn btn-primary" style="padding: 8px 14px;">Расчёт цены</a>
             </div>
         </div>
     </header>
+
     <main class="container">
         <section class="section" style="border-top: none; padding-top: 32px;">
             <div class="section-header">
@@ -25,6 +26,7 @@
                 <h2>Интерактивный шоурум</h2>
                 <p>Выберите нишу, переключите тему оформления, вид устройства и сравните «До / После»</p>
             </div>
+
             <div class="showroom-controls">
                 <div class="tabs" id="niche-tabs">
                     <button type="button" class="tab-btn active" onclick="setNiche('auto', this)">Автосервис</button>
@@ -32,50 +34,65 @@
                     <button type="button" class="tab-btn" onclick="setNiche('school', this)">Онлайн-школа</button>
                     <button type="button" class="tab-btn" onclick="setNiche('beauty', this)">Бьюти-студия</button>
                 </div>
+
                 <div class="device-toggle">
                     <button type="button" class="dev-btn active" id="btn-after" onclick="setMode('after')">Как сделаю я</button>
                     <button type="button" class="dev-btn warn" id="btn-before" onclick="setMode('before')">Как обычно (До)</button>
                 </div>
+
                 <div class="device-toggle">
-                    <button type="button" class="dev-btn active" id="btn-desk" onclick="setDevice('desktop')">Компьютер</button>
+                    <button type="button" class="dev-btn active" id="btn-desk" onclick="setDevice('desk')">Компьютер</button>
                     <button type="button" class="dev-btn" id="btn-mob" onclick="setDevice('mobile')">Телефон</button>
                 </div>
-                <div class="theme-picker">
-                    <div class="color-dot active" style="background: #1e293b;" onclick="setTheme('dark', this)" title="Темная"></div>
-                    <div class="color-dot" style="background: #f8fafc;" onclick="setTheme('light', this)" title="Светлая"></div>
-                    <div class="color-dot" style="background: #4f46e5;" onclick="setTheme('brand', this)" title="Акцент"></div>
+
+                <div class="theme-picker" role="group" aria-label="Выбор темы оформления">
+                    <button type="button" class="color-dot active" aria-label="Тёмная тема" style="background: #1e293b;" onclick="setTheme('dark', this)"></button>
+                    <button type="button" class="color-dot" aria-label="Светлая тема" style="background: #f8fafc;" onclick="setTheme('light', this)"></button>
+                    <button type="button" class="color-dot" aria-label="Фирменная синяя тема" style="background: #4f46e5;" onclick="setTheme('brand', this)"></button>
                 </div>
             </div>
+
             <div class="mockup-window" id="mockup-window">
                 <div class="mockup-bar">
-                    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+                    <div class="dot r"></div>
+                    <div class="dot y"></div>
+                    <div class="dot g"></div>
                     <div class="mockup-url" id="mockup-url">https://demo-auto.by</div>
                 </div>
+
                 <div class="mockup-body" id="mockup-body">
                     <div class="demo-nav">
                         <span class="demo-logo" id="demo-logo">AutoPro Минск</span>
                         <span class="demo-phone" id="demo-phone">+375 (29) 555-12-34</span>
                     </div>
+
                     <div class="mockup-tag" id="mockup-tag">Ремонт и диагностика</div>
-                    <div class="mockup-title" id="mockup-title">Честный автосервис с гарантией на работы 1 год</div>
-                    <div class="mockup-desc" id="mockup-desc">Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.</div>
+                    <h3 class="mockup-title" id="mockup-title">Честный автосервис с гарантией на работы 1 год</h3>
+                    <p class="mockup-desc" id="mockup-desc">Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.</p>
+                    
                     <button type="button" class="mockup-cta" id="mockup-cta" onclick="triggerDemoAction()">Записаться на диагностику</button>
-                    <div class="demo-toast" id="demo-toast">✓ Клиент нажал на кнопку — всплывает форма записи в 1 клик!</div>
+                    <div class="demo-toast" id="demo-toast" style="display: none;">✓ Клиент нажал на кнопку — всплывает форма записи в 1 клик!</div>
+                    
                     <div class="demo-services" id="demo-services"></div>
+
                     <div class="mockup-stats" id="mockup-stats">
                         <div><strong>Было:</strong> 2 заявки в неделю из соцсетей</div>
                         <div><strong>Стало:</strong> 18 заявок в неделю с сайта (конверсия 6.4%)</div>
                     </div>
                 </div>
             </div>
+
             <div style="text-align: center; margin-top: 32px;">
                 <p style="color: var(--muted); margin-bottom: 14px;">Понравился такой формат? Рассчитайте стоимость создания под ваш бизнес за 1 минуту.</p>
                 <a href="index.html#quiz" class="btn btn-primary">Хочу такой же сайт — рассчитать цену</a>
             </div>
         </section>
     </main>
-    <a href="tg://resolve?domain=travellereagle" class="float-tg">Написать в Telegram</a>
-    <footer><div class="container">© 2026 ClearFeStudio. Создание сайтов под ключ.</div></footer>
+
+    <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="float-tg">Написать в Telegram</a>
+    <footer>
+        <div class="container">© 2026 ClearFeStudio. Создание сайтов под ключ.</div>
+    </footer>
     <script>
         var niches = {
             auto: {
@@ -86,6 +103,9 @@
                 title: 'Честный автосервис с гарантией на работы 1 год',
                 desc: 'Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.',
                 cta: 'Записаться на диагностику',
+                beforeTitle: 'СТО «АвтоПро» — ремонт автомобилей любых марок',
+                beforeDesc: 'Выполняем слесарные работы, замену масла, ремонт подвески и двигателей. Звоните по указанным телефонам для уточнения свободного времени.',
+                beforeCta: 'Позвонить нам',
                 services: [
                     { name: 'Замена масла и фильтров', price: 'от 45 BYN' },
                     { name: 'Диагностика подвески', price: '30 BYN' },
@@ -101,12 +121,15 @@
                 title: 'Свежая обжарка и ремесленная выпечка каждое утро',
                 desc: 'Закажите любимый кофе и круассаны заранее к вашему приходу без очереди.',
                 cta: 'Открыть меню и заказать',
+                beforeTitle: 'Кофейня Roast & Bake — добро пожаловать',
+                beforeDesc: 'Мы варим вкусный кофе и печем булочки каждый день с 8:00 до 21:00. Приходите к нам в гости по адресу пр. Независимости.',
+                beforeCta: 'Смотреть адрес',
                 services: [
                     { name: 'Капучино 300 мл', price: '6.50 BYN' },
                     { name: 'Миндальный круассан', price: '7.00 BYN' },
                     { name: 'Комбо: кофе + сэндвич', price: '12.90 BYN' }
                 ],
-                stats: '<div><strong>Было:</strong> Очереди в утренние часы</div><div><strong>Стало:</strong> +35% предзаказов через мобильное веб-приложение</div>'
+                stats: '<div><strong>Было:</strong> Очереди в утренние часы и пустые столики днём</div><div><strong>Стало:</strong> +35% предзаказов навынос через сайт</div>'
             },
             school: {
                 url: 'https://demo-school.by',
@@ -116,12 +139,15 @@
                 title: 'Освойте новую профессию с нуля за 2 месяца',
                 desc: 'Практические задания, проверка кураторов и помощь с первым портфолио.',
                 cta: 'Записаться на пробный урок',
+                beforeTitle: 'Курсы веб-дизайна от школы DesignStart',
+                beforeDesc: 'Обучение проходит онлайн. В программе изучение Figma и основ верстки. Подробности можно узнать у менеджера.',
+                beforeCta: 'Скачать PDF-программу',
                 services: [
                     { name: 'Тариф Базовый', price: '490 BYN' },
                     { name: 'Тариф С куратором', price: '790 BYN' },
                     { name: 'Пробное занятие', price: '0 BYN' }
                 ],
-                stats: '<div><strong>Было:</strong> Сбор заявок через длинную Google-форму</div><div><strong>Стало:</strong> Рост конверсии в регистрацию в 2.3 раза</div>'
+                stats: '<div><strong>Было:</strong> Сбор заявок через длинную Google-форму</div><div><strong>Стало:</strong> Рост конверсии в регистрацию с 1.8% до 5.9%</div>'
             },
             beauty: {
                 url: 'https://demo-beauty.by',
@@ -129,24 +155,30 @@
                 phone: 'Онлайн-запись 24/7',
                 tag: 'Бьюти-пространство',
                 title: 'Идеальный маникюр и уход за волосами в центре Минска',
-                desc: 'Стерильные инструменты, топовые мастера и скидка 15% на первое посещение при записи с сайта.',
+                desc: 'Стерильные инструменты, топовые мастера и скидка 15% на первое посещение.',
                 cta: 'Выбрать мастера и время',
+                beforeTitle: 'Студия красоты Lumina Studio в Минске',
+                beforeDesc: 'Предоставляем услуги парикмахера, мастера маникюра и бровиста. Запись ведется по телефону или в Директ.',
+                beforeCta: 'Написать в Директ',
                 services: [
                     { name: 'Маникюр с покрытием', price: '65 BYN' },
                     { name: 'Сложное окрашивание', price: 'от 180 BYN' },
                     { name: 'Оформление бровей', price: '40 BYN' }
                 ],
-                stats: '<div><strong>Было:</strong> Долгая переписка в Direct</div><div><strong>Стало:</strong> 80% клиентов записываются сами через сайт</div>'
+                stats: '<div><strong>Было:</strong> Долгая переписка в Direct и потеря клиентов</div><div><strong>Стало:</strong> 70% клиентов записываются самостоятельно ночью</div>'
             }
         };
 
         var themes = {
             dark: { bg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
             light: { bg: '#f8fafc', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
-            brand: { bg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#0f172a' }
+            brand: { bg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#064e3b' }
         };
 
         var currentNiche = 'auto';
+        var currentTheme = 'dark';
+        var currentMode = 'after';
+        var toastTimer = null;
 
         function renderServices(list) {
             var html = '';
@@ -159,53 +191,107 @@
         function setNiche(key, btn) {
             currentNiche = key;
             var tabs = document.querySelectorAll('#niche-tabs .tab-btn');
-            for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
-            btn.classList.add('active');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            if (btn) btn.classList.add('active');
+
             var d = niches[key];
             document.getElementById('mockup-url').textContent = d.url;
             document.getElementById('demo-logo').textContent = d.logo;
             document.getElementById('demo-phone').textContent = d.phone;
             document.getElementById('mockup-tag').textContent = d.tag;
-            document.getElementById('mockup-title').textContent = d.title;
-            document.getElementById('mockup-desc').textContent = d.desc;
-            document.getElementById('mockup-cta').textContent = d.cta;
             document.getElementById('mockup-stats').innerHTML = d.stats;
             renderServices(d.services);
+
+            hideToast();
             setMode('after');
         }
 
-        function setTheme(key, dot) {
-            var dots = document.querySelectorAll('.color-dot');
-            for (var i = 0; i < dots.length; i++) { dots[i].classList.remove('active'); }
-            dot.classList.add('active');
+        function applyThemeStyles(key) {
             var t = themes[key];
-            document.getElementById('mockup-body').style.background = t.bg;
-            document.getElementById('mockup-body').style.color = t.color;
-            document.getElementById('mockup-cta').style.background = t.btnBg;
-            document.getElementById('mockup-cta').style.color = t.btnColor;
+            var body = document.getElementById('mockup-body');
+            var cta = document.getElementById('mockup-cta');
+            body.style.background = t.bg;
+            body.style.color = t.color;
+            cta.style.background = t.btnBg;
+            cta.style.color = t.btnColor;
+        }
+
+        function setTheme(key, dot) {
+            currentTheme = key;
+            var dots = document.querySelectorAll('.color-dot');
+            for (var i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            if (dot) dot.classList.add('active');
+
+            if (currentMode === 'after') {
+                applyThemeStyles(key);
+            }
         }
 
         function setDevice(type) {
             var win = document.getElementById('mockup-window');
-            document.getElementById('btn-desk').classList.toggle('active', type === 'desktop');
+            document.getElementById('btn-desk').classList.toggle('active', type === 'desk');
             document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
             win.classList.toggle('mobile-mode', type === 'mobile');
         }
 
         function setMode(mode) {
+            currentMode = mode;
             var body = document.getElementById('mockup-body');
+            var servicesEl = document.getElementById('demo-services');
+            var ctaEl = document.getElementById('mockup-cta');
+            var d = niches[currentNiche];
+
             document.getElementById('btn-after').classList.toggle('active', mode === 'after');
             document.getElementById('btn-before').classList.toggle('active', mode === 'before');
             body.classList.toggle('old-style', mode === 'before');
-            var d = niches[currentNiche];
-            document.getElementById('mockup-title').textContent = mode === 'before' ? 'Добро пожаловать на наш сайт. Оказываем услуги.' : d.title;
-            document.getElementById('mockup-desc').textContent = mode === 'before' ? 'Звоните по телефону в рабочее время с 9 до 18. Прайс-лист уточняйте у менеджера.' : d.desc;
+
+            hideToast();
+
+            if (mode === 'before') {
+                body.style.background = '';
+                body.style.color = '';
+                ctaEl.style.background = '';
+                ctaEl.style.color = '';
+
+                document.getElementById('mockup-title').textContent = d.beforeTitle;
+                document.getElementById('mockup-desc').textContent = d.beforeDesc;
+                ctaEl.textContent = d.beforeCta;
+                servicesEl.style.display = 'none';
+            } else {
+                applyThemeStyles(currentTheme);
+                document.getElementById('mockup-title').textContent = d.title;
+                document.getElementById('mockup-desc').textContent = d.desc;
+                ctaEl.textContent = d.cta;
+                servicesEl.style.display = '';
+            }
+        }
+
+        function hideToast() {
+            var toast = document.getElementById('demo-toast');
+            toast.style.display = 'none';
+            if (toastTimer) {
+                clearTimeout(toastTimer);
+                toastTimer = null;
+            }
         }
 
         function triggerDemoAction() {
             var toast = document.getElementById('demo-toast');
+            if (currentMode === 'before') {
+                toast.textContent = '⚠ На обычном сайте клиент уходит искать номер или закрывает вкладку';
+            } else {
+                toast.textContent = '✓ Клиент нажал на кнопку — всплывает форма записи в 1 клик!';
+            }
             toast.style.display = 'block';
-            setTimeout(function() { toast.style.display = 'none'; }, 3000);
+
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(function() {
+                toast.style.display = 'none';
+            }, 3000);
         }
 
         setTheme('dark', document.querySelector('.color-dot'));

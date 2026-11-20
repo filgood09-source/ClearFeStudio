@@ -1,16 +1,28 @@
+var WORKER_URL = 'https://clearfe-leads.filgood09.workers.dev';
+
 function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('open');
 }
+
 function closeMenu() {
-    document.getElementById('nav-links').classList.remove('open');
+    var nav = document.getElementById('nav-links');
+    if (nav) nav.classList.remove('open');
 }
+
+document.addEventListener('click', function(e) {
+    var nav = document.getElementById('nav-links');
+    var burger = document.querySelector('.burger-btn');
+    if (nav && nav.classList.contains('open') && !nav.contains(e.target) && (!burger || !burger.contains(e.target))) {
+        nav.classList.remove('open');
+    }
+});
 
 var quizSteps = [
     { question: "1. Какая главная цель вашего сайта?", key: "goal", options: [{ title: "Получать заявки на услуги", sub: "Клиенты оставляют контакты", price: 0 }, { title: "Продавать товары онлайн", sub: "Каталог с корзиной", price: 0 }, { title: "Имидж и презентация", sub: "Рассказать о компании", price: 0 }] },
     { question: "2. Какой формат сайта вам ближе?", key: "format", options: [{ title: "Лендинг (одностраничник)", sub: "Быстрый запуск под рекламу", price: 450 }, { title: "Многостраничный сайт", sub: "Отдельные разделы услуг", price: 800 }, { title: "Интернет-магазин / Mini App", sub: "Сложная логика и каталог", price: 1150 }] },
     { question: "3. Что уже готово для старта?", key: "assets", options: [{ title: "Есть только идея", sub: "Нужна помощь со структурой", price: 150 }, { title: "Есть тексты и фото", sub: "Осталось упаковать в дизайн", price: 50 }, { title: "Нужен редизайн", sub: "Обновить старый сайт", price: 120 }] },
     { question: "4. Какие функции добавить?", key: "features", options: [{ title: "Базовый набор", sub: "Формы заявок в Telegram", price: 0 }, { title: "Квиз или калькулятор", sub: "Расчет цены для клиента", price: 180 }, { title: "Онлайн-оплата и CRM", sub: "Прием платежей и интеграции", price: 300 }] },
-    { question: "5. Какие сроки запуска комфортны?", key: "deadline", options: [{ title: "Срочно (до 7 дней)", sub: "Приоритетная разработка", price: 200 }, { title: "Стандартно (2–3 недели)", sub: "Спокойная проработка", price: 0 }, { title: "Не спешим (от 1 месяца)", sub: "Максимум деталей", price: 0 }] }
+    { question: "5. Какие сроки запуска комфортны?", key: "deadline", options: [{ title: "Срочно (до 7 дней)", sub: "Приоритетная разработка", price: 200 }, { title: "Стандартно (10–14 дней)", sub: "Спокойная проработка", price: 0 }, { title: "Не спешим (от 3 недель)", sub: "Максимум деталей", price: 0 }] }
 ];
 
 var currentStep = 0;
@@ -70,7 +82,6 @@ function getTotalSum() {
 function recalcTotal() {
     document.getElementById('final-price').textContent = 'от ' + getTotalSum() + ' BYN';
 }
-
 function showResult() {
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'block';
@@ -97,49 +108,114 @@ function restartQuiz() {
 
 function buildTZText() {
     var total = getTotalSum();
-    var note = document.getElementById('client-contact').value.trim();
+    var contactInput = document.getElementById('client-contact');
+    var note = contactInput ? contactInput.value.trim() : '';
     var addons = [];
     document.querySelectorAll('.addon-item input:checked').forEach(function(cb) {
         addons.push(cb.getAttribute('data-name'));
     });
     var lines = [
         'Заявка с сайта ClearFeStudio:',
-        '- Цель: ' + answers.goal.title,
-        '- Формат: ' + answers.format.title,
-        '- Материалы: ' + answers.assets.title,
-        '- Функции: ' + answers.features.title,
-        '- Сроки: ' + answers.deadline.title
+        '- Цель: ' + (answers.goal ? answers.goal.title : 'Не указана'),
+        '- Формат: ' + (answers.format ? answers.format.title : 'Не указан'),
+        '- Материалы: ' + (answers.assets ? answers.assets.title : 'Не указаны'),
+        '- Функции: ' + (answers.features ? answers.features.title : 'Не указаны'),
+        '- Сроки: ' + (answers.deadline ? answers.deadline.title : 'Не указаны')
     ];
     if (addons.length) {
         lines.push('- Доп. опции: ' + addons.join(', '));
     }
     lines.push('- Бюджет: от ' + total + ' BYN');
     if (note) {
-        lines.push('- Комментарий: ' + note);
+        lines.push('- Контакт: ' + note);
     }
     return lines.join('\n');
 }
 
+function fallbackCopy(text, onSuccess) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+        document.execCommand('copy');
+        onSuccess();
+    } catch (err) {}
+    document.body.removeChild(ta);
+}
+
 function copyTZ() {
-    navigator.clipboard.writeText(buildTZText()).then(function() {
-        var btn = document.getElementById('copy-btn');
-        btn.textContent = 'Скопировано';
+    var text = buildTZText();
+    var btn = document.getElementById('copy-btn');
+    var markCopied = function() {
+        if (!btn) return;
+        btn.textContent = '✓ Скопировано';
         setTimeout(function() {
             btn.textContent = 'Скопировать ТЗ';
         }, 2000);
-    });
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(markCopied).catch(function() {
+            fallbackCopy(text, markCopied);
+        });
+    } else {
+        fallbackCopy(text, markCopied);
+    }
 }
 
 function sendToTelegram(e) {
-    e.preventDefault();
-    var url = 'tg://resolve?domain=clearfe_leads_bot&text=' + encodeURIComponent(buildTZText());
-    window.open(url, '_blank');
+    if (e) e.preventDefault();
+    var contactInput = document.getElementById('client-contact');
+    var contact = contactInput ? contactInput.value.trim() : '';
+
+    if (!contact) {
+        alert('Укажите телефон или ник в Telegram, чтобы я мог с вами связаться.');
+        if (contactInput) contactInput.focus();
+        return;
+    }
+
+    var submitBtn = e && e.target ? e.target.querySelector('button[type="submit"]') : null;
     var msg = document.getElementById('success-msg');
-    msg.style.display = 'block';
-    msg.innerHTML = 'ТЗ сформировано! Если Telegram не открылся сам, <a href="' + url + '" style="text-decoration: underline;">нажмите сюда</a>.';
+    var tzText = buildTZText();
+    var fallbackUrl = 'https://t.me' + encodeURIComponent(tzText);
+
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+    }
+
+    fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: tzText })
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+        if (data.ok) {
+            msg.style.display = 'block';
+            msg.innerHTML = '✓ Заявка и ТЗ успешно отправлены! Я свяжусь с вами в ближайшее время.';
+        } else {
+            throw new Error('TG API error');
+        }
+    })
+    .catch(function() {
+        msg.style.display = 'block';
+        msg.innerHTML = 'Не удалось отправить автоматически. <a href="' + fallbackUrl + '" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Нажмите здесь, чтобы отправить ТЗ в Telegram в 1 клик</a>.';
+    })
+    .finally(function() {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Отправить ТЗ в Telegram';
+        }
+    });
 }
 
-renderStep();
+if (document.getElementById('question-title')) {
+    renderStep();
+}
 
 var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
@@ -148,6 +224,7 @@ var observer = new IntersectionObserver(function(entries) {
         }
     });
 }, { threshold: 0.1 });
+
 document.querySelectorAll('.reveal').forEach(function(el) {
     observer.observe(el);
 });
