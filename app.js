@@ -82,6 +82,7 @@ function getTotalSum() {
 function recalcTotal() {
     document.getElementById('final-price').textContent = 'от ' + getTotalSum() + ' BYN';
 }
+
 function showResult() {
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'block';
@@ -102,10 +103,11 @@ function restartQuiz() {
     });
     document.getElementById('result-container').style.display = 'none';
     document.getElementById('success-msg').style.display = 'none';
+    var errBox = document.getElementById('contact-error');
+    if (errBox) errBox.style.display = 'none';
     document.getElementById('quiz-container').style.display = 'block';
     renderStep();
 }
-
 function buildTZText() {
     var total = getTotalSum();
     var contactInput = document.getElementById('client-contact');
@@ -166,14 +168,87 @@ function copyTZ() {
     }
 }
 
+function formatContactInput(input) {
+    var errBox = document.getElementById('contact-error');
+    if (errBox) errBox.style.display = 'none';
+    input.style.borderColor = '';
+
+    var val = input.value;
+    // Если пользователь вводит только цифры или начинает с +375 / 80 — мягко форматируем белорусский номер
+    if (/^[\d\s+\-()]+$/.test(val)) {
+        var digits = val.replace(/\D/g, '');
+        if (digits.indexOf('80') === 0 && digits.length <= 11) {
+            digits = '375' + digits.slice(2);
+        }
+        if (digits.indexOf('375') === 0 && digits.length <= 12) {
+            var res = '+375';
+            if (digits.length > 3) res += ' (' + digits.slice(3, 5);
+            if (digits.length >= 5) res += ') ';
+            if (digits.length > 5) res += digits.slice(5, 8);
+            if (digits.length > 8) res += '-' + digits.slice(8, 10);
+            if (digits.length > 10) res += '-' + digits.slice(10, 12);
+            input.value = res;
+        }
+    }
+}
+
+function isValidContact(value) {
+    var v = value.trim();
+    if (!v) return false;
+
+    // 1. Номер телефона (от 9 до 15 цифр, защита от повторов 222222222 и 123456789)
+    var digits = v.replace(/\D/g, '');
+    if (digits.length >= 9 && digits.length <= 15 && !/[a-zA-Zа-яА-ЯёЁ@]/.test(v)) {
+        if (/^(\d)\1+$/.test(digits)) return false;
+        if ('0123456789012345'.indexOf(digits) !== -1) return false;
+        // Для РБ (+375) проверяем точную длину 12 цифр
+        if (digits.indexOf('375') === 0 && digits.length !== 12) return false;
+        return true;
+    }
+
+    // 2. Юзернейм Telegram (@username, username или t.me/username — латиница/цифры/_, от 5 до 32 символов)
+    var tgMatch = v.match(/^(?:@|(?:https?:\/\/)?t\.me\/)?([a-zA-Z][a-zA-Z0-9_]{4,31})$/);
+    if (tgMatch) {
+        var username = tgMatch[1].toLowerCase();
+        if (/^([a-z0-9_])\1+$/.test(username)) return false;
+        return true;
+    }
+
+    // 3. Email
+    if (/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(v)) {
+        return true;
+    }
+
+    return false;
+}
+
+function showContactError(text) {
+    var input = document.getElementById('client-contact');
+    var errBox = document.getElementById('contact-error');
+    if (input) {
+        input.style.borderColor = '#ef4444';
+        input.focus();
+    }
+    if (errBox) {
+        errBox.textContent = text;
+        errBox.style.display = 'block';
+    } else {
+        alert(text);
+    }
+}
+
 function sendToTelegram(e) {
     if (e) e.preventDefault();
     var contactInput = document.getElementById('client-contact');
     var contact = contactInput ? contactInput.value.trim() : '';
 
     if (!contact) {
-        alert('Укажите телефон или ник в Telegram, чтобы я мог с вами связаться.');
-        if (contactInput) contactInput.focus();
+        showContactError('Укажите номер телефона или @ник в Telegram, чтобы я мог отправить вам расчёт.');
+        return;
+    }
+
+    if (!isValidContact(contact)) {
+        showContactError('Некорректный контакт. Введите телефон (например, +375 (29) 123-45-67) или @ник в Telegram латиницей.');
         return;
     }
 
@@ -201,11 +276,10 @@ function sendToTelegram(e) {
             throw new Error('TG API error');
         }
     })
-        .catch(function(err) {
+    .catch(function() {
         msg.style.display = 'block';
-        msg.innerHTML = 'Ошибка: ' + err.message + ' — <a href="' + fallbackUrl + '" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">отправить вручную</a>.';
+        msg.innerHTML = 'Не удалось отправить автоматически. <a href="' + fallbackUrl + '" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Нажмите здесь, чтобы отправить ТЗ в Telegram в 1 клик</a>.';
     })
-
     .finally(function() {
         if (submitBtn) {
             submitBtn.disabled = false;
