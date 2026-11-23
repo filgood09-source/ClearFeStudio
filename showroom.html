@@ -8,6 +8,21 @@
     <meta name="description" content="Впишите свою нишу и город — ИИ-дизайнер мгновенно соберёт уникальный прототип продающего сайта под ваш бизнес в Минске и РБ.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <link rel="stylesheet" href="style.css?v=8">
+    <style>
+        .mockup-body.layout-editorial { text-align: center; font-family: Georgia, serif; }
+        .mockup-body.layout-editorial .mockup-title { font-family: Georgia, serif; font-size: 1.85rem; letter-spacing: -0.5px; margin: 14px auto; max-width: 640px; }
+        .mockup-body.layout-editorial .mockup-desc { margin: 0 auto 22px; }
+        .mockup-body.layout-editorial .mockup-cta { border-radius: 99px; padding: 14px 28px; }
+
+        .mockup-body.layout-brutal .mockup-cta { border-radius: 4px; border: 2px solid currentColor; box-shadow: 4px 4px 0px currentColor; text-transform: uppercase; letter-spacing: 0.5px; }
+        .mockup-body.layout-brutal .demo-srv-card { border-radius: 4px; border: 2px solid currentColor; box-shadow: 3px 3px 0px currentColor; background: transparent; }
+
+        .mockup-body.layout-glass .demo-srv-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.22); border-radius: 16px; }
+        .mockup-body.layout-glass .mockup-cta { border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+
+        .mockup-body.layout-split .demo-services { grid-template-columns: 1fr; max-width: 460px; }
+        .mockup-body.layout-split .demo-srv-card { display: flex; justify-content: space-between; align-items: center; }
+    </style>
 </head>
 <body>
     <header>
@@ -25,7 +40,7 @@
             <div class="section-header">
                 <div class="badge" style="margin-bottom: 10px;">AI-генератор прототипов</div>
                 <h2>Соберите уникальный макет сайта с помощью ИИ</h2>
-                <p>Впишите любую нишу или название компании — нейросеть подберёт стиль, цвета, оффер и цены в BYN</p>
+                <p>Впишите любую нишу или название компании — нейросеть подберёт стиль вёрстки, цвета, оффер и цены в BYN</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-bottom: 14px;">
@@ -55,7 +70,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="mockup-window" id="mockup-window">
                 <div class="mockup-bar">
                     <div class="dot r"></div>
@@ -64,7 +78,7 @@
                     <div class="mockup-url" id="mockup-url">https://vash-biznes.by</div>
                 </div>
 
-                <div class="mockup-body" id="mockup-body" style="background: #1e293b; color: #f8fafc;">
+                <div class="mockup-body layout-glass" id="mockup-body" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f8fafc;">
                     <div class="demo-nav">
                         <span class="demo-logo" id="demo-logo">Ваш Бизнес</span>
                         <span class="demo-phone" id="demo-phone">Минск • +375 (29) 000-00-00</span>
@@ -143,7 +157,7 @@
         var themes = {
             dark: { bg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
             light: { bg: '#f8fafc', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
-            brand: { bg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#064e3b' }
+            brand: { bg: 'linear-gradient(135deg, #312e81 0%, #4c1d95 100%)', color: '#ffffff', btnBg: '#10b981', btnColor: '#064e3b' }
         };
         var toastTimer = null;
 
@@ -175,8 +189,15 @@
         }
 
         function applyFallbackDesign(brand, phone) {
-            document.getElementById('mockup-tag').textContent = 'Официальный сайт • ' + phone;
-            document.getElementById('mockup-title').textContent = brand + ' — профессиональный подход, честные цены и сервис без ожиданий';
+            var body = document.getElementById('mockup-body');
+            body.className = 'mockup-body layout-editorial';
+            body.style.background = 'linear-gradient(135deg, #1c1917 0%, #292524 100%)';
+            body.style.color = '#fafaf9';
+            document.getElementById('mockup-cta').style.background = '#d97706';
+            document.getElementById('mockup-cta').style.color = '#ffffff';
+
+            document.getElementById('mockup-tag').textContent = 'Премиум-сервис • ' + phone;
+            document.getElementById('mockup-title').textContent = brand + ' — индивидуальный подход, честные цены и сервис без ожиданий';
             document.getElementById('mockup-desc').textContent = 'Оставьте заявку за 15 секунд — рассчитаем точную стоимость и предложим лучшие условия в Беларуси.';
             document.getElementById('mockup-cta').textContent = 'Оставить заявку в 1 клик';
             document.getElementById('demo-services').innerHTML =
@@ -215,6 +236,7 @@
                 var body = document.getElementById('mockup-body');
                 var cta = document.getElementById('mockup-cta');
 
+                body.className = 'mockup-body layout-' + (d.layout || 'glass');
                 document.getElementById('mockup-tag').textContent = d.tag || ('Официальный сайт • ' + phone);
                 document.getElementById('mockup-title').textContent = d.title || (brand + ' — качество и сервис');
                 document.getElementById('mockup-desc').textContent = d.desc || '';
