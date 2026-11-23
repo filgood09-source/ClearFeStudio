@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <title>ИИ-генератор макета сайта — ClearFeStudio</title>
-    <meta name="description" content="Впишите свою нишу и город — ИИ-дизайнер мгновенно соберёт уникальный прототип продающего сайта под ваш бизнес в Минске и РБ.">
+    <title>ИИ-генератор полноценного сайта — ClearFeStudio</title>
+    <meta name="description" content="Впишите свою нишу и город — ИИ-дизайнер мгновенно соберёт полноценный многоблочный сайт под ваш бизнес в Минске и РБ.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
     <link rel="stylesheet" href="style.css?v=8">
     <style>
-        .mockup-body.layout-editorial { text-align: center; font-family: Georgia, serif; }
-        .mockup-body.layout-editorial .mockup-title { font-family: Georgia, serif; font-size: 1.85rem; letter-spacing: -0.5px; margin: 14px auto; max-width: 640px; }
-        .mockup-body.layout-editorial .mockup-desc { margin: 0 auto 22px; }
-        .mockup-body.layout-editorial .mockup-cta { border-radius: 99px; padding: 14px 28px; }
-
-        .mockup-body.layout-brutal .mockup-cta { border-radius: 4px; border: 2px solid currentColor; box-shadow: 4px 4px 0px currentColor; text-transform: uppercase; letter-spacing: 0.5px; }
-        .mockup-body.layout-brutal .demo-srv-card { border-radius: 4px; border: 2px solid currentColor; box-shadow: 3px 3px 0px currentColor; background: transparent; }
-
-        .mockup-body.layout-glass .demo-srv-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.22); border-radius: 16px; }
-        .mockup-body.layout-glass .mockup-cta { border-radius: 14px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-
-        .mockup-body.layout-split .demo-services { grid-template-columns: 1fr; max-width: 460px; }
-        .mockup-body.layout-split .demo-srv-card { display: flex; justify-content: space-between; align-items: center; }
+        .site-viewport { max-height: 620px; overflow-y: auto; scroll-behavior: smooth; }
+        .site-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 1px solid rgba(128,128,128,0.18); flex-wrap: wrap; gap: 10px; }
+        .site-nav-links { display: flex; gap: 16px; font-size: 0.82rem; opacity: 0.8; }
+        .site-hero { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 20px; align-items: center; padding: 32px 24px; }
+        .site-visual-card { padding: 20px; border-radius: 16px; border: 1px solid rgba(128,128,128,0.2); text-align: center; }
+        .site-emoji { font-size: 2.8rem; margin-bottom: 10px; display: block; }
+        .site-stat-pill { padding: 8px 12px; border-radius: 10px; background: rgba(128,128,128,0.12); font-size: 0.82rem; font-weight: 700; margin-top: 8px; }
+        .site-section { padding: 24px; border-top: 1px solid rgba(128,128,128,0.15); }
+        .site-sec-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 14px; }
+        .site-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+        .site-step-item { padding: 12px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.18); font-size: 0.85rem; }
+        .site-form-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .site-form-bar input { flex: 1; min-width: 160px; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(128,128,128,0.3); background: rgba(255,255,255,0.08); color: inherit; font-size: 0.88rem; }
+        @media (max-width: 680px) { .site-hero { grid-template-columns: 1fr; padding: 22px 16px; } .site-nav-links { display: none; } .site-section { padding: 18px 16px; } }
     </style>
 </head>
 <body>
@@ -38,23 +39,23 @@
     <main class="container">
         <section class="section" style="border-top: none; padding-top: 32px;">
             <div class="section-header">
-                <div class="badge" style="margin-bottom: 10px;">AI-генератор прототипов</div>
-                <h2>Соберите уникальный макет сайта с помощью ИИ</h2>
-                <p>Впишите любую нишу или название компании — нейросеть подберёт стиль вёрстки, цвета, оффер и цены в BYN</p>
+                <div class="badge" style="margin-bottom: 10px;">AI-конструктор сайтов</div>
+                <h2>Соберите прототип полноценного сайта за 5 секунд</h2>
+                <p>Впишите любую нишу (например, «онлайн репетитор») — нейросеть создаст многоблочный лендинг с меню, прайсом и формой заявки</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-bottom: 14px;">
-                <input type="text" class="input-field" id="custom-brand" oninput="updateLiveHeader()" placeholder="Ваша ниша (например, Крафтовая пивоварня)">
+                <input type="text" class="input-field" id="custom-brand" oninput="updateLiveHeader()" placeholder="Ваша ниша (например, Онлайн репетитор)">
                 <input type="text" class="input-field" id="custom-phone" oninput="updateLiveHeader()" placeholder="Город или телефон (например, Минск)">
-                <button type="button" class="btn btn-primary" id="ai-gen-btn" onclick="generateWithAI()">✨ Сгенерировать с ИИ</button>
+                <button type="button" class="btn btn-primary" id="ai-gen-btn" onclick="generateWithAI()">✨ Сгенерировать сайт с ИИ</button>
             </div>
 
             <div class="showroom-controls">
                 <div style="font-size: 0.88rem; color: var(--muted);">
-                    Быстрые примеры: 
+                    Примеры: 
+                    <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Онлайн репетитор по английскому', 'Минск • Онлайн по РБ')">Репетитор</button>
                     <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Крафтовая пивоварня', 'Минск • +375 (29) 777-11-22')">Пивоварня</button>
                     <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Ремонт квартир под ключ', 'Минск и область')">Ремонт</button>
-                    <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Детейлинг-центр AutoShine', '+375 (33) 555-88-99')">Детейлинг</button>
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 12px;">
@@ -75,31 +76,62 @@
                     <div class="dot r"></div>
                     <div class="dot y"></div>
                     <div class="dot g"></div>
-                    <div class="mockup-url" id="mockup-url">https://vash-biznes.by</div>
+                    <div class="mockup-url" id="mockup-url">https://onlayn-repetitor.by</div>
                 </div>
 
-                <div class="mockup-body layout-glass" id="mockup-body" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: #f8fafc;">
-                    <div class="demo-nav">
+                <div class="site-viewport" id="mockup-body" style="background: #0f172a; color: #f8fafc;">
+                    <div class="site-header">
                         <span class="demo-logo" id="demo-logo">Ваш Бизнес</span>
+                        <div class="site-nav-links">
+                            <span>Услуги и цены</span>
+                            <span>Как мы работаем</span>
+                            <span>Отзывы</span>
+                            <span>Контакты</span>
+                        </div>
                         <span class="demo-phone" id="demo-phone">Минск • +375 (29) 000-00-00</span>
                     </div>
 
-                    <div class="mockup-tag" id="mockup-tag">Официальный сайт • Минск и РБ</div>
-                    <h3 class="mockup-title" id="mockup-title">Ваш Бизнес — высокое качество, честные цены и сервис без лишних ожиданий</h3>
-                    <p class="mockup-desc" id="mockup-desc">Впишите вашу нишу сверху и нажмите «Сгенерировать с ИИ», чтобы увидеть персональный дизайн-прототип.</p>
-                    
-                    <button type="button" class="mockup-cta" id="mockup-cta" style="background: #3b82f6; color: #ffffff;" onclick="triggerDemoAction()">Оставить заявку в 1 клик</button>
-                    <div class="demo-toast" id="demo-toast" style="display: none;"></div>
-                    
-                    <div class="demo-services" id="demo-services">
-                        <div class="demo-srv-card"><div class="demo-srv-name">Бесплатная консультация</div><div class="demo-srv-price">0 BYN</div></div>
-                        <div class="demo-srv-card"><div class="demo-srv-name">Расчёт стоимости под задачу</div><div class="demo-srv-price">За 10 минут</div></div>
-                        <div class="demo-srv-card"><div class="demo-srv-name">Запуск проекта под ключ</div><div class="demo-srv-price">от 450 BYN</div></div>
+                    <div class="site-hero">
+                        <div>
+                            <div class="mockup-tag" id="mockup-tag">Индивидуальный подход • Минск и РБ</div>
+                            <h3 class="mockup-title" id="mockup-title">Ваш Бизнес — профессиональные услуги с гарантией результата</h3>
+                            <p class="mockup-desc" id="mockup-desc">Впишите вашу нишу сверху и нажмите «Сгенерировать сайт с ИИ», чтобы увидеть готовый многоблочный лендинг.</p>
+                            <a href="#demo-form-sec" class="mockup-cta" id="mockup-cta" style="background: #3b82f6; color: #ffffff; text-decoration: none; display: inline-block;">Оставить заявку</a>
+                        </div>
+                        <div class="site-visual-card" id="site-visual-card" style="background: #1e293b;">
+                            <span class="site-emoji" id="site-emoji">🚀</span>
+                            <div style="font-weight: 800; font-size: 0.95rem;" id="site-card-title">Показатели качества</div>
+                            <div class="site-stat-pill" id="site-stat1">✓ Быстрый старт за 1 день</div>
+                            <div class="site-stat-pill" id="site-stat2">✓ Прозрачные цены в BYN</div>
+                        </div>
                     </div>
 
-                    <div class="mockup-stats">
-                        <div><strong>Скорость загрузки:</strong> 0.4 сек на смартфонах</div>
-                        <div><strong>Конверсия в заявку:</strong> до 6.5% с рекламы в РБ</div>
+                    <div class="site-section">
+                        <div class="site-sec-title">Популярные услуги и стоимость</div>
+                        <div class="demo-services" id="demo-services">
+                            <div class="demo-srv-card"><div class="demo-srv-name">Базовая консультация</div><div style="font-size: 0.8rem; opacity: 0.75; margin-bottom: 6px;">Разбор вашей задачи</div><div class="demo-srv-price">0 BYN</div></div>
+                            <div class="demo-srv-card"><div class="demo-srv-name">Стандартный пакет</div><div style="font-size: 0.8rem; opacity: 0.75; margin-bottom: 6px;">Оптимальный выбор</div><div class="demo-srv-price">от 120 BYN</div></div>
+                            <div class="demo-srv-card"><div class="demo-srv-name">Премиум сопровождение</div><div style="font-size: 0.8rem; opacity: 0.75; margin-bottom: 6px;">Максимум результата</div><div class="demo-srv-price">от 250 BYN</div></div>
+                        </div>
+                    </div>
+
+                    <div class="site-section">
+                        <div class="site-sec-title">Как проходит работа</div>
+                        <div class="site-steps" id="site-steps">
+                            <div class="site-step-item"><strong>1. Заявка</strong><br><span style="opacity: 0.8;">Оставляете контакт на сайте за 15 секунд</span></div>
+                            <div class="site-step-item"><strong>2. План и расчёт</strong><br><span style="opacity: 0.8;">Подбираем формат и согласуем стоимость</span></div>
+                            <div class="site-step-item"><strong>3. Результат</strong><br><span style="opacity: 0.8;">Приступаем к работе в удобное время</span></div>
+                        </div>
+                    </div>
+
+                    <div class="site-section" id="demo-form-sec">
+                        <div class="site-sec-title" id="demo-form-title">Оставьте заявку — перезвоним за 10 минут</div>
+                        <form class="site-form-bar" onsubmit="triggerDemoAction(event)">
+                            <input type="text" placeholder="Ваше имя" required>
+                            <input type="tel" placeholder="+375 (29) 000-00-00" required>
+                            <button type="submit" class="mockup-cta" id="mockup-cta-2" style="background: #3b82f6; color: #ffffff;">Отправить</button>
+                        </form>
+                        <div class="demo-toast" id="demo-toast" style="display: none;"></div>
                     </div>
                 </div>
             </div>
@@ -155,9 +187,9 @@
     <script>
         var WORKER_URL = 'https://workers.dev';
         var themes = {
-            dark: { bg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
-            light: { bg: '#f8fafc', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
-            brand: { bg: 'linear-gradient(135deg, #312e81 0%, #4c1d95 100%)', color: '#ffffff', btnBg: '#10b981', btnColor: '#064e3b' }
+            dark: { bg: '#0f172a', cardBg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
+            light: { bg: '#f8fafc', cardBg: '#ffffff', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
+            brand: { bg: '#1e1b4b', cardBg: '#312e81', color: '#ffffff', btnBg: '#10b981', btnColor: '#064e3b' }
         };
         var toastTimer = null;
 
@@ -188,22 +220,53 @@
             document.getElementById('demo-phone').textContent = rawPhone || 'Минск • +375 (29) 000-00-00';
         }
 
-        function applyFallbackDesign(brand, phone) {
+        function applyDesignToDOM(d, brand, phone) {
             var body = document.getElementById('mockup-body');
-            body.className = 'mockup-body layout-editorial';
-            body.style.background = 'linear-gradient(135deg, #1c1917 0%, #292524 100%)';
-            body.style.color = '#fafaf9';
-            document.getElementById('mockup-cta').style.background = '#d97706';
-            document.getElementById('mockup-cta').style.color = '#ffffff';
+            var visualCard = document.getElementById('site-visual-card');
+            var cta1 = document.getElementById('mockup-cta');
+            var cta2 = document.getElementById('mockup-cta-2');
 
-            document.getElementById('mockup-tag').textContent = 'Премиум-сервис • ' + phone;
-            document.getElementById('mockup-title').textContent = brand + ' — индивидуальный подход, честные цены и сервис без ожиданий';
-            document.getElementById('mockup-desc').textContent = 'Оставьте заявку за 15 секунд — рассчитаем точную стоимость и предложим лучшие условия в Беларуси.';
-            document.getElementById('mockup-cta').textContent = 'Оставить заявку в 1 клик';
-            document.getElementById('demo-services').innerHTML =
-                '<div class="demo-srv-card"><div class="demo-srv-name">Бесплатная консультация</div><div class="demo-srv-price">0 BYN</div></div>' +
-                '<div class="demo-srv-card"><div class="demo-srv-name">Расчёт сметы за 10 минут</div><div class="demo-srv-price">Фиксированно</div></div>' +
-                '<div class="demo-srv-card"><div class="demo-srv-name">Гарантия качества работ</div><div class="demo-srv-price">По договору</div></div>';
+            document.getElementById('site-emoji').textContent = d.emoji || '⚡';
+            document.getElementById('mockup-tag').textContent = d.tag || ('Официальный сайт • ' + phone);
+            document.getElementById('mockup-title').textContent = d.title || (brand + ' — качество и результат');
+            document.getElementById('mockup-desc').textContent = d.desc || '';
+            cta1.textContent = d.cta || 'Оставить заявку';
+            cta2.textContent = d.cta || 'Отправить';
+
+            if (d.stat1) document.getElementById('site-stat1').textContent = '✓ ' + d.stat1;
+            if (d.stat2) document.getElementById('site-stat2').textContent = '✓ ' + d.stat2;
+
+            if (d.bg) body.style.background = d.bg;
+            if (d.cardBg) visualCard.style.background = d.cardBg;
+            if (d.color) body.style.color = d.color;
+            if (d.btnBg) {
+                cta1.style.background = d.btnBg;
+                cta2.style.background = d.btnBg;
+            }
+            if (d.btnColor) {
+                cta1.style.color = d.btnColor;
+                cta2.style.color = d.btnColor;
+            }
+
+            if (d.services && d.services.length) {
+                var srvHtml = '';
+                for (var i = 0; i < d.services.length; i++) {
+                    var s = d.services[i];
+                    srvHtml += '<div class="demo-srv-card" style="background:' + (d.cardBg || 'rgba(128,128,128,0.12)') + '">' +
+                               '<div class="demo-srv-name">' + s.name + '</div>' +
+                               '<div style="font-size:0.8rem;opacity:0.78;margin-bottom:6px;">' + (s.desc || '') + '</div>' +
+                               '<div class="demo-srv-price">' + s.price + '</div></div>';
+                }
+                document.getElementById('demo-services').innerHTML = srvHtml;
+            }
+
+            if (d.steps && d.steps.length) {
+                var stepHtml = '';
+                for (var j = 0; j < d.steps.length; j++) {
+                    stepHtml += '<div class="site-step-item"><strong>Шаг ' + (j + 1) + '</strong><br><span style="opacity:0.85;">' + d.steps[j] + '</span></div>';
+                }
+                document.getElementById('site-steps').innerHTML = stepHtml;
+            }
         }
 
         function generateWithAI() {
@@ -211,7 +274,7 @@
             var rawPhone = document.getElementById('custom-phone').value.trim();
 
             if (!rawBrand) {
-                alert('Введите нишу или название вашей компании (например, Крафтовая пивоварня).');
+                alert('Введите нишу или название вашей компании (например, Онлайн репетитор).');
                 document.getElementById('custom-brand').focus();
                 return;
             }
@@ -222,7 +285,7 @@
 
             var aiBtn = document.getElementById('ai-gen-btn');
             aiBtn.disabled = true;
-            aiBtn.textContent = '✨ ИИ создаёт дизайн...';
+            aiBtn.textContent = '✨ ИИ собирает сайт...';
 
             fetch(WORKER_URL, {
                 method: 'POST',
@@ -232,38 +295,35 @@
             .then(function(res) { return res.json(); })
             .then(function(data) {
                 if (!data.ok || !data.design) throw new Error('AI error');
-                var d = data.design;
-                var body = document.getElementById('mockup-body');
-                var cta = document.getElementById('mockup-cta');
-
-                body.className = 'mockup-body layout-' + (d.layout || 'glass');
-                document.getElementById('mockup-tag').textContent = d.tag || ('Официальный сайт • ' + phone);
-                document.getElementById('mockup-title').textContent = d.title || (brand + ' — качество и сервис');
-                document.getElementById('mockup-desc').textContent = d.desc || '';
-                cta.textContent = d.cta || 'Оставить заявку';
-
-                if (d.bg) body.style.background = d.bg;
-                if (d.color) body.style.color = d.color;
-                if (d.btnBg) cta.style.background = d.btnBg;
-                if (d.btnColor) cta.style.color = d.btnColor;
-
                 var dots = document.querySelectorAll('.color-dot');
                 for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active');
-
-                if (d.services && d.services.length) {
-                    var html = '';
-                    for (var j = 0; j < d.services.length; j++) {
-                        html += '<div class="demo-srv-card"><div class="demo-srv-name">' + d.services[j].name + '</div><div class="demo-srv-price">' + d.services[j].price + '</div></div>';
-                    }
-                    document.getElementById('demo-services').innerHTML = html;
-                }
+                applyDesignToDOM(data.design, brand, phone);
             })
             .catch(function() {
-                applyFallbackDesign(brand, phone);
+                applyDesignToDOM({
+                    emoji: '✨',
+                    tag: 'Профессиональный сервис • ' + phone,
+                    title: brand + ' — индивидуальный подход и честные цены в РБ',
+                    desc: 'Оставьте заявку за 15 секунд — проконсультируем, подберём решение и рассчитаем точную стоимость.',
+                    cta: 'Записаться онлайн',
+                    bg: '#0f172a',
+                    cardBg: '#1e293b',
+                    color: '#f8fafc',
+                    btnBg: '#3b82f6',
+                    btnColor: '#ffffff',
+                    stat1: 'Более 350 довольных клиентов',
+                    stat2: 'Гарантия качества по договору',
+                    services: [
+                        { name: 'Пробная консультация', desc: 'Знакомство и разбор задачи', price: '0 BYN' },
+                        { name: 'Базовый формат', desc: 'Оптимальное решение под ключ', price: 'от 85 BYN' },
+                        { name: 'Индивидуальный пакет', desc: 'Максимальное сопровождение', price: 'от 190 BYN' }
+                    ],
+                    steps: ['Оставляете заявку на сайте за 15 секунд', 'Согласуем детали и удобное время', 'Получаете гарантированный результат']
+                }, brand, phone);
             })
             .finally(function() {
                 aiBtn.disabled = false;
-                aiBtn.textContent = '✨ Сгенерировать с ИИ';
+                aiBtn.textContent = '✨ Сгенерировать сайт с ИИ';
             });
         }
 
@@ -279,12 +339,13 @@
             if (dot) dot.classList.add('active');
 
             var t = themes[key];
-            var body = document.getElementById('mockup-body');
-            var cta = document.getElementById('mockup-cta');
-            body.style.background = t.bg;
-            body.style.color = t.color;
-            cta.style.background = t.btnBg;
-            cta.style.color = t.btnColor;
+            document.getElementById('mockup-body').style.background = t.bg;
+            document.getElementById('mockup-body').style.color = t.color;
+            document.getElementById('site-visual-card').style.background = t.cardBg;
+            document.getElementById('mockup-cta').style.background = t.btnBg;
+            document.getElementById('mockup-cta').style.color = t.btnColor;
+            document.getElementById('mockup-cta-2').style.background = t.btnBg;
+            document.getElementById('mockup-cta-2').style.color = t.btnColor;
         }
 
         function setDevice(type) {
@@ -294,16 +355,17 @@
             win.classList.toggle('mobile-mode', type === 'mobile');
         }
 
-        function triggerDemoAction() {
+        function triggerDemoAction(e) {
+            if (e) e.preventDefault();
             var toast = document.getElementById('demo-toast');
             var brandName = document.getElementById('demo-logo').textContent;
-            toast.textContent = '✓ Клиент нажал на кнопку на сайте «' + brandName + '» — заявка сразу улетела вам в Telegram!';
+            toast.textContent = '✓ Тестовая заявка с сайта «' + brandName + '» отправлена! На реальном сайте она сразу приходит вам в Telegram.';
             toast.style.display = 'block';
 
             if (toastTimer) clearTimeout(toastTimer);
             toastTimer = setTimeout(function() {
                 toast.style.display = 'none';
-            }, 3000);
+            }, 3500);
         }
     </script>
 </body>
