@@ -4,18 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
-    <title>Интерактивный шоурум — ClearFeStudio</title>
-    <meta name="description" content="Интерактивный шоурум прототипов ClearFeStudio. Выберите нишу, тему оформления и сравните сайт До и После.">
-    <meta property="og:title" content="Интерактивный шоурум — ClearFeStudio">
-    <meta property="og:description" content="Потестируйте будущий сайт для вашего бизнеса до заказа.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://github.io">
-    <meta property="og:image" content="https://github.io">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta name="twitter:card" content="summary_large_image">
+    <title>Конструктор и шоурум прототипов — ClearFeStudio</title>
+    <meta name="description" content="Соберите прототип будущего сайта под ваш бизнес в Минске и РБ и посмотрите живые демо-сайты.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
     <header>
@@ -31,9 +23,14 @@
     <main class="container">
         <section class="section" style="border-top: none; padding-top: 32px;">
             <div class="section-header">
-                <div class="badge" style="margin-bottom: 10px;">Демонстрация прототипов</div>
-                <h2>Интерактивный шоурум</h2>
-                <p>Выберите нишу, переключите тему оформления, вид устройства и сравните «До / После»</p>
+                <div class="badge" style="margin-bottom: 10px;">Конструктор первого экрана</div>
+                <h2>Примерьте сайт под свой бизнес</h2>
+                <p>Впишите название своей компании, выберите нишу и цветовую тему — макет обновится сразу</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 16px;">
+                <input type="text" class="input-field" id="custom-brand" oninput="updateCustomBrand()" placeholder="Название вашей компании (например, СТО Форсаж)">
+                <input type="text" class="input-field" id="custom-phone" oninput="updateCustomBrand()" placeholder="Ваш телефон или город (например, +375 29 123-45-67)">
             </div>
 
             <div class="showroom-controls">
@@ -42,11 +39,6 @@
                     <button type="button" class="tab-btn" onclick="setNiche('coffee', this)">Кофейня</button>
                     <button type="button" class="tab-btn" onclick="setNiche('school', this)">Онлайн-школа</button>
                     <button type="button" class="tab-btn" onclick="setNiche('beauty', this)">Бьюти-студия</button>
-                </div>
-
-                <div class="device-toggle">
-                    <button type="button" class="dev-btn active" id="btn-after" onclick="setMode('after')">Как сделаю я</button>
-                    <button type="button" class="dev-btn warn" id="btn-before" onclick="setMode('before')">Как обычно (До)</button>
                 </div>
 
                 <div class="device-toggle device-switcher">
@@ -60,7 +52,6 @@
                     <button type="button" class="color-dot" aria-label="Фирменная синяя тема" style="background: #4f46e5;" onclick="setTheme('brand', this)"></button>
                 </div>
             </div>
-
             <div class="mockup-window" id="mockup-window">
                 <div class="mockup-bar">
                     <div class="dot r"></div>
@@ -90,15 +81,52 @@
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div style="text-align: center; margin-top: 32px;">
-                <p style="color: var(--muted); margin-bottom: 14px;">Понравился такой формат? Рассчитайте стоимость создания под ваш бизнес за 1 минуту.</p>
-                <a href="index.html#quiz" class="btn btn-primary">Хочу такой же сайт — рассчитать цену</a>
+        <section class="section">
+            <div class="section-header">
+                <div class="badge" style="margin-bottom: 10px;">Полноразмерные примеры</div>
+                <h2>Посмотрите 3 готовых демо-сайта во весь экран</h2>
+                <p>Настоящие сверстанные страницы с рабочей логикой, калькуляторами и формами записи</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="mockup-tag" style="color: #60a5fa;">Автобизнес / Услуги</div>
+                        <h3>СТО и шиномонтаж в Минске</h3>
+                        <p style="margin-bottom: 16px;">Полноценный лендинг с интерактивным калькулятором стоимости ТО, прайсом и записью на подъёмник.</p>
+                    </div>
+                    <a href="demos/auto.html" class="btn btn-secondary" style="text-align: center; padding: 10px 16px;">Открыть демо-сайт →</a>
+                </div>
+
+                <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="mockup-tag" style="color: #f472b6;">Бьюти-индустрия</div>
+                        <h3>Студия красоты и маникюра</h3>
+                        <p style="margin-bottom: 16px;">Нежный дизайн с выбором мастера, галереей услуг, акцией на первый визит и онлайн-записью 24/7.</p>
+                    </div>
+                    <a href="demos/beauty.html" class="btn btn-secondary" style="text-align: center; padding: 10px 16px;">Открыть демо-сайт →</a>
+                </div>
+
+                <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div class="mockup-tag" style="color: #34d399;">Общепит / Доставка</div>
+                        <h3>Кофейня и пекарня навынос</h3>
+                        <p style="margin-bottom: 16px;">Витрина меню с живой корзиной предзаказа к выбранному времени без очереди.</p>
+                    </div>
+                    <a href="demos/commerce.html" class="btn btn-secondary" style="text-align: center; padding: 10px 16px;">Открыть демо-сайт →</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 36px;">
+                <p style="color: var(--muted); margin-bottom: 14px;">Хотите такой же сайт под ключ для своего бизнеса? Рассчитайте бюджет за 1 минуту.</p>
+                <a href="index.html#quiz" class="btn btn-primary">Рассчитать стоимость сайта</a>
             </div>
         </section>
     </main>
 
-<a href="#" onclick="window.open('https://t.' + 'me/travellereagle', '_blank'); return false;" class="float-tg">Написать в Telegram</a>
+    <a href="#" onclick="window.open('https://t.' + 'me/travellereagle', '_blank'); return false;" class="float-tg">Написать в Telegram</a>
     <footer>
         <div class="container">© 2026 ClearFeStudio. Создание сайтов под ключ.</div>
     </footer>
@@ -112,9 +140,6 @@
                 title: 'Честный автосервис с гарантией на работы 1 год',
                 desc: 'Бесплатная компьютерная диагностика при первом обращении. Расчет стоимости ремонта за 15 минут.',
                 cta: 'Записаться на диагностику',
-                beforeTitle: 'СТО «АвтоПро» — ремонт автомобилей любых марок',
-                beforeDesc: 'Выполняем слесарные работы, замену масла, ремонт подвески и двигателей. Звоните по указанным телефонам для уточнения свободного времени.',
-                beforeCta: 'Позвонить нам',
                 services: [
                     { name: 'Замена масла и фильтров', price: 'от 45 BYN' },
                     { name: 'Диагностика подвески', price: '30 BYN' },
@@ -130,9 +155,6 @@
                 title: 'Свежая обжарка и ремесленная выпечка каждое утро',
                 desc: 'Закажите любимый кофе и круассаны заранее к вашему приходу без очереди.',
                 cta: 'Открыть меню и заказать',
-                beforeTitle: 'Кофейня Roast & Bake — добро пожаловать',
-                beforeDesc: 'Мы варим вкусный кофе и печем булочки каждый день с 8:00 до 21:00. Приходите к нам в гости по адресу пр. Независимости.',
-                beforeCta: 'Смотреть адрес',
                 services: [
                     { name: 'Капучино 300 мл', price: '6.50 BYN' },
                     { name: 'Миндальный круассан', price: '7.00 BYN' },
@@ -148,9 +170,6 @@
                 title: 'Освойте новую профессию с нуля за 2 месяца',
                 desc: 'Практические задания, проверка кураторов и помощь с первым портфолио.',
                 cta: 'Записаться на пробный урок',
-                beforeTitle: 'Курсы веб-дизайна от школы DesignStart',
-                beforeDesc: 'Обучение проходит онлайн. В программе изучение Figma и основ верстки. Подробности можно узнать у менеджера.',
-                beforeCta: 'Скачать PDF-программу',
                 services: [
                     { name: 'Тариф Базовый', price: '490 BYN' },
                     { name: 'Тариф С куратором', price: '790 BYN' },
@@ -166,9 +185,6 @@
                 title: 'Идеальный маникюр и уход за волосами в центре Минска',
                 desc: 'Стерильные инструменты, топовые мастера и скидка 15% на первое посещение.',
                 cta: 'Выбрать мастера и время',
-                beforeTitle: 'Студия красоты Lumina Studio в Минске',
-                beforeDesc: 'Предоставляем услуги парикмахера, мастера маникюра и бровиста. Запись ведется по телефону или в Директ.',
-                beforeCta: 'Написать в Директ',
                 services: [
                     { name: 'Маникюр с покрытием', price: '65 BYN' },
                     { name: 'Сложное окрашивание', price: 'от 180 BYN' },
@@ -186,7 +202,6 @@
 
         var currentNiche = 'auto';
         var currentTheme = 'dark';
-        var currentMode = 'after';
         var toastTimer = null;
 
         function renderServices(list) {
@@ -195,6 +210,15 @@
                 html += '<div class="demo-srv-card"><div class="demo-srv-name">' + list[i].name + '</div><div class="demo-srv-price">' + list[i].price + '</div></div>';
             }
             document.getElementById('demo-services').innerHTML = html;
+        }
+
+        function updateCustomBrand() {
+            var d = niches[currentNiche];
+            var brandVal = document.getElementById('custom-brand').value.trim();
+            var phoneVal = document.getElementById('custom-phone').value.trim();
+
+            document.getElementById('demo-logo').textContent = brandVal || d.logo;
+            document.getElementById('demo-phone').textContent = phoneVal || d.phone;
         }
 
         function setNiche(key, btn) {
@@ -207,24 +231,15 @@
 
             var d = niches[key];
             document.getElementById('mockup-url').textContent = d.url;
-            document.getElementById('demo-logo').textContent = d.logo;
-            document.getElementById('demo-phone').textContent = d.phone;
             document.getElementById('mockup-tag').textContent = d.tag;
+            document.getElementById('mockup-title').textContent = d.title;
+            document.getElementById('mockup-desc').textContent = d.desc;
+            document.getElementById('mockup-cta').textContent = d.cta;
             document.getElementById('mockup-stats').innerHTML = d.stats;
+
+            updateCustomBrand();
             renderServices(d.services);
-
             hideToast();
-            setMode('after');
-        }
-
-        function applyThemeStyles(key) {
-            var t = themes[key];
-            var body = document.getElementById('mockup-body');
-            var cta = document.getElementById('mockup-cta');
-            body.style.background = t.bg;
-            body.style.color = t.color;
-            cta.style.background = t.btnBg;
-            cta.style.color = t.btnColor;
         }
 
         function setTheme(key, dot) {
@@ -235,9 +250,13 @@
             }
             if (dot) dot.classList.add('active');
 
-            if (currentMode === 'after') {
-                applyThemeStyles(key);
-            }
+            var t = themes[key];
+            var body = document.getElementById('mockup-body');
+            var cta = document.getElementById('mockup-cta');
+            body.style.background = t.bg;
+            body.style.color = t.color;
+            cta.style.background = t.btnBg;
+            cta.style.color = t.btnColor;
         }
 
         function setDevice(type) {
@@ -245,38 +264,6 @@
             document.getElementById('btn-desk').classList.toggle('active', type === 'desk');
             document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
             win.classList.toggle('mobile-mode', type === 'mobile');
-        }
-
-        function setMode(mode) {
-            currentMode = mode;
-            var body = document.getElementById('mockup-body');
-            var servicesEl = document.getElementById('demo-services');
-            var ctaEl = document.getElementById('mockup-cta');
-            var d = niches[currentNiche];
-
-            document.getElementById('btn-after').classList.toggle('active', mode === 'after');
-            document.getElementById('btn-before').classList.toggle('active', mode === 'before');
-            body.classList.toggle('old-style', mode === 'before');
-
-            hideToast();
-
-            if (mode === 'before') {
-                body.style.background = '';
-                body.style.color = '';
-                ctaEl.style.background = '';
-                ctaEl.style.color = '';
-
-                document.getElementById('mockup-title').textContent = d.beforeTitle;
-                document.getElementById('mockup-desc').textContent = d.beforeDesc;
-                ctaEl.textContent = d.beforeCta;
-                servicesEl.style.display = 'none';
-            } else {
-                applyThemeStyles(currentTheme);
-                document.getElementById('mockup-title').textContent = d.title;
-                document.getElementById('mockup-desc').textContent = d.desc;
-                ctaEl.textContent = d.cta;
-                servicesEl.style.display = '';
-            }
         }
 
         function hideToast() {
@@ -290,11 +277,8 @@
 
         function triggerDemoAction() {
             var toast = document.getElementById('demo-toast');
-            if (currentMode === 'before') {
-                toast.textContent = '⚠ На обычном сайте клиент уходит искать номер или закрывает вкладку';
-            } else {
-                toast.textContent = '✓ Клиент нажал на кнопку — всплывает форма записи в 1 клик!';
-            }
+            var brandName = document.getElementById('demo-logo').textContent;
+            toast.textContent = '✓ Клиент нажал на кнопку на сайте «' + brandName + '» — всплывает форма записи в 1 клик!';
             toast.style.display = 'block';
 
             if (toastTimer) clearTimeout(toastTimer);

@@ -1,4 +1,4 @@
-var WORKER_URL = 'https://clearfe-leads.filgood09.workers.dev';
+var WORKER_URL = 'https://workers.dev';
 
 function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('open');
@@ -174,7 +174,6 @@ function formatContactInput(input) {
     input.style.borderColor = '';
 
     var val = input.value;
-    // Если пользователь вводит только цифры или начинает с +375 / 80 — мягко форматируем белорусский номер
     if (/^[\d\s+\-()]+$/.test(val)) {
         var digits = val.replace(/\D/g, '');
         if (digits.indexOf('80') === 0 && digits.length <= 11) {
@@ -196,17 +195,14 @@ function isValidContact(value) {
     var v = value.trim();
     if (!v) return false;
 
-    // 1. Номер телефона (от 9 до 15 цифр, защита от повторов 222222222 и 123456789)
     var digits = v.replace(/\D/g, '');
     if (digits.length >= 9 && digits.length <= 15 && !/[a-zA-Zа-яА-ЯёЁ@]/.test(v)) {
         if (/^(\d)\1+$/.test(digits)) return false;
         if ('0123456789012345'.indexOf(digits) !== -1) return false;
-        // Для РБ (+375) проверяем точную длину 12 цифр
         if (digits.indexOf('375') === 0 && digits.length !== 12) return false;
         return true;
     }
 
-    // 2. Юзернейм Telegram (@username, username или t.me/username — латиница/цифры/_, от 5 до 32 символов)
     var tgMatch = v.match(/^(?:@|(?:https?:\/\/)?t\.me\/)?([a-zA-Z][a-zA-Z0-9_]{4,31})$/);
     if (tgMatch) {
         var username = tgMatch[1].toLowerCase();
@@ -214,7 +210,6 @@ function isValidContact(value) {
         return true;
     }
 
-    // 3. Email
     if (/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(v)) {
         return true;
     }
@@ -255,7 +250,7 @@ function sendToTelegram(e) {
     var submitBtn = e && e.target ? e.target.querySelector('button[type="submit"]') : null;
     var msg = document.getElementById('success-msg');
     var tzText = buildTZText();
-    var fallbackUrl = 'https://t.me' + encodeURIComponent(tzText);
+    var fallbackUrl = 'https://t.' + 'me/travellereagle?text=' + encodeURIComponent(tzText);
 
     if (submitBtn) {
         submitBtn.disabled = true;
@@ -287,6 +282,39 @@ function sendToTelegram(e) {
         }
     });
 }
+
+function formatBYN(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' BYN';
+}
+
+function calcROI() {
+    var visitorsEl = document.getElementById('roi-visitors');
+    var checkEl = document.getElementById('roi-check');
+    if (!visitorsEl || !checkEl) return;
+
+    var visitors = parseInt(visitorsEl.value, 10);
+    var avgCheck = parseInt(checkEl.value, 10);
+
+    document.getElementById('roi-visitors-val').textContent = visitors + ' чел.';
+    document.getElementById('roi-check-val').textContent = formatBYN(avgCheck);
+
+    var oldLeads = Math.max(1, Math.round(visitors * 0.015));
+    var newLeads = Math.max(2, Math.round(visitors * 0.055));
+
+    var oldMoney = oldLeads * avgCheck;
+    var newMoney = newLeads * avgCheck;
+    var diffMoney = newMoney - oldMoney;
+
+    document.getElementById('roi-old-leads').textContent = oldLeads + ' заявок / мес';
+    document.getElementById('roi-old-money').textContent = formatBYN(oldMoney) + ' выручки';
+
+    document.getElementById('roi-new-leads').textContent = newLeads + ' заявок / мес';
+    document.getElementById('roi-new-money').textContent = formatBYN(newMoney) + ' выручки';
+
+    document.getElementById('roi-diff-money').textContent = '+' + formatBYN(diffMoney) + ' / мес';
+}
+
+calcROI();
 
 if (document.getElementById('question-title')) {
     renderStep();
