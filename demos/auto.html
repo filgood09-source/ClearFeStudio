@@ -8,40 +8,53 @@
     <style>
         :root { --bg: #0b0f19; --card: #131a2a; --text: #f8fafc; --muted: #94a3b8; --accent: #f59e0b; --accent-hover: #d97706; --green: #10b981; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 84px; }
+        body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 94px; }
         .container { max-width: 980px; margin: 0 auto; padding: 0 18px; }
-        header { background: rgba(11,15,25,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; position: sticky; top: 0; z-index: 20; }
+        header { background: rgba(11,15,25,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; position: sticky; top: 0; z-index: 20; }
         .nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-        .brand { font-size: 1.3rem; font-weight: 900; letter-spacing: 0.5px; }
+        .brand { font-size: 1.3rem; font-weight: 900; letter-spacing: 0.5px; white-space: nowrap; }
         .brand span { color: var(--accent); }
         .nav-info { display: flex; align-items: center; gap: 16px; font-size: 0.9rem; }
         .badge { display: inline-block; background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.35); padding: 5px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 700; margin-bottom: 14px; }
-        .hero { padding: 56px 0 44px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center; }
-        .hero h1 { font-size: 2.3rem; font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
+        .hero { padding: 52px 0 42px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 28px; align-items: center; }
+        .hero h1 { font-size: 2.25rem; font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
         .hero p { color: var(--muted); font-size: 1.02rem; margin-bottom: 24px; }
         .btn { display: inline-block; padding: 13px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-size: 0.96rem; transition: 0.2s; }
         .btn-accent { background: var(--accent); color: #0b0f19; }
         .btn-accent:hover { background: var(--accent-hover); }
+        .nav-cta { padding: 9px 16px; font-size: 0.86rem; white-space: nowrap; }
         .hero-box { background: var(--card); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 22px; }
-        .hero-stat { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.92rem; }
+        .hero-stat { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.92rem; }
         .hero-stat:last-child { border-bottom: none; }
         .section { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.06); }
         .section h2 { font-size: 1.7rem; margin-bottom: 8px; }
         .section-sub { color: var(--muted); margin-bottom: 24px; font-size: 0.95rem; }
         .calc-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 20px; }
         .calc-card { background: var(--card); border-radius: 16px; padding: 22px; border: 1px solid rgba(255,255,255,0.08); }
-        .srv-check { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--bg); border-radius: 10px; margin-bottom: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.06); }
-        .srv-check input { width: 18px; height: 18px; accent-color: var(--accent); margin-right: 10px; }
+        .srv-check { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px; background: var(--bg); border-radius: 10px; margin-bottom: 10px; cursor: pointer; border: 1px solid rgba(255,255,255,0.06); }
+        .srv-check input { width: 18px; height: 18px; accent-color: var(--accent); margin-right: 10px; flex-shrink: 0; }
         .srv-left { display: flex; align-items: center; font-size: 0.92rem; font-weight: 500; }
         .srv-price { color: var(--accent); font-weight: 700; font-size: 0.9rem; white-space: nowrap; }
         .input { width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.14); color: var(--text); padding: 12px; border-radius: 10px; margin-bottom: 12px; font-size: 0.92rem; }
         .total-sum { font-size: 1.8rem; font-weight: 900; color: var(--green); margin: 8px 0 16px; }
         .demo-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; border-top: 2px solid #3b82f6; padding: 12px 18px; z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .demo-banner-text { font-size: 0.88rem; color: #f8fafc; }
+        .demo-banner-text { font-size: 0.86rem; color: #f8fafc; }
         .demo-banner-btns { display: flex; gap: 8px; }
-        .btn-studio { background: #3b82f6; color: #fff; padding: 9px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.86rem; }
-        .btn-back { background: rgba(255,255,255,0.1); color: #fff; padding: 9px 14px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.86rem; }
-        @media (max-width: 720px) { .hero, .calc-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 1.8rem; } .nav-info span { display: none; } }
+        .btn-studio { background: #3b82f6; color: #fff; padding: 9px 14px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.84rem; white-space: nowrap; }
+        .btn-back { background: rgba(255,255,255,0.1); color: #fff; padding: 9px 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.84rem; white-space: nowrap; }
+        @media (max-width: 720px) {
+            .container { padding: 0 14px; }
+            .hero, .calc-grid { grid-template-columns: 1fr; }
+            .hero { padding: 30px 0 26px; gap: 20px; }
+            .hero h1 { font-size: 1.65rem; }
+            .brand { font-size: 1.05rem; }
+            .nav-info span { display: none; }
+            .nav-cta { padding: 8px 12px; font-size: 0.8rem; }
+            .hero-box, .calc-card { padding: 16px; }
+            .demo-banner { padding: 10px 14px; }
+            .demo-banner-btns { width: 100%; }
+            .demo-banner-btns a { flex: 1; text-align: center; }
+        }
     </style>
 </head>
 <body>
@@ -50,7 +63,7 @@
             <div class="brand">AUTO<span>PRO</span> МИНСК</div>
             <div class="nav-info">
                 <span style="color: var(--muted);">ул. Тимирязева, 65 • 09:00–21:00</span>
-                <a href="#calc" class="btn btn-accent" style="padding: 8px 14px; font-size: 0.86rem;">Записаться на ТО</a>
+                <a href="#calc" class="btn btn-accent nav-cta">Записаться на ТО</a>
             </div>
         </div>
     </header>
@@ -61,7 +74,7 @@
                 <div class="badge">Гарантия на работы 12 месяцев</div>
                 <h1>Честный автосервис в Минске без навязанных услуг</h1>
                 <p>Согласуем смету до начала ремонта. Бесплатная компьютерная диагностика при первом визите и фотоотчёт заменённых запчастей в Telegram.</p>
-                <a href="#calc" class="btn btn-accent">Рассчитать стоимость ТО за 15 сек</a>
+                <a href="#calc" class="btn btn-accent" style="width: 100%; text-align: center;">Рассчитать стоимость ТО за 15 сек</a>
             </div>
             <div class="hero-box">
                 <div style="font-weight: 800; margin-bottom: 10px; color: var(--accent);">Почему нас выбирают:</div>

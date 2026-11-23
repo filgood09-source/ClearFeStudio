@@ -7,11 +7,11 @@
     <title>ИИ-генератор полноценного сайта — ClearFeStudio</title>
     <meta name="description" content="Впишите свою нишу и город — ИИ-дизайнер мгновенно соберёт полноценный многоблочный сайт под ваш бизнес в Минске и РБ.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://w3.org' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=9">
     <style>
         .site-viewport { max-height: 620px; overflow-y: auto; scroll-behavior: smooth; }
         .site-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; border-bottom: 1px solid rgba(128,128,128,0.18); flex-wrap: wrap; gap: 10px; }
-        .site-nav-links { display: flex; gap: 16px; font-size: 0.82rem; opacity: 0.8; }
+        .site-nav-links { display: flex; gap: 16px; font-size: 0.82rem; opacity: 0.85; }
         .site-hero { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 20px; align-items: center; padding: 32px 24px; }
         .site-visual-card { padding: 20px; border-radius: 16px; border: 1px solid rgba(128,128,128,0.2); text-align: center; }
         .site-emoji { font-size: 2.8rem; margin-bottom: 10px; display: block; }
@@ -22,14 +22,13 @@
         .site-step-item { padding: 12px; border-radius: 10px; border: 1px solid rgba(128,128,128,0.18); font-size: 0.85rem; }
         .site-form-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
         .site-form-bar input { flex: 1; min-width: 160px; padding: 10px 12px; border-radius: 8px; border: 1px solid rgba(128,128,128,0.3); background: rgba(255,255,255,0.08); color: inherit; font-size: 0.88rem; }
+        .mockup-window.mobile-mode .site-nav-links { display: none; }
+        .mockup-window.mobile-mode .site-header { padding: 12px 16px; }
+        .mockup-window.mobile-mode .site-hero { grid-template-columns: 1fr; padding: 20px 16px; gap: 16px; }
+        .mockup-window.mobile-mode .site-section { padding: 18px 16px; }
+        .mockup-window.mobile-mode .mockup-title { font-size: 1.25rem; word-break: break-word; }
         @media (max-width: 680px) { .site-hero { grid-template-columns: 1fr; padding: 22px 16px; } .site-nav-links { display: none; } .site-section { padding: 18px 16px; } }
-   .mockup-window.mobile-mode .site-nav-links { display: none; }
-.mockup-window.mobile-mode .site-header { padding: 12px 16px; }
-.mockup-window.mobile-mode .site-hero { grid-template-columns: 1fr; padding: 20px 16px; gap: 16px; }
-.mockup-window.mobile-mode .site-section { padding: 18px 16px; }
-.mockup-window.mobile-mode .mockup-title { font-size: 1.25rem; word-break: break-word; }
-
-   </style>
+    </style>
 </head>
 <body>
     <header>
@@ -47,11 +46,11 @@
             <div class="section-header">
                 <div class="badge" style="margin-bottom: 10px;">AI-конструктор сайтов</div>
                 <h2>Соберите прототип полноценного сайта за 5 секунд</h2>
-                <p>Впишите любую нишу (например, «онлайн репетитор») — нейросеть создаст многоблочный лендинг с меню, прайсом и формой заявки</p>
+                <p>Впишите любую нишу (например, «фотограф») и нажмите «Сгенерировать сайт с ИИ» — нейросеть создаст меню, прайс и дизайн</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-bottom: 14px;">
-                <input type="text" class="input-field" id="custom-brand" oninput="updateLiveHeader()" placeholder="Ваша ниша (например, Онлайн репетитор)">
+                <input type="text" class="input-field" id="custom-brand" oninput="updateLiveHeader()" placeholder="Ваша ниша (например, Фотограф в Минске)">
                 <input type="text" class="input-field" id="custom-phone" oninput="updateLiveHeader()" placeholder="Город или телефон (например, Минск)">
                 <button type="button" class="btn btn-primary" id="ai-gen-btn" onclick="generateWithAI()">✨ Сгенерировать сайт с ИИ</button>
             </div>
@@ -59,7 +58,7 @@
             <div class="showroom-controls">
                 <div style="font-size: 0.88rem; color: var(--muted);">
                     Примеры: 
-                    <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Онлайн репетитор по английскому', 'Минск • Онлайн по РБ')">Репетитор</button>
+                    <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Фотограф в Минске', 'Минск • @photo_minsk')">Фотограф</button>
                     <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Крафтовая пивоварня', 'Минск • +375 (29) 777-11-22')">Пивоварня</button>
                     <button type="button" class="tab-btn" style="padding: 4px 10px; font-size: 0.8rem;" onclick="runExample('Ремонт квартир под ключ', 'Минск и область')">Ремонт</button>
                 </div>
@@ -82,13 +81,13 @@
                     <div class="dot r"></div>
                     <div class="dot y"></div>
                     <div class="dot g"></div>
-                    <div class="mockup-url" id="mockup-url">https://onlayn-repetitor.by</div>
+                    <div class="mockup-url" id="mockup-url">https://fotograf.by</div>
                 </div>
 
                 <div class="site-viewport" id="mockup-body" style="background: #0f172a; color: #f8fafc;">
                     <div class="site-header">
                         <span class="demo-logo" id="demo-logo">Ваш Бизнес</span>
-                        <div class="site-nav-links">
+                        <div class="site-nav-links" id="site-nav-links">
                             <span>Услуги и цены</span>
                             <span>Как мы работаем</span>
                             <span>Отзывы</span>
@@ -239,8 +238,18 @@
             cta1.textContent = d.cta || 'Оставить заявку';
             cta2.textContent = d.cta || 'Отправить';
 
+            if (d.menu && d.menu.length) {
+                var navHtml = '';
+                for (var m = 0; m < d.menu.length; m++) {
+                    navHtml += '<span>' + d.menu[m] + '</span>';
+                }
+                document.getElementById('site-nav-links').innerHTML = navHtml;
+            }
+
+            if (d.cardTitle) document.getElementById('site-card-title').textContent = d.cardTitle;
             if (d.stat1) document.getElementById('site-stat1').textContent = '✓ ' + d.stat1;
             if (d.stat2) document.getElementById('site-stat2').textContent = '✓ ' + d.stat2;
+            if (d.formTitle) document.getElementById('demo-form-title').textContent = d.formTitle;
 
             if (d.bg) body.style.background = d.bg;
             if (d.cardBg) visualCard.style.background = d.cardBg;
@@ -280,7 +289,7 @@
             var rawPhone = document.getElementById('custom-phone').value.trim();
 
             if (!rawBrand) {
-                alert('Введите нишу или название вашей компании (например, Онлайн репетитор).');
+                alert('Введите нишу или название вашей компании (например, Фотограф в Минске).');
                 document.getElementById('custom-brand').focus();
                 return;
             }
@@ -308,17 +317,20 @@
             .catch(function() {
                 applyDesignToDOM({
                     emoji: '✨',
+                    menu: ['Услуги и цены', 'Портфолио', 'Отзывы', 'Контакты'],
                     tag: 'Профессиональный сервис • ' + phone,
                     title: brand + ' — индивидуальный подход и честные цены в РБ',
                     desc: 'Оставьте заявку за 15 секунд — проконсультируем, подберём решение и рассчитаем точную стоимость.',
                     cta: 'Записаться онлайн',
+                    cardTitle: 'Гарантия качества',
+                    stat1: 'Более 350 довольных клиентов',
+                    stat2: 'Прозрачные условия по договору',
+                    formTitle: 'Оставьте заявку — свяжемся за 10 минут',
                     bg: '#0f172a',
                     cardBg: '#1e293b',
                     color: '#f8fafc',
                     btnBg: '#3b82f6',
                     btnColor: '#ffffff',
-                    stat1: 'Более 350 довольных клиентов',
-                    stat2: 'Гарантия качества по договору',
                     services: [
                         { name: 'Пробная консультация', desc: 'Знакомство и разбор задачи', price: '0 BYN' },
                         { name: 'Базовый формат', desc: 'Оптимальное решение под ключ', price: 'от 85 BYN' },

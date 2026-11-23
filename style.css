@@ -17,7 +17,7 @@ header { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; posit
 .hero h1 { font-size: 2.45rem; font-weight: 800; margin-bottom: 16px; line-height: 1.18; }
 .hero p { color: var(--muted); max-width: 600px; margin: 0 auto 28px; font-size: 1.05rem; }
 .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.btn { padding: 14px 24px; border-radius: 12px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-size: 1rem; transition: 0.2s; }
+.btn { display: inline-block; padding: 14px 24px; border-radius: 12px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; font-size: 1rem; transition: 0.2s; }
 .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 8px 20px rgba(59,130,246,0.28); }
 .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
 .btn-secondary { background: var(--card); color: var(--text); border: 1px solid rgba(255,255,255,0.1); }
@@ -62,12 +62,6 @@ header { border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; posit
 .demo-srv-price { font-size: 0.9rem; font-weight: 800; color: #10b981; }
 .demo-toast { display: none; margin-top: 14px; background: rgba(16,185,129,0.2); border: 1px solid #10b981; padding: 10px 14px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; }
 .mockup-stats { margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(128,128,128,0.2); display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; }
-.mockup-body.old-style { background: #e2e8f0 !important; color: #334155 !important; font-family: "Times New Roman", serif; }
-.mockup-body.old-style .mockup-title { font-size: 1.2rem; font-family: "Times New Roman", serif; text-decoration: underline; }
-.mockup-body.old-style .mockup-cta { background: #cbd5e1 !important; color: #1e293b !important; border: 2px outset #94a3b8; border-radius: 0; font-weight: 400; padding: 6px 12px; }
-.mockup-body.old-style .demo-srv-card { border-radius: 0; background: #f1f5f9; border: 1px solid #94a3b8; }
-.mockup-body.old-style .demo-srv-price { color: #475569; }
-.mockup-body.old-style .demo-toast { background: #fef2f2; border-color: #ef4444; color: #991b1b; border-radius: 0; font-family: sans-serif; }
 .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
 .step-card { background: var(--card); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08); }
 .icon-box { width: 40px; height: 40px; border-radius: 10px; background: rgba(59,130,246,0.15); color: #60a5fa; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
