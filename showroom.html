@@ -309,12 +309,15 @@
             })
             .then(function(res) { return res.json(); })
             .then(function(data) {
-                if (!data.ok || !data.design) throw new Error('AI error');
+                if (!data.ok || !data.design) {
+                    throw new Error(data.error || 'Неизвестная ошибка воркера');
+                }
                 var dots = document.querySelectorAll('.color-dot');
                 for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active');
                 applyDesignToDOM(data.design, brand, phone);
             })
-            .catch(function() {
+            .catch(function(err) {
+                alert('Ошибка ИИ: ' + err.message);
                 applyDesignToDOM({
                     emoji: '✨',
                     menu: ['Услуги и цены', 'Портфолио', 'Отзывы', 'Контакты'],
