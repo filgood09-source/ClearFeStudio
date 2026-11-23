@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Roast & Bake Минск — Кофейня и ремесленная пекарня (Демо ClearFeStudio)</title>
+    <style>
+        :root { --bg: #1c1917; --card: #292524; --text: #fafaf9; --muted: #a8a29e; --accent: #d97706; --green: #10b981; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 84px; }
+        .container { max-width: 960px; margin: 0 auto; padding: 0 18px; }
+        header { background: rgba(28,25,23,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; position: sticky; top: 0; z-index: 20; }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .brand { font-size: 1.3rem; font-weight: 900; letter-spacing: 0.4px; }
+        .brand span { color: var(--accent); }
+        .badge { display: inline-block; background: rgba(217,119,6,0.18); color: #fbbf24; border: 1px solid rgba(217,119,6,0.35); padding: 5px 12px; border-radius: 99px; font-size: 0.82rem; font-weight: 700; margin-bottom: 14px; }
+        .hero { padding: 52px 0 40px; text-align: center; }
+        .hero h1 { font-size: 2.25rem; font-weight: 800; line-height: 1.18; max-width: 660px; margin: 0 auto 14px; }
+        .hero p { color: var(--muted); max-width: 540px; margin: 0 auto 24px; font-size: 1.02rem; }
+        .btn { display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-size: 0.94rem; transition: 0.2s; }
+        .btn-coffee { background: var(--accent); color: #fff; }
+        .btn-coffee:hover { background: #b45309; }
+        .section { padding: 38px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+        .menu-layout { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 20px; align-items: start; }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+        .item-card { background: var(--card); padding: 18px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; justify-content: space-between; }
+        .item-title { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .item-desc { font-size: 0.84rem; color: var(--muted); margin-bottom: 14px; }
+        .item-foot { display: flex; justify-content: space-between; align-items: center; }
+        .item-price { font-weight: 800; color: #fbbf24; font-size: 0.98rem; }
+        .cart-box { background: var(--card); padding: 20px; border-radius: 16px; border: 1px solid rgba(217,119,6,0.3); position: sticky; top: 74px; }
+        .cart-list { margin: 12px 0; font-size: 0.88rem; color: var(--muted); min-height: 48px; }
+        .cart-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text); }
+        .input { width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.14); color: var(--text); padding: 11px; border-radius: 10px; margin-bottom: 10px; font-size: 0.9rem; }
+        .demo-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; border-top: 2px solid #3b82f6; padding: 12px 18px; z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .demo-banner-text { font-size: 0.88rem; color: #f8fafc; }
+        .demo-banner-btns { display: flex; gap: 8px; }
+        .btn-studio { background: #3b82f6; color: #fff; padding: 9px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.86rem; }
+        .btn-back { background: rgba(255,255,255,0.1); color: #fff; padding: 9px 14px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.86rem; }
+        @media (max-width: 720px) { .menu-layout { grid-template-columns: 1fr; } .hero h1 { font-size: 1.8rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="brand">ROAST <span>&</span> BAKE</div>
+            <a href="#order" class="btn btn-coffee" style="padding: 8px 16px; font-size: 0.86rem;">Заказать без очереди</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="badge">Минск, пр. Независимости • С 08:00 до 22:00</div>
+            <h1>Свежая обжарка и тёплая выпечка к вашему приходу</h1>
+            <p>Соберите заказ онлайн за 20 секунд — бариста приготовит кофе ровно к указанному времени, чтобы вы не стояли в утренней очереди.</p>
+            <a href="#order" class="btn btn-coffee">Открыть меню предзаказа</a>
+        </section>
+
+        <section id="order" class="section">
+            <div class="menu-layout">
+                <div class="menu-grid">
+                    <div class="item-card">
+                        <div>
+                            <div class="item-title">Капучино 300 мл</div>
+                            <div class="item-desc">100% арабика Бразилия Серрадо, бархатная молочная пенка.</div>
+                        </div>
+                        <div class="item-foot">
+                            <span class="item-price">6.50 BYN</span>
+                            <button type="button" class="btn btn-coffee" style="padding: 7px 14px; font-size: 0.84rem;" onclick="addToCart('Капучино 300 мл', 6.5)">+ В заказ</button>
+                        </div>
+                    </div>
+
+                    <div class="item-card">
+                        <div>
+                            <div class="item-title">Миндальный круассан</div>
+                            <div class="item-desc">Слоёное тесто на сливочном масле с миндальным кремом.</div>
+                        </div>
+                        <div class="item-foot">
+                            <span class="item-price">7.00 BYN</span>
+                            <button type="button" class="btn btn-coffee" style="padding: 7px 14px; font-size: 0.84rem;" onclick="addToCart('Миндальный круассан', 7.0)">+ В заказ</button>
+                        </div>
+                    </div>
+
+                    <div class="item-card">
+                        <div>
+                            <div class="item-title">Флэт Уайт 200 мл</div>
+                            <div class="item-desc">Двойной эспрессо с тонким слоем глянцевого молока.</div>
+                        </div>
+                        <div class="item-foot">
+                            <span class="item-price">7.50 BYN</span>
+                            <button type="button" class="btn btn-coffee" style="padding: 7px 14px; font-size: 0.84rem;" onclick="addToCart('Флэт Уайт 200 мл', 7.5)">+ В заказ</button>
+                        </div>
+                    </div>
+
+                    <div class="item-card">
+                        <div>
+                            <div class="item-title">Комбо: Кофе + Сэндвич</div>
+                            <div class="item-desc">Любой кофе 300 мл и хрустящая чиабатта с индейкой.</div>
+                        </div>
+                        <div class="item-foot">
+                            <span class="item-price">12.90 BYN</span>
+                            <button type="button" class="btn btn-coffee" style="padding: 7px 14px; font-size: 0.84rem;" onclick="addToCart('Комбо: Кофе + Сэндвич', 12.9)">+ В заказ</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-box">
+                    <div style="font-weight: 800; font-size: 1.05rem;">Ваш предзаказ навынос</div>
+                    <div class="cart-list" id="cart-list">Добавьте позиции из меню слева</div>
+                    <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; margin-bottom: 14px;">
+                        <span>Итого:</span>
+                        <span id="cart-total" style="color: #fbbf24;">0.00 BYN</span>
+                    </div>
+                    <form onsubmit="submitCoffeeDemo(event)">
+                        <input type="text" class="input" placeholder="Через сколько заберёте? (например, 15 мин)" required>
+                        <input type="tel" class="input" placeholder="+375 (29) 000-00-00" required>
+                        <button type="submit" class="btn btn-coffee" style="width: 100%;">Оформить предзаказ</button>
+                    </form>
+                    <div id="coffee-msg" style="display: none; margin-top: 12px; padding: 10px; background: rgba(16,185,129,0.15); border: 1px solid var(--green); border-radius: 8px; font-size: 0.84rem; color: #6ee7b7;">
+                        ✓ Демо-заказ передан бариста! На реальном сайте чек сразу приходит в Telegram кофейни.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="demo-banner">
+        <div class="demo-banner-text">⚡ Это демо-сайт, созданный в <strong>ClearFeStudio</strong>. Запуск такого проекта под ключ — от 5 дней.</div>
+        <div class="demo-banner-btns">
+            <a href="../showroom.html" class="btn-back">← В шоурум</a>
+            <a href="../index.html#quiz" class="btn-studio">Заказать такой же сайт</a>
+        </div>
+    </div>
+
+    <script>
+        var cart = [];
+        function addToCart(name, price) {
+            cart.push({ name: name, price: price });
+            renderCart();
+        }
+        function renderCart() {
+            var listEl = document.getElementById('cart-list');
+            var total = 0;
+            var html = '';
+            for (var i = 0; i < cart.length; i++) {
+                total += cart[i].price;
+                html += '<div class="cart-row"><span>' + cart[i].name + '</span><strong>' + cart[i].price.toFixed(2) + ' BYN</strong></div>';
+            }
+            listEl.innerHTML = html || 'Добавьте позиции из меню слева';
+            document.getElementById('cart-total').textContent = total.toFixed(2) + ' BYN';
+        }
+        function submitCoffeeDemo(e) {
+            e.preventDefault();
+            if (!cart.length) {
+                alert('Сначала добавьте хотя бы одну позицию в заказ.');
+                return;
+            }
+            document.getElementById('coffee-msg').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
