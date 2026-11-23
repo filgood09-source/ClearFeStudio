@@ -46,7 +46,7 @@
             <div class="section-header">
                 <div class="badge" style="margin-bottom: 10px;">AI-конструктор сайтов</div>
                 <h2>Соберите прототип полноценного сайта за 5 секунд</h2>
-                <p>Впишите любую нишу (например, «фотограф») и нажмите «Сгенерировать сайт с ИИ» — нейросеть создаст меню, прайс и дизайн</p>
+                <p>Впишите любую нишу (например, «повар») и нажмите «Сгенерировать сайт с ИИ» — нейросеть создаст меню, прайс и дизайн</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-bottom: 14px;">
@@ -81,7 +81,7 @@
                     <div class="dot r"></div>
                     <div class="dot y"></div>
                     <div class="dot g"></div>
-                    <div class="mockup-url" id="mockup-url">https://fotograf.by</div>
+                    <div class="mockup-url" id="mockup-url">https://vash-biznes.by</div>
                 </div>
 
                 <div class="site-viewport" id="mockup-body" style="background: #0f172a; color: #f8fafc;">
@@ -189,8 +189,8 @@
     <footer>
         <div class="container">© 2026 ClearFeStudio. Создание сайтов под ключ.</div>
     </footer>
-    <script>
-        var WORKER_URL = 'https://workers.dev';
+     <script>
+        var WORKER_URL = 'https://clearfe-' + 'leads.filgood09.workers.dev';
         var themes = {
             dark: { bg: '#0f172a', cardBg: '#1e293b', color: '#f8fafc', btnBg: '#3b82f6', btnColor: '#ffffff' },
             light: { bg: '#f8fafc', cardBg: '#ffffff', color: '#0f172a', btnBg: '#0f172a', btnColor: '#ffffff' },
@@ -289,7 +289,7 @@
             var rawPhone = document.getElementById('custom-phone').value.trim();
 
             if (!rawBrand) {
-                alert('Введите нишу или название вашей компании (например, Фотограф в Минске).');
+                alert('Введите нишу или название вашей компании (например, Повар или Фотограф).');
                 document.getElementById('custom-brand').focus();
                 return;
             }
@@ -309,15 +309,12 @@
             })
             .then(function(res) { return res.json(); })
             .then(function(data) {
-                if (!data.ok || !data.design) {
-                    throw new Error(data.error || 'Неизвестная ошибка воркера');
-                }
+                if (!data.ok || !data.design) throw new Error('AI error');
                 var dots = document.querySelectorAll('.color-dot');
                 for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active');
                 applyDesignToDOM(data.design, brand, phone);
             })
-            .catch(function(err) {
-                alert('Ошибка ИИ: ' + err.message);
+            .catch(function() {
                 applyDesignToDOM({
                     emoji: '✨',
                     menu: ['Услуги и цены', 'Портфолио', 'Отзывы', 'Контакты'],
