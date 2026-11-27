@@ -13,7 +13,7 @@ function escapeHtml(str) {
 (function initUrlParams() {
     try {
         var params = new URLSearchParams(window.location.search);
-        var niche = params.get('niche');
+        var niche = params.get('niche') || sessionStorage.getItem('clearfe_niche');
         if (niche) {
             clientNicheFromUrl = niche.trim().slice(0, 70);
         }
@@ -25,6 +25,7 @@ function launchQuickPrototype(e) {
     var input = document.getElementById('home-niche-input');
     var val = input ? input.value.trim() : '';
     if (val.length >= 2) {
+        try { sessionStorage.setItem('clearfe_niche', val); } catch (err) {}
         window.location.href = 'showroom.html?niche=' + encodeURIComponent(val);
     } else {
         window.location.href = 'showroom.html';
