@@ -46,119 +46,23 @@
     </header>
 
     <main class="container">
-        <section class="section" style="border-top:none;padding-top:32px;">
-            <div class="section-header">
-                <div class="badge" style="margin-bottom:10px;">AI-конструктор прототипов</div>
-                <h2>Соберите прототип сайта под свою нишу за 5 секунд</h2>
-                <p>Впишите сферу бизнеса (например, «Детейлинг-студия» или «Повар на банкет») — нейросеть создаст структуру, оффер и цены в BYN</p>
-            </div>
-
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:14px;">
-                <input type="text" class="input-field" id="custom-brand" maxlength="70" oninput="updateLiveHeader()" onkeydown="if(event.key==='Enter') generateWithAI()" placeholder="Ваша ниша (например, Фотограф в Минске)">
-                <input type="text" class="input-field" id="custom-phone" maxlength="50" oninput="updateLiveHeader()" onkeydown="if(event.key==='Enter') generateWithAI()" placeholder="Город или телефон (например, Минск)">
-                <button type="button" class="btn btn-primary" id="ai-gen-btn" onclick="generateWithAI()">✨ Сгенерировать сайт с ИИ</button>
-            </div>
-
-            <div class="showroom-controls">
-                <div style="font-size:0.88rem;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                    <span>Примеры:</span>
-                    <button type="button" class="tab-btn" style="padding:4px 10px;font-size:0.8rem;" onclick="runExample('Фотограф в Минске', 'Минск • @photo_minsk')">Фотограф</button>
-                    <button type="button" class="tab-btn" style="padding:4px 10px;font-size:0.8rem;" onclick="runExample('Крафтовая пивоварня', 'Минск • +375 (29) 777-11-22')">Пивоварня</button>
-                    <button type="button" class="tab-btn" style="padding:4px 10px;font-size:0.8rem;" onclick="runExample('Ремонт квартир под ключ', 'Минск и область')">Ремонт</button>
-                    <button type="button" class="tab-btn" style="padding:4px 10px;font-size:0.8rem;" onclick="runExample('Частный шеф-повар на банкет', 'Минск • Выезд на дом')">Шеф-повар</button>
-                </div>
-
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <div class="device-toggle device-switcher">
-                        <button type="button" class="dev-btn active" id="btn-desk" onclick="setDevice('desk')">Компьютер</button>
-                        <button type="button" class="dev-btn" id="btn-mob" onclick="setDevice('mobile')">Телефон</button>
-                    </div>
-
-                    <div class="theme-picker" role="group" aria-label="Ручной выбор темы">
-                        <button type="button" class="color-dot active" aria-label="Тёмная тема" style="background:#1e293b;" onclick="setTheme('dark', this)"></button>
-                        <button type="button" class="color-dot" aria-label="Светлая тема" style="background:#f8fafc;" onclick="setTheme('light', this)"></button>
-                        <button type="button" class="color-dot" aria-label="Фирменная синяя тема" style="background:#4f46e5;" onclick="setTheme('brand', this)"></button>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align:center;"><span class="ai-status-pill" id="ai-status-pill"></span></div>
-            <div class="mockup-window" id="mockup-window">
-                <div class="mockup-bar">
-                    <div class="dot r"></div>
-                    <div class="dot y"></div>
-                    <div class="dot g"></div>
-                    <div class="mockup-url" id="mockup-url">https://vash-biznes.by</div>
-                </div>
-
-                <div class="site-viewport" id="mockup-body" style="background:#0f172a;color:#f8fafc;">
-                    <div class="site-header">
-                        <span class="demo-logo" id="demo-logo">Ваш Бизнес</span>
-                        <div class="site-nav-links" id="site-nav-links">
-                            <span>Услуги и цены</span>
-                            <span>Как мы работаем</span>
-                            <span>Отзывы</span>
-                            <span>Контакты</span>
-                        </div>
-                        <span class="demo-phone" id="demo-phone">Минск • +375 (29) 000-00-00</span>
-                    </div>
-
-                    <div class="site-hero">
-                        <div>
-                            <div class="mockup-tag" id="mockup-tag">Работаем по Минску и РБ</div>
-                            <h3 class="mockup-title" id="mockup-title">Ваш Бизнес — точный расчёт за 15 минут и гарантия по договору</h3>
-                            <p class="mockup-desc" id="mockup-desc">Впишите вашу нишу сверху и нажмите «Сгенерировать сайт с ИИ», чтобы увидеть персональный многоблочный лендинг с ценами в BYN.</p>
-                            <a href="#demo-form-sec" class="mockup-cta" id="mockup-cta" style="background:#3b82f6;color:#ffffff;text-decoration:none;display:inline-block;">Оставить заявку</a>
-                        </div>
-                        <div class="site-visual-card" id="site-visual-card" style="background:#1e293b;">
-                            <span class="site-emoji" id="site-emoji">⚡</span>
-                            <div style="font-weight:800;font-size:0.95rem;" id="site-card-title">Факты в цифрах</div>
-                            <div class="site-stat-pill" id="site-stat1">✓ Выезд и расчёт в день обращения</div>
-                            <div class="site-stat-pill" id="site-stat2">✓ Фиксированная смета в BYN</div>
-                        </div>
-                    </div>
-
-                    <div class="site-section">
-                        <div class="site-sec-title">Популярные услуги и стоимость</div>
-                        <div class="demo-services" id="demo-services">
-                            <div class="demo-srv-card"><div class="demo-srv-name">Первичная консультация</div><div style="font-size:0.8rem;opacity:0.75;margin-bottom:6px;">Разбор вашей задачи</div><div class="demo-srv-price">0 BYN</div></div>
-                            <div class="demo-srv-card"><div class="demo-srv-name">Базовый пакет</div><div style="font-size:0.8rem;opacity:0.75;margin-bottom:6px;">Оптимальный выбор</div><div class="demo-srv-price">от 120 BYN</div></div>
-                            <div class="demo-srv-card"><div class="demo-srv-name">Расширенный тариф</div><div style="font-size:0.8rem;opacity:0.75;margin-bottom:6px;">Максимум результата</div><div class="demo-srv-price">от 250 BYN</div></div>
-                        </div>
-                    </div>
-
-                    <div class="site-section">
-                        <div class="site-sec-title">Как проходит работа</div>
-                        <div class="site-steps" id="site-steps">
-                            <div class="site-step-item"><strong>Шаг 1</strong><br><span style="opacity:0.85;">Оставляете заявку на сайте за 15 секунд</span></div>
-                            <div class="site-step-item"><strong>Шаг 2</strong><br><span style="opacity:0.85;">Согласуем формат и фиксируем смету</span></div>
-                            <div class="site-step-item"><strong>Шаг 3</strong><br><span style="opacity:0.85;">Приступаем к работе в удобное время</span></div>
-                        </div>
-                    </div>
-
-                    <div class="site-section" id="demo-form-sec">
-                        <div class="site-sec-title" id="demo-form-title">Оставьте заявку — перезвоним за 10 минут</div>
-                        <form class="site-form-bar" onsubmit="triggerDemoAction(event)">
-                            <input type="text" placeholder="Ваше имя" required>
-                            <input type="tel" placeholder="+375 (29) 000-00-00" required>
-                            <button type="submit" class="mockup-cta" id="mockup-cta-2" style="background:#3b82f6;color:#ffffff;">Отправить</button>
-                        </form>
-                        <div class="demo-toast" id="demo-toast" style="display:none;"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mockup-footer-cta">
-                <span style="font-size:0.9rem;color:var(--muted);">Нравится структура? Превратим этот прототип в рабочий сайт на домене <strong>.by</strong> за 5–14 дней.</span>
-                <a href="index.html#quiz" id="order-proto-top-btn" class="btn btn-primary" style="padding:9px 16px;font-size:0.9rem;">Заказать такой сайт →</a>
-            </div>
-        </section>
-
-        <section class="section">
+                <section class="section">
             <div class="section-header">
                 <div class="badge" style="margin-bottom:10px;">Полноразмерные примеры</div>
-                <h2>Посмотрите 3 готовых демо-сайта во весь экран</h2>
-                <p>Настоящие сверстанные страницы с рабочей логикой, калькуляторами и формами записи</p>
+                <h2>Флагманский многостраничный сайт и 3 лендинга</h2>
+                <p>Настоящие сверстанные страницы с рабочей логикой, фильтрами, калькуляторами и формами записи</p>
+            </div>
+
+            <div style="background:linear-gradient(135deg,rgba(245,158,11,0.16),#1e293b);border:1px solid #f59e0b;border-radius:16px;padding:22px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+                <div style="max-width:600px;">
+                    <div style="color:#fbbf24;font-size:0.78rem;font-weight:800;text-transform:uppercase;margin-bottom:6px;">★ Флагманский кейс • Многостраничный сайт (5 стр.)</div>
+                    <h3 style="font-size:1.3rem;margin-bottom:6px;color:#fff;">Строительство загородных домов «NordHouse Минск»</h3>
+                    <p style="font-size:0.9rem;color:var(--muted);">Главная, каталог проектов с живым фильтром по технологии, карточка дома со схемой планировки, этапы стройки и калькулятор сметы в BYN.</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px;min-width:205px;">
+                    <a href="demos/stroy-index.html" class="btn btn-primary" style="background:#f59e0b;color:#0f172a;text-align:center;">Открыть многостраничник →</a>
+                    <a href="demos/stroy-project.html" style="font-size:0.8rem;color:#fbbf24;text-align:center;text-decoration:underline;">Сразу в карточку проекта</a>
+                </div>
             </div>
 
             <div class="steps-grid">
@@ -166,7 +70,7 @@
                     <div>
                         <div class="mockup-tag" style="color:#60a5fa;">Автобизнес / Услуги</div>
                         <h3>СТО и шиномонтаж в Минске</h3>
-                        <p style="margin-bottom:16px;">Полноценный лендинг с интерактивным калькулятором стоимости ТО, прайсом и записью на подъёмник.</p>
+                        <p style="margin-bottom:16px;">Лендинг с интерактивным калькулятором стоимости ТО, прайсом и записью на подъёмник.</p>
                     </div>
                     <a href="demos/auto.html" class="btn btn-secondary" style="text-align:center;padding:10px 16px;">Открыть демо-сайт →</a>
                 </div>
@@ -195,6 +99,7 @@
                 <a href="index.html#quiz" id="order-similar-btn" class="btn btn-primary">Заказать такой же сайт — рассчитать цену</a>
             </div>
         </section>
+
     </main>
 
     <a href="#" onclick="window.open('https://t.' + 'me/travellereagle', '_blank'); return false;" class="float-tg">Написать в Telegram</a>
