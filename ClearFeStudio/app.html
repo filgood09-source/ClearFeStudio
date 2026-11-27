@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ClearFeStudio Mini App</title>
+    <script src="https://telegram.org"></script>
+    <style>
+        :root { --bg: var(--tg-theme-bg-color, #0f172a); --sec: var(--tg-theme-secondary-bg-color, #1e293b); --text: var(--tg-theme-text-color, #f8fafc); --hint: var(--tg-theme-hint-color, #94a3b8); --btn: var(--tg-theme-button-color, #3b82f6); --btn-t: var(--tg-theme-button-text-color, #ffffff); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 16px; }
+        .header { text-align: center; margin-bottom: 18px; }
+        .header h1 { font-size: 1.4rem; margin-bottom: 4px; font-weight: 800; }
+        .header h1 span { color: var(--btn); }
+        .header p { font-size: 0.85rem; color: var(--hint); }
+        .label { font-size: 0.75rem; font-weight: 700; color: var(--btn); text-transform: uppercase; margin: 14px 0 6px; }
+        .opt { background: var(--sec); border: 2px solid transparent; border-radius: 12px; padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; cursor: pointer; transition: 0.15s; }
+        .opt.selected { border-color: var(--btn); background: rgba(59,130,246,0.12); }
+        .box { background: var(--sec); border-radius: 16px; padding: 16px; margin-top: 16px; text-align: center; }
+        .price { font-size: 1.7rem; font-weight: 800; color: #10b981; margin: 4px 0; }
+        input { width: 100%; background: var(--bg); border: 1px solid rgba(128,128,128,0.3); color: var(--text); padding: 12px; border-radius: 10px; margin-top: 10px; font-size: 0.95rem; }
+        button { width: 100%; background: var(--btn); color: var(--btn-t); border: none; padding: 14px; border-radius: 12px; font-size: 1rem; font-weight: 700; margin-top: 12px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>ClearFe<span>Studio</span></h1><p>Калькулятор разработки сайта</p></div>
+    <div class="label">1. Формат</div>
+    <div class="opt selected" onclick="pick('f','Лендинг',450,this)"><span>Лендинг</span><span>450 BYN</span></div>
+    <div class="opt" onclick="pick('f','Многостраничный',800,this)"><span>Многостраничный</span><span>800 BYN</span></div>
+    <div class="opt" onclick="pick('f','Магазин / Mini App',1150,this)"><span>Магазин / Mini App</span><span>1 150 BYN</span></div>
+    <div class="label">2. Контент</div>
+    <div class="opt selected" onclick="pick('d','Свои материалы',0,this)"><span>Свои тексты и фото</span><span>+0 BYN</span></div>
+    <div class="opt" onclick="pick('d','Помощь с текстами',150,this)"><span>Помощь с текстами</span><span>+150 BYN</span></div>
+    <div class="label">3. Сроки</div>
+    <div class="opt selected" onclick="pick('s','Стандартно',0,this)"><span>Стандартно (10–14 дней)</span><span>+0 BYN</span></div>
+    <div class="opt" onclick="pick('s','Срочно (до 7 дней)',200,this)"><span>Срочно (до 7 дней)</span><span>+200 BYN</span></div>
+    <div class="box">
+        <div style="font-size:0.85rem;color:var(--hint);">Итоговая стоимость:</div>
+        <div class="price" id="sum">450 BYN</div>
+        <input id="note" placeholder="Ниша бизнеса или комментарий">
+        <button onclick="send()">Отправить заявку</button>
+    </div>
+    <script>
+        var tg = window.Telegram.WebApp; tg.ready(); tg.expand();
+        var st = { f: {n:'Лендинг',p:450}, d: {n:'Свои материалы',p:0}, s: {n:'Стандартно',p:0} };
+        function pick(k, n, p, el) {
+            el.parentElement.querySelectorAll('.opt').forEach(function(x) { x.classList.remove('selected'); });
+            el.classList.add('selected'); st[k] = {n: n, p: p};
+            document.getElementById('sum').textContent = (st.f.p + st.d.p + st.s.p) + ' BYN';
+        }
+        function send() {
+            var total = st.f.p + st.d.p + st.s.p;
+            var note = document.getElementById('note').value.trim();
+            var txt = 'Заявка из Mini App ClearFeStudio:\n• Формат: ' + st.f.n + '\n• Контент: ' + st.d.n + '\n• Сроки: ' + st.s.n + '\n• Бюджет: ' + total + ' BYN' + (note ? '\n• Комментарий: ' + note : '');
+            var url = 'https://t.me' + encodeURIComponent(txt);
+            if (tg.openTelegramLink) { tg.openTelegramLink(url); } else { window.open(url, '_blank'); }
+        }
+    </script>
+</body>
+</html>

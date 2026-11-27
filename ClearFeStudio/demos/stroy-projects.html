@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <title>Проект «Берген-120» — Барнхаус под ключ в Минске (Демо ClearFeStudio)</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="stylesheet" href="stroy.css?v=1">
+    <style>
+        .plan-box { background: linear-gradient(135deg, #162033 0%, #0c111d 100%); border: 1px solid rgba(245,158,11,0.28); border-radius: 16px; padding: 22px; }
+        .plan-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 14px; }
+        .room-cell { background: rgba(255,255,255,0.04); border: 1px dashed rgba(245,158,11,0.35); border-radius: 10px; padding: 12px; font-size: 0.86rem; }
+        .room-cell strong { display: block; color: var(--text); margin-bottom: 2px; }
+        .room-cell span { color: var(--accent); font-weight: 700; font-size: 0.8rem; }
+        .spec-row { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.92rem; }
+        .spec-row:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <div class="studio-topbar">
+        <span>⚡ Многостраничный демо-стенд <strong>ClearFeStudio</strong> (Карточка проекта)</span>
+        <div class="studio-topbar-links">
+            <a href="../showroom.html" style="color:#94a3b8;text-decoration:none;font-weight:600;">← В шоурум</a>
+            <a href="../index.html?niche=%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE%20%D0%B4%D0%BE%D0%BC%D0%BE%D0%B2%20(%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D1%81%D1%82%D1%80%D0%B0%D0%BD%D0%B8%D1%87%D0%BD%D0%B8%D0%BA)#quiz" style="color:#60a5fa;text-decoration:none;font-weight:700;">Заказать такой же →</a>
+        </div>
+    </div>
+
+    <header>
+        <div class="container nav">
+            <a href="stroy-index.html" class="brand">NORD<span>HOUSE</span></a>
+            <button type="button" class="burger" onclick="toggleStroyMenu()" aria-label="Меню">☰</button>
+            <nav class="menu" id="stroy-menu">
+                <a href="stroy-index.html">Главная</a>
+                <a href="stroy-projects.html" class="active">Каталог проектов</a>
+                <a href="stroy-process.html">Этапы и цены</a>
+                <a href="stroy-contacts.html">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div style="padding-top:24px;font-size:0.86rem;color:var(--muted);">
+            <a href="stroy-index.html" style="color:var(--muted);text-decoration:none;">Главная</a> /
+            <a href="stroy-projects.html" style="color:var(--muted);text-decoration:none;">Каталог проектов</a> /
+            <span style="color:var(--accent);">Проект «Берген-120»</span>
+        </div>
+
+        <div class="page-head" style="padding-top:18px;">
+            <div class="badge">Хит продаж • Барнхаус с террасой</div>
+            <h1>Проект дома «Берген-120» (120 м²)</h1>
+            <p>Одноэтажный энергоэффективный барнхаус со вторым светом, панорамным остеклением, 3 спальнями, сауной и крытой террасой 24 м².</p>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:36px;">
+            <div class="plan-box">
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <strong style="font-size:1.05rem;">Схема планировки (12 × 10 м)</strong>
+                    <span style="font-size:0.8rem;color:var(--muted);">Высота потолка до 4.2 м</span>
+                </div>
+                <div class="plan-grid">
+                    <div class="room-cell" style="grid-column:span 2;"><strong>Кухня-гостиная со вторым светом</strong><span>38.5 м² • выход на террасу</span></div>
+                    <div class="room-cell"><strong>Мастер-спальня</strong><span>16.2 м² + гардероб</span></div>
+                    <div class="room-cell"><strong>Детская / спальня 2</strong><span>13.4 м²</span></div>
+                    <div class="room-cell"><strong>Кабинет / спальня 3</strong><span>11.8 м²</span></div>
+                    <div class="room-cell"><strong>Сауна + 2 санузла</strong><span>11.1 м²</span></div>
+                    <div class="room-cell"><strong>Котельная и тамбур</strong><span>9.0 м² (под газ / электрокотёл)</span></div>
+                    <div class="room-cell"><strong>Крытая терраса</strong><span>24.0 м² (лиственница)</span></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h2 style="font-size:1.25rem;margin-bottom:10px;">Характеристики и стоимость</h2>
+                    <div class="spec-row"><span style="color:var(--muted);">Общая площадь (с террасой)</span><strong>120 м²</strong></div>
+                    <div class="spec-row"><span style="color:var(--muted);">Срок строительства</span><strong>75 рабочих дней</strong></div>
+                    <div class="spec-row"><span style="color:var(--muted);">Фундамент</span><strong>Ж/б сваи или УШП</strong></div>
+                    <div class="spec-row"><span style="color:var(--muted);">Утепление контура</span><strong>200 мм (стены) / 250 мм (кровля)</strong></div>
+                    <div class="spec-row"><span style="color:var(--muted);">Кровля и фасад</span><strong>Кликфальц + планкен лиственницы</strong></div>
+                    <div style="margin-top:16px;">
+                        <div style="font-size:0.84rem;color:var(--muted);">Цена в комплектации «Тёплый контур»:</div>
+                        <div class="price-tag" style="font-size:1.6rem;margin-top:4px;">156 000 BYN</div>
+                    </div>
+                </div>
+                <form onsubmit="submitStroyForm(event, 'proj-bergen-msg', 'Смета проекта Берген-120')">
+                    <input type="tel" class="input" oninput="formatByPhone(this)" placeholder="+375 (29) 000-00-00" required>
+                    <button type="submit" class="btn btn-gold" style="width:100%;">Получить подробную смету проекта</button>
+                </form>
+                <div class="toast-ok" id="proj-bergen-msg"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container foot-grid">
+            <div><strong>NORDHOUSE МИНСК</strong> • Проект «Берген-120»</div>
+            <div style="display:flex;gap:14px;">
+                <a href="stroy-index.html" style="color:var(--muted);text-decoration:none;">Главная</a>
+                <a href="stroy-projects.html" style="color:var(--muted);text-decoration:none;">Все проекты</a>
+                <a href="stroy-contacts.html" style="color:var(--muted);text-decoration:none;">Контакты</a>
+            </div>
+        </div>
+    </footer>
+    <script src="stroy.js?v=1"></script>
+</body>
+</html>

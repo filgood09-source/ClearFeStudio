@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ClearFeStudio — Сайты под ключ в Минске</title>
+<link rel="stylesheet" href="style.css?v=12">
+</head>
+<body>
+<header>
+<div class="container nav">
+<a href="index.html" class="logo" style="text-decoration:none;color:inherit;">ClearFe<span>Studio</span></a>
+<button type="button" class="burger-btn" onclick="toggleMenu()">☰</button>
+<div class="nav-links" id="nav-links">
+<a href="showroom.html">AI-макет</a>
+<a href="#roi-calc" onclick="closeMenu()">Окупаемость</a>
+<a href="#quiz" onclick="closeMenu()">Цена</a>
+<a href="offer.html">Оферта</a>
+</div>
+</div>
+</header>
+<main class="container">
+<section class="hero">
+<div class="badge">Разработка в Минске и РБ</div>
+<h1>Сайты, которые приносят заявки</h1>
+<p>Соберите макет с ИИ за 5 секунд или рассчитайте смету в BYN.</p>
+<div class="btn-group">
+<a href="showroom.html" class="btn btn-primary">✨ Собрать макет</a>
+<a href="#quiz" class="btn btn-secondary">Узнать цену</a>
+</div>
+</section>
+<section class="section reveal">
+<div class="quiz-box">
+<div style="text-align:center;margin-bottom:20px;">
+<div class="badge">Примеры работ</div>
+<h2>Посмотрите готовые сайты до заказа</h2>
+<form onsubmit="launchQuickPrototype(event)" style="display:flex;gap:8px;max-width:480px;margin:14px auto;flex-wrap:wrap;">
+<input type="text" id="home-niche-input" class="input-field" placeholder="Ваша ниша (например, Ремонт квартир)">
+<button type="submit" class="btn btn-primary">✨ Макет ИИ</button>
+</form>
+</div>
+<div style="background:linear-gradient(135deg,rgba(245,158,11,0.16),#1e293b);border:1px solid #f59e0b;border-radius:14px;padding:18px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;">
+<div>
+<div style="color:#fbbf24;font-size:0.78rem;font-weight:800;margin-bottom:4px;">★ ФЛАГМАНСКИЙ КЕЙС • 5 СТРАНИЦ</div>
+<h3 style="margin-bottom:4px;">Строительство домов «NordHouse Минск»</h3>
+<p style="font-size:0.88rem;color:var(--muted);">Каталог с фильтром, карточка проекта со схемой и калькулятор сметы.</p>
+</div>
+<a href="demos/stroy-index.html" class="btn btn-primary" style="background:#f59e0b;color:#0f172a;">Открыть сайт →</a>
+</div>
+<div class="steps-grid">
+<a href="demos/auto.html" class="step-card" style="text-decoration:none;color:inherit;display:block;">
+<div class="mockup-tag" style="color:#60a5fa;">Автобизнес</div>
+<h3>СТО и шиномонтаж →</h3>
+<p>Калькулятор ТО и запись в 1 клик.</p>
+</a>
+<a href="demos/beauty.html" class="step-card" style="text-decoration:none;color:inherit;display:block;">
+<div class="mockup-tag" style="color:#f472b6;">Бьюти-сфера</div>
+<h3>Студия красоты →</h3>
+<p>Выбор мастера, прайс и онлайн-запись.</p>
+</a>
+<a href="demos/commerce.html" class="step-card" style="text-decoration:none;color:inherit;display:block;">
+<div class="mockup-tag" style="color:#34d399;">Общепит</div>
+<h3>Кофейня и пекарня →</h3>
+<p>Меню с живой корзиной предзаказа.</p>
+</a>
+</div>
+</div>
+</section>
+
+<section id="roi-calc" class="section reveal">
+<div class="section-header">
+<h2>Калькулятор окупаемости</h2>
+<p>Настройте ползунки под параметры вашего бизнеса в РБ</p>
+</div>
+<div class="quiz-box">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:20px;">
+<div>
+<div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.9rem;">
+<span style="color:var(--muted);">Посетителей в месяц:</span>
+<strong id="roi-visitors-val" style="color:#60a5fa;">500 чел.</strong>
+</div>
+<input type="range" id="roi-visitors" min="100" max="5000" step="100" value="500" oninput="calcROI()" style="width:100%;accent-color:var(--primary);">
+</div>
+<div>
+<div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.9rem;">
+<span style="color:var(--muted);">Средний чек:</span>
+<strong id="roi-check-val" style="color:#60a5fa;">120 BYN</strong>
+</div>
+<input type="range" id="roi-check" min="20" max="1000" step="10" value="120" oninput="calcROI()" style="width:100%;accent-color:var(--primary);">
+</div>
+</div>
+<div class="steps-grid" style="margin-bottom:16px;">
+<div style="background:var(--bg);padding:14px;border-radius:12px;">
+<div style="font-size:0.8rem;color:var(--muted);">Сейчас (~1.5%):</div>
+<div style="font-size:1.2rem;font-weight:700;" id="roi-old-leads">8 заявок / мес</div>
+<div style="font-size:0.88rem;color:var(--muted);" id="roi-old-money">960 BYN выручки</div>
+</div>
+<div style="background:rgba(16,185,129,0.1);padding:14px;border-radius:12px;border:1px solid rgba(16,185,129,0.35);">
+<div style="font-size:0.8rem;color:#6ee7b7;">Новый сайт (~5.5%):</div>
+<div style="font-size:1.2rem;font-weight:800;color:#10b981;" id="roi-new-leads">28 заявок / мес</div>
+<div style="font-size:0.88rem;color:#a7f3d0;" id="roi-new-money">3 360 BYN выручки</div>
+</div>
+</div>
+<div style="background:rgba(59,130,246,0.12);padding:14px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+<div>
+<div style="font-size:0.82rem;color:var(--muted);">Прирост выручки:</div>
+<div style="font-size:1.35rem;font-weight:800;color:#60a5fa;" id="roi-diff-money">+2 400 BYN / мес</div>
+</div>
+<a href="#quiz" class="btn btn-primary" style="padding:10px 16px;">Заказать от 450 BYN →</a>
+</div>
+</div>
+</section>
+
+<section class="section reveal">
+<div class="section-header">
+<h2>Гарантии и условия</h2>
+</div>
+<div class="steps-grid">
+<div class="step-card"><h3>Фиксация цены</h3><p>Бюджет в BYN не меняется после старта.</p></div>
+<div class="step-card"><h3>Мобильный адаптив</h3><p>Безупречная работа на iOS и Android.</p></div>
+<div class="step-card"><h3>Загрузка за 1 сек</h3><p>Чистый лёгкий код без тормозов.</p></div>
+<div class="step-card"><h3>Поддержка 14 дней</h3><p>Помощь с правками и доменом .by.</p></div>
+</div>
+<div style="margin-top:16px;padding:14px 18px;border-radius:12px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+<span>📄 Официальная работа по <strong>Договору публичной оферты</strong> (НПД / чек в BYN).</span>
+<a href="offer.html" class="btn btn-secondary" style="padding:8px 14px;font-size:0.86rem;">Открыть оферту →</a>
+</div>
+</section>
+<section id="quiz" class="section reveal">
+<div class="section-header">
+<h2>Экспресс-бриф</h2>
+<p>Ответьте на 5 вопросов для расчёта стоимости</p>
+</div>
+<div class="quiz-box">
+<div id="quiz-container">
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="quiz-question" id="question-title"></div>
+<div class="options-grid" id="options-grid"></div>
+<div class="quiz-footer">
+<button type="button" class="btn btn-secondary" id="prev-btn" onclick="prevStep()">Назад</button>
+<button type="button" class="btn btn-primary" id="next-btn" onclick="nextStep()">Далее</button>
+</div>
+</div>
+<div id="result-container" class="result-card">
+<h3>Предварительный расчёт готов</h3>
+<div class="result-summary" id="result-summary"></div>
+<div class="addons-box">
+<div class="addons-title">Дополнительные опции:</div>
+<label class="addon-item"><span class="addon-left"><input type="checkbox" value="80" data-name="Домен .by" onchange="recalcTotal()"> Домен .by и запуск</span><span class="addon-price">+80 BYN</span></label>
+<label class="addon-item"><span class="addon-left"><input type="checkbox" value="120" data-name="Базовое SEO" onchange="recalcTotal()"> Базовое SEO</span><span class="addon-price">+120 BYN</span></label>
+<label class="addon-item"><span class="addon-left"><input type="checkbox" value="150" data-name="Тексты" onchange="recalcTotal()"> Продающие тексты</span><span class="addon-price">+150 BYN</span></label>
+</div>
+<div>
+<div style="font-size:0.85rem;color:var(--muted);">Итого:</div>
+<div class="result-price" id="final-price"></div>
+</div>
+<form class="form-group" onsubmit="sendToTelegram(event)" novalidate>
+<input type="text" id="hp-website" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;">
+<input type="text" class="input-field" id="client-contact" oninput="formatContactInput(this)" placeholder="+375 (29) 123-45-67 или @ник" required>
+<button type="submit" class="btn btn-primary">Отправить в Telegram</button>
+<button type="button" class="btn btn-secondary" id="copy-btn" onclick="copyTZ()">Скопировать ТЗ</button>
+</form>
+<div style="font-size:0.78rem;color:var(--muted);margin-top:8px;">Отправляя заявку, вы соглашаетесь с <a href="offer.html" style="color:#60a5fa;">Договором публичной оферты</a>.</div>
+<div id="contact-error" style="display:none;margin-top:10px;color:#f87171;font-size:0.88rem;"></div>
+<div class="success-msg" id="success-msg"></div>
+<div style="margin-top:14px;"><button type="button" class="tab-btn" onclick="restartQuiz()">← Пройти заново</button></div>
+</div>
+</div>
+</section>
+
+<section id="faq" class="section reveal">
+<div class="section-header">
+<h2>Частые вопросы</h2>
+</div>
+<div class="faq-list">
+<details><summary>Как проходит оплата?</summary><p>50% предоплата перед началом работы и 50% после демонстрации готового проекта.</p></details>
+<details><summary>Если нет текстов и фото?</summary><p>Составлю продающую структуру, напишу заголовки и подберу визуалы под вашу нишу.</p></details>
+<details><summary>Поможете купить домен .by?</summary><p>Да, помогу оформить доменное имя у белорусского регистратора и настрою HTTPS.</p></details>
+</div>
+</section>
+</main>
+
+<a href="#" onclick="window.open('https://t.' + 'me/travellereagle', '_blank'); return false;" class="float-tg">Написать в Telegram</a>
+<footer>
+<div class="container">
+<div style="margin-bottom:6px;color:var(--text);font-weight:600;">ClearFeStudio — Сайты под ключ в Минске и РБ</div>
+<div>Оплата в BYN (НПД) • <a href="offer.html" style="color:#60a5fa;font-weight:600;">Договор публичной оферты</a> • © 2026 ClearFeStudio</div>
+</div>
+</footer>
+<script src="app.js?v=12"></script>
+</body>
+</html>
