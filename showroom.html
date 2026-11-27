@@ -204,6 +204,153 @@
             <div>Расчёт в BYN (НПД / договор) • <a href="offer.html" style="color:#60a5fa;text-decoration:none;font-weight:600;">Договор публичной оферты</a> • © 2026 ClearFeStudio</div>
         </div>
     </footer>
-    <script src="showroom.js?v=2"></script>
+    <    <script>
+        var WORKER_URL = 'https://clearfe-' + 'leads.filgood09.workers.dev';
+        var isGenerating = false;
+        var toastTimer = null;
+
+        function translitToDomain(str) {
+            var map = {'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya'};
+            var res = str.toLowerCase().split('').map(function(ch) {
+                return map[ch] !== undefined ? map[ch] : (/[a-z0-9]/.test(ch) ? ch : '-');
+            }).join('').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            return 'https://' + (res || 'vash-biznes') + '.by';
+        }
+
+        function updateLiveHeader() {
+            var rawBrand = document.getElementById('custom-brand').value.trim();
+            var rawPhone = document.getElementById('custom-phone').value.trim();
+            var brand = rawBrand ? (rawBrand.charAt(0).toUpperCase() + rawBrand.slice(1)) : 'Ваш Бизнес';
+            document.getElementById('mockup-url').textContent = translitToDomain(brand);
+            document.getElementById('demo-logo').textContent = brand;
+            document.getElementById('demo-phone').textContent = rawPhone || 'Минск • +375 (29) 000-00-00';
+            var href = rawBrand ? ('index.html?niche=' + encodeURIComponent(brand) + '#quiz') : 'index.html#quiz';
+            var b1 = document.getElementById('order-similar-btn');
+            var b2 = document.getElementById('order-proto-top-btn');
+            if (b1) b1.href = href;
+            if (b2) b2.href = href;
+        }
+
+        function generateWithAI() {
+            if (isGenerating) return;
+            var brandInput = document.getElementById('custom-brand');
+            var rawBrand = brandInput.value.trim();
+            var rawPhone = document.getElementById('custom-phone').value.trim();
+            var pill = document.getElementById('ai-status-pill');
+            if (rawBrand.length < 2) {
+                brandInput.focus();
+                pill.textContent = '⚠️ Впишите вашу нишу (например: Повар на банкет)';
+                pill.style.display = 'inline-block';
+                return;
+            }
+            isGenerating = true;
+            var brand = rawBrand.charAt(0).toUpperCase() + rawBrand.slice(1);
+            var phone = rawPhone || 'Минск • +375 (29) 000-00-00';
+            updateLiveHeader();
+
+            var btn = document.getElementById('ai-gen-btn');
+            btn.disabled = true;
+            btn.textContent = '✨ ИИ собирает сайт...';
+            pill.textContent = '⏳ Нейросеть подбирает оффер и цены в BYN...';
+            pill.style.display = 'inline-block';
+
+            fetch(WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'generate', niche: brand, city: phone })
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (!data.ok || !data.design) throw new Error('err');
+                var d = data.design;
+                document.getElementById('site-emoji').textContent = d.emoji || '⚡';
+                document.getElementById('mockup-tag').textContent = d.tag || phone;
+                document.getElementById('mockup-title').textContent = d.title || brand;
+                document.getElementById('mockup-desc').textContent = d.desc || '';
+                document.getElementById('mockup-cta').textContent = d.cta || 'Оставить заявку';
+                document.getElementById('mockup-cta-2').textContent = d.cta || 'Отправить';
+                if (d.cardTitle) document.getElementById('site-card-title').textContent = d.cardTitle;
+                if (d.stat1) document.getElementById('site-stat1').textContent = '✓ ' + d.stat1;
+                if (d.stat2) document.getElementById('site-stat2').textContent = '✓ ' + d.stat2;
+                if (d.formTitle) document.getElementById('demo-form-title').textContent = d.formTitle;
+                if (d.bg) document.getElementById('mockup-body').style.background = d.bg;
+                if (d.cardBg) document.getElementById('site-visual-card').style.background = d.cardBg;
+                if (d.btnBg) {
+                    document.getElementById('mockup-cta').style.background = d.btnBg;
+                    document.getElementById('mockup-cta-2').style.background = d.btnBg;
+                }
+                if (d.btnColor) {
+                    document.getElementById('mockup-cta').style.color = d.btnColor;
+                    document.getElementById('mockup-cta-2').style.color = d.btnColor;
+                }
+                if (d.services && d.services.length) {
+                    document.getElementById('demo-services').innerHTML = d.services.map(function(s) {
+                        return '<div class="demo-srv-card" style="background:' + (d.cardBg || '#1e293b') + '"><div class="demo-srv-name">' + s.name + '</div><div style="font-size:0.8rem;opacity:0.78;margin-bottom:6px;">' + (s.desc || '') + '</div><div class="demo-srv-price">' + s.price + '</div></div>';
+                    }).join('');
+                }
+                if (d.steps && d.steps.length) {
+                    document.getElementById('site-steps').innerHTML = d.steps.map(function(st, i) {
+                        return '<div class="site-step-item"><strong>Шаг ' + (i + 1) + '</strong><br><span style="opacity:0.85;">' + st + '</span></div>';
+                    }).join('');
+                }
+                pill.textContent = '✨ Прототип для «' + brand + '» готов';
+            })
+            .catch(function() {
+                document.getElementById('mockup-title').textContent = brand + ' — расчёт стоимости за 15 минут в Минске и РБ';
+                pill.textContent = '✨ Базовый прототип для «' + brand + '» готов';
+            })
+            .finally(function() {
+                isGenerating = false;
+                btn.disabled = false;
+                btn.textContent = '✨ Сгенерировать сайт с ИИ';
+            });
+        }
+
+        function runExample(b, p) {
+            document.getElementById('custom-brand').value = b;
+            document.getElementById('custom-phone').value = p;
+            generateWithAI();
+        }
+
+        function setDevice(type) {
+            document.getElementById('btn-desk').classList.toggle('active', type === 'desk');
+            document.getElementById('btn-mob').classList.toggle('active', type === 'mobile');
+            document.getElementById('mockup-window').classList.toggle('mobile-mode', type === 'mobile');
+        }
+
+        function setTheme(key, dot) {
+            var map = {
+                dark: { bg: '#0f172a', card: '#1e293b', text: '#f8fafc', btn: '#3b82f6', btnText: '#ffffff' },
+                light: { bg: '#f8fafc', card: '#e2e8f0', text: '#0f172a', btn: '#0f172a', btnText: '#ffffff' },
+                brand: { bg: '#1e1b4b', card: '#312e81', text: '#ffffff', btn: '#10b981', btnText: '#064e3b' }
+            };
+            document.querySelectorAll('.color-dot').forEach(function(d) { d.classList.remove('active'); });
+            if (dot) dot.classList.add('active');
+            var t = map[key];
+            document.getElementById('mockup-body').style.background = t.bg;
+            document.getElementById('mockup-body').style.color = t.text;
+            document.getElementById('site-visual-card').style.background = t.card;
+            document.querySelectorAll('.demo-srv-card').forEach(function(c) { c.style.background = t.card; });
+            document.getElementById('mockup-cta').style.background = t.btn;
+            document.getElementById('mockup-cta').style.color = t.btnText;
+            document.getElementById('mockup-cta-2').style.background = t.btn;
+            document.getElementById('mockup-cta-2').style.color = t.btnText;
+        }
+
+        function triggerDemoAction(e) {
+            if (e) e.preventDefault();
+            var toast = document.getElementById('demo-toast');
+            toast.textContent = '✓ Тестовая заявка отправлена! На реальном сайте она сразу приходит вам в Telegram.';
+            toast.style.display = 'block';
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(function() { toast.style.display = 'none'; }, 3500);
+        }
+
+        var qNiche = new URLSearchParams(window.location.search).get('niche');
+        if (qNiche) {
+            document.getElementById('custom-brand').value = qNiche;
+            generateWithAI();
+        }
+    </script>
 </body>
 </html>
