@@ -128,3 +128,10 @@ footer { text-align: center; padding: 28px 0 80px; color: var(--muted); font-siz
 .form-group .btn { width: 100%; }
 .float-tg { bottom: 14px; right: 14px; padding: 10px 14px; font-size: 0.85rem; }
 }
+.input-field:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59,130,246,0.18); }
+.option-card { transition: border-color 0.2s, background 0.2s, transform 0.15s; }
+.option-card:hover { border-color: rgba(59,130,246,0.45); }
+.addon-item { transition: border-color 0.2s, background 0.2s; }
+.addon-item:has(input:checked) { border-color: rgba(59,130,246,0.55); background: rgba(59,130,246,0.1); }
+details summary:hover { color: #93c5fd; }
+.btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none !important; }

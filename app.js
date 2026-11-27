@@ -1,4 +1,35 @@
-var WORKER_URL = 'https://workers.dev';
+var WORKER_URL = 'https://clearfe-' + 'leads.filgood09.workers.dev';
+var clientNicheFromUrl = '';
+var autoAdvanceTimer = null;
+
+function escapeHtml(str) {
+    return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+(function initUrlParams() {
+    try {
+        var params = new URLSearchParams(window.location.search);
+        var niche = params.get('niche');
+        if (niche) {
+            clientNicheFromUrl = niche.trim().slice(0, 70);
+        }
+    } catch (e) {}
+})();
+
+function launchQuickPrototype(e) {
+    if (e) e.preventDefault();
+    var input = document.getElementById('home-niche-input');
+    var val = input ? input.value.trim() : '';
+    if (val.length >= 2) {
+        window.location.href = 'showroom.html?niche=' + encodeURIComponent(val);
+    } else {
+        window.location.href = 'showroom.html';
+    }
+}
 
 function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('open');
@@ -30,7 +61,12 @@ var answers = {};
 
 function renderStep() {
     var step = quizSteps[currentStep];
-    document.getElementById('question-title').textContent = step.question;
+    var qTitle = document.getElementById('question-title');
+    if (clientNicheFromUrl && currentStep === 0) {
+        qTitle.textContent = step.question + ' (проект: «' + clientNicheFromUrl + '»)';
+    } else {
+        qTitle.textContent = step.question;
+    }
     document.getElementById('progress-fill').style.width = Math.round(((currentStep + 1) / quizSteps.length) * 100) + '%';
     var grid = document.getElementById('options-grid');
     grid.innerHTML = '';
@@ -41,6 +77,13 @@ function renderStep() {
         card.onclick = function() {
             answers[step.key] = { index: i, title: opt.title, price: opt.price };
             renderStep();
+            if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
+            if (currentStep < quizSteps.length - 1) {
+                autoAdvanceTimer = setTimeout(function() {
+                    currentStep++;
+                    renderStep();
+                }, 240);
+            }
         };
         grid.appendChild(card);
     });
@@ -49,8 +92,14 @@ function renderStep() {
 }
 
 function nextStep() {
+    if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
     if (!answers[quizSteps[currentStep].key]) {
-        alert('Выберите один из вариантов.');
+        var grid = document.getElementById('options-grid');
+        if (grid) {
+            grid.style.outline = '2px solid rgba(245, 158, 11, 0.6)';
+            grid.style.borderRadius = '12px';
+            setTimeout(function() { grid.style.outline = ''; }, 900);
+        }
         return;
     }
     if (currentStep < quizSteps.length - 1) {
@@ -62,6 +111,7 @@ function nextStep() {
 }
 
 function prevStep() {
+    if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
     if (currentStep > 0) {
         currentStep--;
         renderStep();
@@ -86,7 +136,11 @@ function recalcTotal() {
 function showResult() {
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('result-container').style.display = 'block';
+    var nicheRow = clientNicheFromUrl
+        ? '<div class="result-row"><span>Ниша / проект:</span><strong>' + escapeHtml(clientNicheFromUrl) + '</strong></div>'
+        : '';
     document.getElementById('result-summary').innerHTML =
+        nicheRow +
         '<div class="result-row"><span>Цель:</span><strong>' + answers.goal.title + '</strong></div>' +
         '<div class="result-row"><span>Формат:</span><strong>' + answers.format.title + '</strong></div>' +
         '<div class="result-row"><span>Материалы:</span><strong>' + answers.assets.title + '</strong></div>' +
@@ -96,6 +150,7 @@ function showResult() {
 }
 
 function restartQuiz() {
+    if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
     currentStep = 0;
     answers = {};
     document.querySelectorAll('.addon-item input').forEach(function(cb) {
@@ -116,14 +171,15 @@ function buildTZText() {
     document.querySelectorAll('.addon-item input:checked').forEach(function(cb) {
         addons.push(cb.getAttribute('data-name'));
     });
-    var lines = [
-        'Заявка с сайта ClearFeStudio:',
-        '- Цель: ' + (answers.goal ? answers.goal.title : 'Не указана'),
-        '- Формат: ' + (answers.format ? answers.format.title : 'Не указан'),
-        '- Материалы: ' + (answers.assets ? answers.assets.title : 'Не указаны'),
-        '- Функции: ' + (answers.features ? answers.features.title : 'Не указаны'),
-        '- Сроки: ' + (answers.deadline ? answers.deadline.title : 'Не указаны')
-    ];
+    var lines = ['Заявка с сайта ClearFeStudio:'];
+    if (clientNicheFromUrl) {
+        lines.push('- Ниша / проект: ' + clientNicheFromUrl);
+    }
+    lines.push('- Цель: ' + (answers.goal ? answers.goal.title : 'Не указана'));
+    lines.push('- Формат: ' + (answers.format ? answers.format.title : 'Не указан'));
+    lines.push('- Материалы: ' + (answers.assets ? answers.assets.title : 'Не указаны'));
+    lines.push('- Функции: ' + (answers.features ? answers.features.title : 'Не указаны'));
+    lines.push('- Сроки: ' + (answers.deadline ? answers.deadline.title : 'Не указаны'));
     if (addons.length) {
         lines.push('- Доп. опции: ' + addons.join(', '));
     }
@@ -205,7 +261,7 @@ function isValidContact(value) {
 
     var tgMatch = v.match(/^(?:@|(?:https?:\/\/)?t\.me\/)?([a-zA-Z][a-zA-Z0-9_]{4,31})$/);
     if (tgMatch) {
-        var username = tgMatch[1].toLowerCase();
+        var username = tgMatch.pop().toLowerCase();
         if (/^([a-z0-9_])\1+$/.test(username)) return false;
         return true;
     }
@@ -234,6 +290,12 @@ function showContactError(text) {
 
 function sendToTelegram(e) {
     if (e) e.preventDefault();
+
+    var honey = document.getElementById('hp-website');
+    if (honey && honey.value.trim() !== '') {
+        return;
+    }
+
     var contactInput = document.getElementById('client-contact');
     var contact = contactInput ? contactInput.value.trim() : '';
 
@@ -260,13 +322,20 @@ function sendToTelegram(e) {
     fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: tzText })
+        body: JSON.stringify({ text: tzText, website: honey ? honey.value : '' })
     })
     .then(function(res) { return res.json(); })
     .then(function(data) {
         if (data.ok) {
             msg.style.display = 'block';
             msg.innerHTML = '✓ Заявка и ТЗ успешно отправлены! Я свяжусь с вами в ближайшее время.';
+            if (submitBtn) {
+                submitBtn.textContent = '✓ Отправлено';
+                setTimeout(function() {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Отправить ТЗ в Telegram';
+                }, 8000);
+            }
         } else {
             throw new Error('TG API error');
         }
@@ -274,8 +343,6 @@ function sendToTelegram(e) {
     .catch(function() {
         msg.style.display = 'block';
         msg.innerHTML = 'Не удалось отправить автоматически. <a href="' + fallbackUrl + '" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline;">Нажмите здесь, чтобы отправить ТЗ в Telegram в 1 клик</a>.';
-    })
-    .finally(function() {
         if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.textContent = 'Отправить ТЗ в Telegram';

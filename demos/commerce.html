@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <title>Roast & Bake Минск — Кофейня и ремесленная пекарня (Демо ClearFeStudio)</title>
+    <meta name="robots" content="noindex, follow">
     <style>
         :root { --bg: #1c1917; --card: #292524; --text: #fafaf9; --muted: #a8a29e; --accent: #d97706; --green: #10b981; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
-        body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 84px; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); line-height: 1.5; padding-bottom: 40px; }
+        .studio-topbar { background: #0f172a; color: #f8fafc; border-bottom: 1px solid rgba(59,130,246,0.4); padding: 8px 16px; font-size: 0.82rem; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .studio-topbar-links { display: flex; gap: 14px; align-items: center; }
         .container { max-width: 960px; margin: 0 auto; padding: 0 18px; }
         header { background: rgba(28,25,23,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 0; position: sticky; top: 0; z-index: 20; }
-        .nav { display: flex; justify-content: space-between; align-items: center; }
-        .brand { font-size: 1.3rem; font-weight: 900; letter-spacing: 0.4px; }
+        .nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .brand { font-size: 1.3rem; font-weight: 900; letter-spacing: 0.4px; white-space: nowrap; }
         .brand span { color: var(--accent); }
         .badge { display: inline-block; background: rgba(217,119,6,0.18); color: #fbbf24; border: 1px solid rgba(217,119,6,0.35); padding: 5px 12px; border-radius: 99px; font-size: 0.82rem; font-weight: 700; margin-bottom: 14px; }
         .hero { padding: 52px 0 40px; text-align: center; }
@@ -31,21 +35,26 @@
         .item-price { font-weight: 800; color: #fbbf24; font-size: 0.98rem; }
         .cart-box { background: var(--card); padding: 20px; border-radius: 16px; border: 1px solid rgba(217,119,6,0.3); position: sticky; top: 74px; }
         .cart-list { margin: 12px 0; font-size: 0.88rem; color: var(--muted); min-height: 48px; }
-        .cart-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text); }
+        .cart-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--text); }
+        .cart-del { background: none; border: none; color: #f87171; cursor: pointer; font-size: 1rem; padding: 0 4px; line-height: 1; }
         .input { width: 100%; background: var(--bg); border: 1px solid rgba(255,255,255,0.14); color: var(--text); padding: 11px; border-radius: 10px; margin-bottom: 10px; font-size: 0.9rem; }
-        .demo-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #1e293b; border-top: 2px solid #3b82f6; padding: 12px 18px; z-index: 50; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .demo-banner-text { font-size: 0.88rem; color: #f8fafc; }
-        .demo-banner-btns { display: flex; gap: 8px; }
-        .btn-studio { background: #3b82f6; color: #fff; padding: 9px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.86rem; }
-        .btn-back { background: rgba(255,255,255,0.1); color: #fff; padding: 9px 14px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.86rem; }
-        @media (max-width: 720px) { .menu-layout { grid-template-columns: 1fr; } .hero h1 { font-size: 1.8rem; } }
+        .input:focus { outline: none; border-color: var(--accent); }
+        @media (max-width: 720px) { .menu-layout { grid-template-columns: 1fr; } .hero h1 { font-size: 1.75rem; } .brand { font-size: 1.1rem; } }
     </style>
 </head>
 <body>
+    <div class="studio-topbar">
+        <span>⚡ Демо-стенд <strong>ClearFeStudio</strong> • Пример сайта под ключ</span>
+        <div class="studio-topbar-links">
+            <a href="../showroom.html" style="color: #94a3b8; text-decoration: none; font-weight: 600;">← В AI-конструктор</a>
+            <a href="../index.html?niche=%D0%9A%D0%BE%D1%84%D0%B5%D0%B9%D0%BD%D1%8F%20%D0%B8%20%D0%BF%D0%B5%D0%BA%D0%B0%D1%80%D0%BD%D1%8F%20%D0%BD%D0%B0%D0%B2%D1%8B%D0%BD%D0%BE%D1%81#quiz" style="color: #60a5fa; text-decoration: none; font-weight: 700;">Заказать такой же →</a>
+        </div>
+    </div>
+
     <header>
         <div class="container nav">
             <div class="brand">ROAST <span>&</span> BAKE</div>
-            <a href="#order" class="btn btn-coffee" style="padding: 8px 16px; font-size: 0.86rem;">Заказать без очереди</a>
+            <a href="#order" class="btn btn-coffee" style="padding: 8px 16px; font-size: 0.86rem; white-space: nowrap;">Заказать без очереди</a>
         </div>
     </header>
 
@@ -56,7 +65,6 @@
             <p>Соберите заказ онлайн за 20 секунд — бариста приготовит кофе ровно к указанному времени, чтобы вы не стояли в утренней очереди.</p>
             <a href="#order" class="btn btn-coffee">Открыть меню предзаказа</a>
         </section>
-
         <section id="order" class="section">
             <div class="menu-layout">
                 <div class="menu-grid">
@@ -104,58 +112,95 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="cart-box">
-                    <div style="font-weight: 800; font-size: 1.05rem;">Ваш предзаказ навынос</div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="font-weight: 800; font-size: 1.05rem;">Ваш предзаказ навынос</div>
+                        <button type="button" id="cart-clear-btn" onclick="clearCart()" style="display: none; background: none; border: none; color: var(--muted); font-size: 0.78rem; cursor: pointer; text-decoration: underline;">Очистить</button>
+                    </div>
                     <div class="cart-list" id="cart-list">Добавьте позиции из меню слева</div>
                     <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.1rem; margin-bottom: 14px;">
                         <span>Итого:</span>
                         <span id="cart-total" style="color: #fbbf24;">0.00 BYN</span>
                     </div>
                     <form onsubmit="submitCoffeeDemo(event)">
-                        <input type="text" class="input" placeholder="Через сколько заберёте? (например, 15 мин)" required>
-                        <input type="tel" class="input" placeholder="+375 (29) 000-00-00" required>
+                        <input type="text" class="input" id="coffee-time" placeholder="Через сколько заберёте? (например, 15 мин)" required>
+                        <input type="tel" class="input" id="coffee-phone" oninput="formatByPhone(this)" placeholder="+375 (29) 000-00-00" required>
                         <button type="submit" class="btn btn-coffee" style="width: 100%;">Оформить предзаказ</button>
                     </form>
-                    <div id="coffee-msg" style="display: none; margin-top: 12px; padding: 10px; background: rgba(16,185,129,0.15); border: 1px solid var(--green); border-radius: 8px; font-size: 0.84rem; color: #6ee7b7;">
-                        ✓ Демо-заказ передан бариста! На реальном сайте чек сразу приходит в Telegram кофейни.
-                    </div>
+                    <div id="coffee-msg" style="display: none; margin-top: 12px; padding: 10px; background: rgba(16,185,129,0.15); border: 1px solid var(--green); border-radius: 8px; font-size: 0.84rem; color: #6ee7b7;"></div>
                 </div>
             </div>
         </section>
     </main>
-
-    <div class="demo-banner">
-        <div class="demo-banner-text">⚡ Это демо-сайт, созданный в <strong>ClearFeStudio</strong>. Запуск такого проекта под ключ — от 5 дней.</div>
-        <div class="demo-banner-btns">
-            <a href="../showroom.html" class="btn-back">← В шоурум</a>
-            <a href="../index.html#quiz" class="btn-studio">Заказать такой же сайт</a>
-        </div>
-    </div>
-
     <script>
         var cart = [];
+
+        function formatByPhone(input) {
+            var digits = input.value.replace(/\D/g, '');
+            if (digits.indexOf('80') === 0 && digits.length <= 11) {
+                digits = '375' + digits.slice(2);
+            }
+            if (digits.indexOf('375') === 0 && digits.length <= 12) {
+                var res = '+375';
+                if (digits.length > 3) res += ' (' + digits.slice(3, 5);
+                if (digits.length >= 5) res += ') ';
+                if (digits.length > 5) res += digits.slice(5, 8);
+                if (digits.length > 8) res += '-' + digits.slice(8, 10);
+                if (digits.length > 10) res += '-' + digits.slice(10, 12);
+                input.value = res;
+            }
+        }
+
         function addToCart(name, price) {
             cart.push({ name: name, price: price });
             renderCart();
         }
+
+        function removeFromCart(idx) {
+            cart.splice(idx, 1);
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            renderCart();
+        }
+
         function renderCart() {
             var listEl = document.getElementById('cart-list');
+            var clearBtn = document.getElementById('cart-clear-btn');
             var total = 0;
             var html = '';
             for (var i = 0; i < cart.length; i++) {
                 total += cart[i].price;
-                html += '<div class="cart-row"><span>' + cart[i].name + '</span><strong>' + cart[i].price.toFixed(2) + ' BYN</strong></div>';
+                html += '<div class="cart-row"><span>' + cart[i].name + '</span>' +
+                        '<span style="display:flex;align-items:center;gap:6px;"><strong>' + cart[i].price.toFixed(2) + ' BYN</strong>' +
+                        '<button type="button" class="cart-del" onclick="removeFromCart(' + i + ')" title="Удалить">×</button></span></div>';
             }
             listEl.innerHTML = html || 'Добавьте позиции из меню слева';
+            if (clearBtn) clearBtn.style.display = cart.length ? 'inline-block' : 'none';
             document.getElementById('cart-total').textContent = total.toFixed(2) + ' BYN';
         }
+
         function submitCoffeeDemo(e) {
             e.preventDefault();
+            var msg = document.getElementById('coffee-msg');
             if (!cart.length) {
-                alert('Сначала добавьте хотя бы одну позицию в заказ.');
+                msg.style.background = 'rgba(245,158,11,0.15)';
+                msg.style.borderColor = '#f59e0b';
+                msg.style.color = '#fbbf24';
+                msg.textContent = '⚠️ Сначала добавьте хотя бы одну позицию из меню слева.';
+                msg.style.display = 'block';
                 return;
             }
-            document.getElementById('coffee-msg').style.display = 'block';
+            var timeVal = document.getElementById('coffee-time').value.trim();
+            var total = document.getElementById('cart-total').textContent;
+            msg.style.background = 'rgba(16,185,129,0.15)';
+            msg.style.borderColor = 'var(--green)';
+            msg.style.color = '#6ee7b7';
+            msg.textContent = '✓ Демо-заказ (' + total + ', готовность через ' + timeVal + ') передан бариста! На реальном сайте чек сразу приходит в Telegram кофейни.';
+            msg.style.display = 'block';
         }
     </script>
 </body>

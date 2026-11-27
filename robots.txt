@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /demos/
 
-Sitemap: https://filgood09-source.github.io/ClearFeStudio/sitemap.xml
+Sitemap: https://clearfestudio.by/sitemap.xml
